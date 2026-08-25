@@ -1879,7 +1879,7 @@ body.menu-open{overflow:hidden;touch-action:none}
 }
 /* Global two-tone Byte lockup */
 .brand-color-logo{position:relative;display:block}
-.brand-color-logo--header{width:164px}
+.brand-color-logo--header{width:176px}
 .brand-color-logo--footer{width:220px}
 .brand .brand-color-logo img,.byte-footer__brand .brand-color-logo img{
   display:block;width:100%;height:auto;margin:0;filter:none;
@@ -1891,14 +1891,14 @@ body.menu-open{overflow:hidden;touch-action:none}
   filter:brightness(0) invert(1);
 }
 @media (max-width:820px){
-  .brand-color-logo--header{width:145px}
+  .brand-color-logo--header{width:152px}
 }
 @media (max-width:640px){
   .brand-color-logo--footer{width:205px;margin-left:auto;margin-right:auto}
   .byte-footer__contact{border-top:0}
 }
 @media (max-width:540px){
-  .brand-color-logo--header{width:128px}
+  .brand-color-logo--header{width:134px}
 }
 /* Sticky navigation and back to top */
 .site-header{
