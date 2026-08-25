@@ -276,7 +276,10 @@ export default function Home() {
       </section>
 
       <section className="network-film reveal" aria-label="La red Byte en movimiento">
-        <img className="network-film-image" src="assets/byte-robot-network.webp" alt="Androide futurista de Byte integrado a una red de conectividad" loading="lazy" decoding="async" />
+        <picture>
+          <source media="(max-width: 540px)" srcSet="assets/byte-robot-network-mobile.webp" />
+          <img className="network-film-image" src="assets/byte-robot-network.webp" alt="Androide futurista de Byte integrado a una red de conectividad" loading="lazy" decoding="async" />
+        </picture>
 
         <div className="network-film-shade" aria-hidden="true" />
         <div className="network-film-copy">
@@ -323,7 +326,32 @@ export default function Home() {
 
       <section className="feature-section reveal"><div className="section-intro section-intro-centered"><span className="section-tag">PENSADA PARA LA REGIÓN</span><h2>La conexión que necesitás.<br /><em>Donde la necesitás.</em></h2></div><div className="feature-grid">{features.map(([icon, title, copy]) => <article key={title}><span className={"feature-icon feature-icon-" + icon + " icon-shell"} aria-hidden="true"><IconGlyph name={icon} /></span><h3>{title}</h3><p>{copy}</p></article>)}</div></section>
 
-      <section className="portal reveal"><div className="portal-glow" aria-hidden="true" /><div className="portal-copy"><span className="section-tag">ÁREA CLIENTES</span><h2>Tu cuenta, siempre a mano.</h2><p>Consultá tu estado de cuenta y administrá tu servicio desde el portal de clientes.</p><a className="button button-light" href="https://ap2.factulinc.com.ar/loginc/200h1k1q1p1z1k1w1a0h130w220o0v" target="_blank" rel="noreferrer">Ingresar a mi cuenta <span>↗</span></a></div><div className="portal-console" aria-hidden="true"><div className="console-bar"><i /><i /><i /><span>MI CUENTA BYTE</span></div><div className="console-body"><span>ESTADO DEL SERVICIO</span><div className="console-status"><i /> Activo</div><strong>Todo en orden.</strong><div className="console-line"><i /></div><div className="console-buttons"><b>Cuenta</b><b>Comprobantes</b><b>Soporte</b></div></div></div></section>
+      <section className="portal reveal">
+        <div className="portal-glow" aria-hidden="true" />
+        <div className="portal-matrix" aria-hidden="true"><i /><i /><i /></div>
+        <div className="portal-copy">
+          <span className="section-tag"><i /> ÁREA CLIENTES</span>
+          <h2>Todo tu servicio.<br /><em>En un solo lugar.</em></h2>
+          <p>Consultá tu cuenta, revisá el estado de tu conexión y accedé al soporte de Byte desde un único espacio.</p>
+          <div className="portal-proof" aria-label="Funciones del portal"><span><i /> Estado en tiempo real</span><span><i /> Cuenta y comprobantes</span><span><i /> Soporte directo</span></div>
+          <a className="button button-light" href="https://ap2.factulinc.com.ar/loginc/200h1k1q1p1z1k1w1a0h130w220o0v" target="_blank" rel="noreferrer">Accedé a tu cuenta <span>↗</span></a>
+        </div>
+        <div className="portal-console" aria-hidden="true">
+          <div className="console-bar"><div className="console-dots"><i /><i /><i /></div><span>MI CUENTA BYTE</span><b><i /> EN LÍNEA</b></div>
+          <div className="console-body">
+            <div className="console-head"><span>RESUMEN DEL SERVICIO</span><small>ACTUALIZADO AHORA</small></div>
+            <div className="console-status"><i /> SERVICIO ACTIVO</div>
+            <strong>Todo conectado.</strong>
+            <p>Tu cuenta y tu conexión funcionan con normalidad.</p>
+            <div className="console-signal">
+              <div><span>ACTIVIDAD DEL SERVICIO</span><b>ÚLTIMAS 24 H</b></div>
+              <div className="console-line"><i /></div>
+              <div className="console-axis"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
+            </div>
+            <div className="console-info-grid"><span><small>CUENTA</small><b>Al día</b></span><span><small>CONEXIÓN</small><b>Estable</b></span><span><small>SOPORTE</small><b>Disponible</b></span></div>
+          </div>
+        </div>
+      </section>
 
       <section className="faq reveal">
         <div className="faq-heading"><span className="section-tag">PREGUNTAS FRECUENTES</span><h2>Todo lo que necesitás saber.</h2><p>Si tu pregunta no está acá, escribinos. Nuestro equipo está listo para ayudarte.</p><a className="text-button" href="#contacto">Hablar con Byte <span>↗</span></a></div>

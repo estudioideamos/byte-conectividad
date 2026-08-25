@@ -86,11 +86,8 @@ export default function ByteFooter({ homePrefix = "", assetPrefix = "", requestH
         </div>
 
         <div className="byte-footer__bottom">
-          <span>© {new Date().getFullYear()} Byte Conectividad.<br />Todos los derechos reservados.</span>
-          <div className="byte-footer__seal" aria-label="Byte Conectividad, conectando desde 2003">
-            <b><i /> BYTE NETWORK</b>
-            <small>LINCOLN · DESDE 2003</small>
-          </div>
+          <span>© {new Date().getFullYear()} Byte Conectividad.</span>
+
           <span className="byte-footer__ideamos">Diseño y desarrollo para ir más lejos — <a href="https://ideamos.com.ar" target="_blank" rel="noreferrer">Estudio Ideamos <b>↗</b></a></span>
         </div>
       </footer>
