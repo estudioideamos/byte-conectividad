@@ -331,8 +331,8 @@ export default function Home() {
         <div className="portal-matrix" aria-hidden="true"><i /><i /><i /></div>
         <div className="portal-copy">
           <span className="section-tag"><i /> ÁREA CLIENTES</span>
-          <h2>Todo tu servicio.<br /><em>En un solo lugar.</em></h2>
-          <p>Consultá tu cuenta, revisá el estado de tu conexión y accedé al soporte de Byte desde un único espacio.</p>
+          <h2>Tu conexión,<br /><em>siempre bajo control.</em></h2>
+          <p>Consultá tu cuenta, revisá el estado del servicio y accedé al soporte de Byte desde donde estés.</p>
           <div className="portal-proof" aria-label="Funciones del portal"><span><i /> Estado en tiempo real</span><span><i /> Cuenta y comprobantes</span><span><i /> Soporte directo</span></div>
           <a className="button button-light" href="https://ap2.factulinc.com.ar/loginc/200h1k1q1p1z1k1w1a0h130w220o0v" target="_blank" rel="noreferrer">Accedé a tu cuenta <span>↗</span></a>
         </div>

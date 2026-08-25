@@ -1018,7 +1018,7 @@ body.menu-open{overflow:hidden;touch-action:none}
   position:relative;
   isolation:isolate;
   overflow:hidden;
-  padding:0 max(24px,calc((100vw - 1260px)/2)) 34px;
+  padding:0 max(24px,calc((100vw - 1260px)/2)) 20px;
   border-top:1px solid rgba(255,255,255,.08);
   background:
     linear-gradient(180deg,rgba(5,7,16,.96),#020309 34%,#010207);
@@ -1146,7 +1146,7 @@ body.menu-open{overflow:hidden;touch-action:none}
 .byte-footer__whatsapp b{font-size:10px;font-weight:650}
 
 .byte-footer__bottom{
-  min-height:112px;
+  min-height:76px;
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:35px;
