@@ -38,7 +38,10 @@ export default function SiteHeader({
   return (
     <header className="site-header">
       <a className="brand" href={sectionHref("inicio")} aria-label="Byte Conectividad, inicio" onClick={closeMenu}>
-        <img src={assetPrefix + "assets/byte-logo.png"} alt="Byte Conectividad" />
+        <span className="brand-color-logo brand-color-logo--header">
+          <img src={assetPrefix + "assets/byte-logo.png"} alt="Byte Conectividad" />
+          <img className="brand-color-logo__byte" src={assetPrefix + "assets/byte-logo.png"} alt="" aria-hidden="true" />
+        </span>
       </a>
 
       <nav className="desktop-nav" aria-label="Navegación principal">

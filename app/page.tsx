@@ -360,7 +360,10 @@ export default function Home() {
 
         <div className="byte-footer__main">
           <div className="byte-footer__brand">
-            <img src="assets/byte-logo.png" alt="Byte Conectividad" />
+            <span className="brand-color-logo brand-color-logo--footer">
+              <img src="assets/byte-logo.png" alt="Byte Conectividad" />
+              <img className="brand-color-logo__byte" src="assets/byte-logo.png" alt="" aria-hidden="true" />
+            </span>
             <p>Internet de alta velocidad para Lincoln y la región. Tecnología que conecta, personas que acompañan.</p>
             <span className="byte-footer__status"><i /> RED OPERATIVA · SOPORTE LOCAL</span>
             <div className="byte-footer__social" aria-label="Redes sociales">
