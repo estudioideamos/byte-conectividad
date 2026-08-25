@@ -22,6 +22,9 @@ test("exporta la experiencia institucional completa de Byte", async () => {
   assert.match(html, /icon-shell/i);
   assert.match(html, /icon-glyph/i);
   assert.doesNotMatch(html, /feature-icon[^>]*>\s*<i/i);
+  assert.match(html, /Todos los derechos reservados/i);
+  assert.match(html, /Diseño y desarrollo para ir más lejos/i);
+  assert.match(html, /https:\/\/ideamos\.com\.ar/i);
   assert.doesNotMatch(html, /Your site is taking shape|codex-preview|SkeletonPreview/i);
 });
 

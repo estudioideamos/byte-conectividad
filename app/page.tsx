@@ -4,10 +4,13 @@ import { FormEvent, useEffect, useRef, useState } from "react";
 import {
   Activity,
   ArrowUpDown,
+  ArrowUpRight,
   Building2,
   DraftingCompass,
+  Facebook,
   Headphones,
   House,
+  Instagram,
   MapPin,
   MessageCircle,
   MonitorCheck,
@@ -366,9 +369,68 @@ export default function Home() {
 
       <section className="career reveal"><div><span className="section-tag">OPORTUNIDADES LABORALES</span><h2>¿Querés ser parte de Byte?</h2></div><p>Estamos construyendo la red del futuro con talento local.</p><a className="button button-secondary" href="mailto:info@byteinformatica.com.ar?subject=Quiero%20trabajar%20en%20Byte%20Conectividad">Enviar mi CV <span>↗</span></a></section>
 
-      <footer>
-        <div className="footer-main"><div className="footer-brand"><img src="assets/byte-logo.png" alt="Byte Conectividad" /><p>Internet de alta velocidad para Lincoln y la región.</p></div><div className="footer-column"><span>NAVEGACIÓN</span><a href="#servicios">Servicios</a><a href="#cobertura">Cobertura</a><a href="#nosotros">Nosotros</a><a href="#contacto">Contacto</a></div><div className="footer-column"><span>SEGUINOS</span><a href="https://www.instagram.com/byteconectividad.20/" target="_blank" rel="noreferrer">Instagram ↗</a><a href="https://www.facebook.com/Byte-Conectividad-416914858648229" target="_blank" rel="noreferrer">Facebook ↗</a></div><div className="footer-column"><span>CLIENTES</span><a href="https://ap2.factulinc.com.ar/loginc/200h1k1q1p1z1k1w1a0h130w220o0v" target="_blank" rel="noreferrer">Ingresar a mi cuenta ↗</a><a href="mailto:atencionaclientes@byteinformatica.com.ar">Soporte</a></div></div>
-        <div className="footer-bottom"><span>© {new Date().getFullYear()} BYTE CONECTIVIDAD</span><span>INTERNET · INFRAESTRUCTURA · SOPORTE</span><a href="#inicio">VOLVER ARRIBA ↑</a></div>
+      <footer className="byte-footer">
+        <div className="byte-footer__aurora" aria-hidden="true" />
+        <section className="byte-footer__cta reveal">
+          <div className="byte-footer__cta-copy">
+            <span className="section-tag"><i /> LA RED QUE TE ACOMPAÑA</span>
+            <h2>Donde estés, que tus ideas<br /><em>lleguen más lejos.</em></h2>
+            <p>Conectividad estable, soporte local y una solución pensada para tu zona.</p>
+          </div>
+          <a className="byte-footer__orbit" href="#contacto" aria-label="Consultar cobertura con Byte">
+            <span className="byte-footer__orbit-ring" aria-hidden="true" />
+            <small>HABLEMOS</small>
+            <ArrowUpRight aria-hidden="true" />
+          </a>
+        </section>
+
+        <div className="byte-footer__main">
+          <div className="byte-footer__brand">
+            <img src="assets/byte-logo.png" alt="Byte Conectividad" />
+            <p>Internet de alta velocidad para Lincoln y la región. Tecnología que conecta, personas que acompañan.</p>
+            <span className="byte-footer__status"><i /> RED OPERATIVA · SOPORTE LOCAL</span>
+            <div className="byte-footer__social" aria-label="Redes sociales">
+              <a href="https://www.instagram.com/byteconectividad.20/" target="_blank" rel="noreferrer" aria-label="Instagram de Byte"><Instagram aria-hidden="true" /></a>
+              <a href="https://www.facebook.com/Byte-Conectividad-416914858648229" target="_blank" rel="noreferrer" aria-label="Facebook de Byte"><Facebook aria-hidden="true" /></a>
+            </div>
+          </div>
+
+          <nav className="byte-footer__nav" aria-label="Explorar Byte">
+            <span>EXPLORÁ</span>
+            <a href="#servicios">Servicios <b>↗</b></a>
+            <a href="#cobertura">Cobertura <b>↗</b></a>
+            <a href="#nosotros">Nosotros <b>↗</b></a>
+            <a href="#contacto">Contacto <b>↗</b></a>
+          </nav>
+
+          <nav className="byte-footer__nav" aria-label="Soluciones Byte">
+            <span>SOLUCIONES</span>
+            <a href="#servicios">Internet para hogares</a>
+            <a href="#servicios">Internet para empresas</a>
+            <a href="#cobertura">Conectividad rural</a>
+            <a href="#servicios">Zonas WiFi</a>
+          </nav>
+
+          <div className="byte-footer__contact">
+            <span>EQUIPO LOCAL</span>
+            <h3>¿Conectamos tu próximo proyecto?</h3>
+            <a className="byte-footer__whatsapp" href="https://wa.me/5492355448231?text=Hola%20Byte%2C%20quiero%20consultar%20por%20el%20servicio%20de%20internet." target="_blank" rel="noreferrer">
+              <MessageCircle aria-hidden="true" /><b>Hablar por WhatsApp</b><ArrowUpRight aria-hidden="true" />
+            </a>
+            <a href="tel:+542355448231">2355 448231</a>
+            <a href="mailto:info@byteinformatica.com.ar">info@byteinformatica.com.ar</a>
+            <p>Rivadavia 1286 · Lincoln, Bs. As.</p>
+          </div>
+        </div>
+
+        <div className="byte-footer__bottom">
+          <span>© {new Date().getFullYear()} Byte Conectividad.<br />Todos los derechos reservados.</span>
+          <div className="byte-footer__seal" aria-label="Byte Conectividad, conectando desde 2003">
+            <b><i /> BYTE NETWORK</b>
+            <small>LINCOLN · DESDE 2003</small>
+          </div>
+          <span className="byte-footer__ideamos">Diseño y desarrollo para ir más lejos — <a href="https://ideamos.com.ar" target="_blank" rel="noreferrer">Estudio Ideamos <b>↗</b></a></span>
+        </div>
       </footer>
 
       <a className="whatsapp" href="https://wa.me/5492355448231?text=Hola%20Byte%2C%20quiero%20consultar%20por%20el%20servicio%20de%20internet." target="_blank" rel="noreferrer" aria-label="Escribir a Byte por WhatsApp"><span>WhatsApp</span><i>↗</i></a>
