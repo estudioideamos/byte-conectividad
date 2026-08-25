@@ -1892,3 +1892,76 @@ body.menu-open{overflow:hidden;touch-action:none}
 @media (max-width:540px){
   .brand-color-logo--header{width:128px}
 }
+/* Sticky navigation and back to top */
+.site-header{
+  position:fixed;
+  will-change:top,width,height,background-color,box-shadow;
+  transition:
+    top .35s cubic-bezier(.2,.7,.2,1),
+    width .35s cubic-bezier(.2,.7,.2,1),
+    height .35s cubic-bezier(.2,.7,.2,1),
+    border-color .35s ease,
+    background .35s ease,
+    box-shadow .35s ease;
+}
+.site-header.is-scrolled{
+  top:10px;
+  width:min(1260px,calc(100% - 24px));
+  height:60px;
+  border-color:rgba(121,136,255,.17);
+  background:rgba(4,6,13,.92);
+  box-shadow:0 18px 52px rgba(0,0,0,.34),0 0 30px rgba(60,74,220,.07);
+}
+.go-top{
+  position:fixed;
+  z-index:44;
+  right:20px;
+  bottom:82px;
+  width:48px;
+  height:48px;
+  padding:0;
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(120,137,255,.24);
+  border-radius:50%;
+  color:#dce1ff;
+  background:
+    radial-gradient(circle at 42% 28%,rgba(117,135,255,.18),transparent 38%),
+    rgba(7,10,20,.88);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 14px 38px rgba(0,0,0,.3);
+  backdrop-filter:blur(16px);
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transform:translateY(12px) scale(.9);
+  transition:opacity .28s ease,visibility .28s ease,transform .32s cubic-bezier(.2,.7,.2,1),border-color .25s ease,background .25s ease;
+}
+.go-top svg{width:17px;height:17px;stroke-width:1.7}
+.go-top.is-visible{opacity:1;visibility:visible;pointer-events:auto;transform:none}
+.go-top:hover{
+  border-color:rgba(126,144,255,.52);
+  background:rgba(50,63,154,.28);
+  transform:translateY(-3px);
+}
+.go-top:focus-visible{outline:2px solid rgba(126,144,255,.76);outline-offset:3px}
+.request-page .go-top{bottom:20px}
+@media (max-width:820px){
+  .site-header.is-scrolled{
+    top:8px;
+    left:8px;
+    right:8px;
+    width:auto;
+    height:56px;
+    transform:none;
+  }
+  .go-top{
+    right:10px;
+    bottom:calc(70px + env(safe-area-inset-bottom));
+    width:44px;
+    height:44px;
+  }
+  .request-page .go-top{bottom:calc(12px + env(safe-area-inset-bottom))}
+}
+@media (prefers-reduced-motion:reduce){
+  .site-header,.go-top{transition:none!important}
+}

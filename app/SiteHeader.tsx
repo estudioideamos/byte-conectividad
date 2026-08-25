@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { ArrowUp } from "lucide-react";
 
 const accountUrl = "https://ap2.factulinc.com.ar/loginc/200h1k1q1p1z1k1w1a0h130w220o0v";
 
@@ -18,8 +19,14 @@ export default function SiteHeader({
   requestActive = false,
 }: SiteHeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [showBackToTop, setShowBackToTop] = useState(false);
   const sectionHref = (id: string) => homePrefix + "#" + id;
   const closeMenu = () => setMenuOpen(false);
+  const goToTop = () => {
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+  };
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -34,9 +41,20 @@ export default function SiteHeader({
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [menuOpen]);
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 18);
+      setShowBackToTop(window.scrollY > 640);
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <header className="site-header">
+    <>
+      <header className={"site-header " + (isScrolled ? "is-scrolled" : "")}>
       <a className="brand" href={sectionHref("inicio")} aria-label="Byte Conectividad, inicio" onClick={closeMenu}>
         <span className="brand-color-logo brand-color-logo--header">
           <img src={assetPrefix + "assets/byte-logo.png"} alt="Byte Conectividad" />
@@ -82,6 +100,17 @@ export default function SiteHeader({
         </a>
         <div className="mobile-menu-meta"><span>Lincoln, Buenos Aires</span><span>2355 448231</span></div>
       </div>
-    </header>
+      </header>
+
+      <button
+        className={"go-top " + (showBackToTop && !menuOpen ? "is-visible" : "")}
+        type="button"
+        aria-label="Volver arriba"
+        title="Volver arriba"
+        onClick={goToTop}
+      >
+        <ArrowUp aria-hidden="true" />
+      </button>
+    </>
   );
 }
