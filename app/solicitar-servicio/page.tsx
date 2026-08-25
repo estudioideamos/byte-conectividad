@@ -65,7 +65,10 @@ export default function RequestServicePage() {
 
       <footer className="request-footer">
         <div className="request-footer__brand">
-          <img src="../assets/byte-logo.png" alt="Byte Conectividad" />
+          <span className="request-footer__logo">
+            <img src="../assets/byte-logo.png" alt="Byte Conectividad" />
+            <img className="request-footer__logo-byte" src="../assets/byte-logo.png" alt="" aria-hidden="true" />
+          </span>
           <p>Internet de alta velocidad para Lincoln y la región.</p>
         </div>
         <nav aria-label="Navegación secundaria">
