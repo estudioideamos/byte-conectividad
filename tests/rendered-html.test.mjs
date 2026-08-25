@@ -25,7 +25,7 @@ test("exporta la experiencia institucional completa de Byte", async () => {
   assert.match(html, /icon-shell/i);
   assert.match(html, /icon-glyph/i);
   assert.doesNotMatch(html, /feature-icon[^>]*>\s*<i/i);
-  assert.match(html, /Todos los derechos reservados/i);
+  assert.doesNotMatch(html, /Todos los derechos reservados/i);
   assert.match(html, /Diseño y desarrollo para ir más lejos/i);
   assert.match(html, /https:\/\/ideamos\.com\.ar/i);
   assert.match(html, /aria-controls="footer-explore"/i);
@@ -40,7 +40,7 @@ test("incluye metadatos sociales y controles accesibles", async () => {
   const css = await readFile(styles, "utf8");
 
   assert.match(html, /property="og:image"/i);
-  assert.match(html, /content="https:\/\/[^"]+\/og\.png"/i);
+  assert.match(html, /content="https:\/\/[^"]+\/og\.jpg"/i);
   assert.match(html, /name="twitter:card" content="summary_large_image"/i);
   assert.match(html, /aria-label="Abrir menú"/i);
   assert.match(html, /aria-label="Escribir a Byte por WhatsApp"/i);
@@ -67,7 +67,7 @@ test("exporta la página individual para solicitar servicio", async () => {
 test("mantiene el formulario en modo demo sin envíos externos", async () => {
   const source = await readFile(requestSource, "utf8");
 
-  assert.match(source, /Demo visual: los datos no se envían ni se almacenan/i);
+  assert.match(source, /Demo visual: por ahora, los datos no se envían ni se guardan/i);
   assert.match(source, /setStatus\("success"\)/i);
   assert.doesNotMatch(source, /fetch\(|FormSubmit|formsubmit\.co|mailto:/i);
 });

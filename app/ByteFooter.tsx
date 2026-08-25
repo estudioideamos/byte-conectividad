@@ -22,12 +22,19 @@ export default function ByteFooter({ homePrefix = "", assetPrefix = "", requestH
         <section className={"byte-footer__cta " + (animate ? "reveal" : "")}>
           <div className="byte-footer__cta-copy">
             <span className="section-tag"><i /> LA RED QUE TE ACOMPAÑA</span>
-            <h2><span className="byte-footer__cta-title-line">Donde estés, que tus ideas</span><em>lleguen más lejos.</em></h2>
+            <h2><span className="byte-footer__cta-title-line">Estés donde estés, tus ideas</span><em>pueden llegar más lejos.</em></h2>
             <p>Conectividad estable, soporte local y una solución pensada para tu zona.</p>
           </div>
           <a className="byte-footer__orbit" href={sectionHref("contacto")} aria-label="Consultar cobertura con Byte">
             <span className="byte-footer__orbit-ring" aria-hidden="true" />
-            <small>HABLEMOS</small>
+            <svg className="byte-footer__orbit-copy" viewBox="0 0 174 174" aria-hidden="true">
+              <defs>
+                <path id="byte-footer-orbit-path" d="M 87,87 m -66,0 a 66,66 0 1,1 132,0 a 66,66 0 1,1 -132,0" />
+              </defs>
+              <text textLength="405" lengthAdjust="spacing">
+                <textPath href="#byte-footer-orbit-path" startOffset="0">HABLEMOS · CONECTEMOS · BYTE ·</textPath>
+              </text>
+            </svg>
             <ArrowUpRight aria-hidden="true" />
           </a>
         </section>
@@ -35,8 +42,8 @@ export default function ByteFooter({ homePrefix = "", assetPrefix = "", requestH
         <div className="byte-footer__main">
           <div className="byte-footer__brand">
             <span className="brand-color-logo brand-color-logo--footer">
-              <img src={assetPrefix + "assets/byte-logo.png"} alt="Byte Conectividad" />
-              <img className="brand-color-logo__byte" src={assetPrefix + "assets/byte-logo.png"} alt="" aria-hidden="true" />
+              <img src={assetPrefix + "assets/byte-logo.png"} width="1107" height="209" alt="Byte Conectividad" />
+              <img className="brand-color-logo__byte" src={assetPrefix + "assets/byte-logo.png"} width="1107" height="209" alt="" aria-hidden="true" />
             </span>
             <p>Internet de alta velocidad para Lincoln y la región. Tecnología que conecta, personas que acompañan.</p>
             <span className="byte-footer__status"><i /> RED OPERATIVA · SOPORTE LOCAL</span>

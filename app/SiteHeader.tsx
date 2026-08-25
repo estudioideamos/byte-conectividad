@@ -57,8 +57,8 @@ export default function SiteHeader({
       <header className={"site-header " + (isScrolled ? "is-scrolled" : "")}>
       <a className="brand" href={sectionHref("inicio")} aria-label="Byte Conectividad, inicio" onClick={closeMenu}>
         <span className="brand-color-logo brand-color-logo--header">
-          <img src={assetPrefix + "assets/byte-logo.png"} alt="Byte Conectividad" />
-          <img className="brand-color-logo__byte" src={assetPrefix + "assets/byte-logo.png"} alt="" aria-hidden="true" />
+          <img src={assetPrefix + "assets/byte-logo.png"} width="1107" height="209" alt="Byte Conectividad" />
+          <img className="brand-color-logo__byte" src={assetPrefix + "assets/byte-logo.png"} width="1107" height="209" alt="" aria-hidden="true" />
         </span>
       </a>
 

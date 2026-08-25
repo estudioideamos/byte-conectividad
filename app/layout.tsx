@@ -51,8 +51,8 @@ export const metadata: Metadata = {
       "Internet estable, atención cercana y soluciones a medida para hogares, empresas y zonas rurales.",
     images: [
       {
-        url: "og.png",
-        width: 1732,
+        url: "og.jpg",
+        width: 1731,
         height: 909,
         alt: "Byte Conectividad — Conectividad que llega más lejos",
       },
@@ -63,7 +63,7 @@ export const metadata: Metadata = {
     title: "Byte Conectividad | Conectividad que llega más lejos",
     description:
       "Internet estable, atención cercana y soluciones a medida para hogares, empresas y zonas rurales.",
-    images: ["og.png"],
+    images: ["og.jpg"],
   },
 };
 
@@ -74,6 +74,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
+      <head>
+        <meta name="referrer" content="strict-origin-when-cross-origin" />
+        <meta
+          httpEquiv="Content-Security-Policy"
+          content="default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self' mailto:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; media-src 'self'; connect-src 'self'; upgrade-insecure-requests"
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

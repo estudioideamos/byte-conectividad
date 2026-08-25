@@ -18,8 +18,8 @@ export default function ServiceRequestForm() {
       <div className="request-success" role="status" aria-live="polite">
         <span className="request-success__icon"><CheckCircle2 aria-hidden="true" /></span>
         <span className="request-form__signal"><i /> VISTA DE CONFIRMACIÓN</span>
-        <h2>Listo. Así se verá la confirmación.</h2>
-        <p>Esta es una demostración visual: ningún dato fue enviado ni almacenado. La conexión definitiva del formulario se incorporará en la próxima etapa.</p>
+        <h2>Listo. Esta es la confirmación de la demo.</h2>
+        <p>Por ahora, el formulario no envía ni guarda información. El envío definitivo se activará en una próxima etapa.</p>
         <button type="button" onClick={() => setStatus("idle")}>
           <RotateCcw aria-hidden="true" /> Volver al formulario
         </button>
@@ -30,14 +30,14 @@ export default function ServiceRequestForm() {
   return (
     <form className="request-form" onSubmit={previewConfirmation}>
       <div className="request-form__top">
-        <span>SOLICITUD ONLINE</span>
+        <span>SOLICITUD EN LÍNEA</span>
         <b>01</b>
       </div>
 
       <div className="request-form__intro">
         <span className="request-form__signal"><i /> RESPUESTA PERSONALIZADA</span>
         <h2>Contanos dónde querés conectarte.</h2>
-        <p>Con estos datos podemos evaluar tu ubicación y recomendarte la alternativa más conveniente.</p>
+        <p>Con tus datos verificamos la cobertura y te recomendamos la alternativa más conveniente.</p>
       </div>
 
       <label className="request-field request-field--full">
@@ -78,7 +78,7 @@ export default function ServiceRequestForm() {
         <i><ArrowUpRight aria-hidden="true" /></i>
       </button>
 
-      <p className="request-privacy"><Eye aria-hidden="true" /> Demo visual: los datos no se envían ni se almacenan.</p>
+      <p className="request-privacy"><Eye aria-hidden="true" /> Demo visual: por ahora, los datos no se envían ni se guardan.</p>
     </form>
   );
 }

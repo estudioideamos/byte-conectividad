@@ -20,13 +20,23 @@ npm install
 npm run dev
 ```
 
-Para validar la versión final:
+Para ejecutar todos los controles de calidad antes de publicar:
 
 ```bash
-npm run build
-npm test
+npm run check
 ```
+
+El control incluye estilo de código, tipos, compilación estática y pruebas sobre el HTML generado.
+
+## Rendimiento y seguridad
+
+- Recursos visuales optimizados y videos cargados únicamente cuando están cerca de la pantalla.
+- Imágenes con dimensiones definidas para evitar saltos de diseño.
+- Política de seguridad de contenido y política de referencia incorporadas.
+- Auditoría de dependencias sin vulnerabilidades conocidas.
+- Dependabot revisa semanalmente dependencias y acciones de GitHub.
+- El formulario de solicitud permanece en modo demostración y no transmite ni almacena datos.
 
 ## Publicación
 
-Cada cambio enviado a la rama `main` activa la publicación automática en GitHub Pages.
+Cada cambio enviado a la rama `main` ejecuta nuevamente todos los controles y, si son correctos, activa la publicación automática en GitHub Pages.

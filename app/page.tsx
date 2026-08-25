@@ -23,31 +23,31 @@ import SiteHeader from "./SiteHeader";
 import ByteFooter from "./ByteFooter";
 
 const services = [
-  { number: "01", label: "PARA TU HOGAR", title: "Internet de banda ancha", copy: "Conexión de alta velocidad a través de nuestra red inalámbrica. Estable, confiable y con soporte local de verdad.", points: ["Navegación fluida", "Instalación personalizada", "Soporte cercano"], icon: "signal" },
-  { number: "02", label: "PARA EMPRESAS", title: "Internet simétrico", copy: "La misma velocidad de subida y de bajada para trabajar, compartir archivos, hacer videollamadas y crecer sin límites.", points: ["Subida y bajada equivalentes", "Mayor rendimiento", "Solución profesional"], icon: "sync" },
-  { number: "03", label: "SOLUCIONES A MEDIDA", title: "Zonas WiFi", copy: "Diseñamos redes WiFi para oficinas, estancias, hoteles y grandes empresas, con cobertura pensada para cada espacio.", points: ["Diseño a medida", "Cobertura optimizada", "Escalabilidad"], icon: "nodes" },
+  { number: "01", label: "PARA TU HOGAR", title: "Internet de banda ancha", copy: "Internet de alta velocidad a través de nuestra red inalámbrica, con una conexión estable y soporte local.", points: ["Navegación fluida", "Instalación personalizada", "Soporte cercano"], icon: "signal" },
+  { number: "02", label: "PARA EMPRESAS", title: "Internet simétrico", copy: "La misma velocidad de subida y de bajada para trabajar, compartir archivos y hacer videollamadas con el rendimiento que tu empresa necesita.", points: ["Subida y bajada equivalentes", "Mayor rendimiento", "Solución profesional"], icon: "sync" },
+  { number: "03", label: "SOLUCIONES A MEDIDA", title: "Zonas WiFi", copy: "Redes WiFi diseñadas para oficinas, estancias, hoteles y grandes espacios, con cobertura optimizada para cada entorno.", points: ["Diseño a medida", "Cobertura optimizada", "Escalabilidad"], icon: "nodes" },
 ];
 
 const locations = ["Lincoln", "General Pinto", "Arenaza", "El Triunfo", "Bayauca", "Bermúdez"];
 const advantages = [
-  ["01", "Red monitoreada", "Supervisamos nuestra infraestructura de forma constante para sostener una conexión estable y confiable."],
-  ["02", "Atención personalizada", "Un equipo local que conoce tu zona, entiende lo que necesitás y te acompaña de verdad."],
-  ["03", "Cobertura regional", "Conectamos ciudades y áreas rurales donde la distancia suele convertirse en una barrera."],
+  ["01", "Red monitoreada", "Monitoreamos nuestra infraestructura de forma constante para ofrecer una conexión estable y confiable."],
+  ["02", "Atención personalizada", "Un equipo local que conoce la zona, entiende tus necesidades y está cerca cuando lo necesitás."],
+  ["03", "Cobertura regional", "Llevamos conectividad a ciudades y zonas rurales donde la distancia suele ser un desafío."],
 ];
 const features = [
   ["home", "Hogares conectados", "Internet para estudiar, entretenerte, trabajar y compartir sin interrupciones."],
-  ["business", "Empresas ágiles", "Capacidad de subida y bajada para operaciones que no pueden esperar."],
-  ["rural", "Alcance rural", "Infraestructura diseñada para acercar conectividad donde otros no llegan."],
+  ["business", "Empresas ágiles", "La misma velocidad de subida y bajada para que tu empresa trabaje sin demoras."],
+  ["rural", "Alcance rural", "Infraestructura pensada para llevar conectividad a lugares donde otros no llegan."],
   ["wifi", "WiFi a medida", "Cobertura inteligente para oficinas, estancias, hoteles y grandes espacios."],
-  ["support", "Soporte local", "Personas reales, cerca tuyo, listas para ayudarte cuando lo necesitás."],
-  ["growth", "Una red que crece", "Ampliamos nuestra infraestructura junto con las necesidades de la región."],
+  ["support", "Soporte local", "Un equipo real y cercano, listo para ayudarte cuando lo necesitás."],
+  ["growth", "Una red que crece", "Ampliamos nuestra infraestructura al ritmo de las necesidades de la región."],
 ];
 
 const processSteps = [
-  { number: "01", icon: "location", title: "Relevamos tu zona", copy: "Analizamos ubicación, alcance y necesidades reales." },
-  { number: "02", icon: "design", title: "Diseñamos la solución", copy: "Definimos la tecnología y cobertura más conveniente." },
-  { number: "03", icon: "install", title: "Activamos tu conexión", copy: "Instalación cuidada y puesta en marcha personalizada." },
-  { number: "04", icon: "monitor", title: "La acompañamos siempre", copy: "Monitoreo continuo y soporte local cuando lo necesitás." },
+  { number: "01", icon: "location", title: "Relevamos tu zona", copy: "Analizamos tu ubicación, la cobertura disponible y lo que necesitás." },
+  { number: "02", icon: "design", title: "Diseñamos la solución", copy: "Definimos la tecnología y el alcance más adecuados para vos." },
+  { number: "03", icon: "install", title: "Activamos tu conexión", copy: "Instalamos el servicio y dejamos todo listo para que te conectes." },
+  { number: "04", icon: "monitor", title: "Seguimos a tu lado", copy: "Monitoreamos la red y te brindamos soporte local siempre que lo necesites." },
 ];
 
 const iconGlyphs = {
@@ -197,19 +197,44 @@ export default function Home() {
 
   useEffect(() => {
     const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const videos = Array.from(document.querySelectorAll<HTMLVideoElement>("video"));
-    const syncPlayback = () => {
-      videos.forEach((video) => {
-        if (motionPreference.matches) {
-          video.pause();
-        } else {
-          video.play().catch(() => undefined);
-        }
+    const videos = Array.from(document.querySelectorAll<HTMLVideoElement>("video[data-lazy-video]"));
+
+    const loadVideo = (video: HTMLVideoElement) => {
+      if (video.dataset.loaded === "true") return;
+      video.querySelectorAll<HTMLSourceElement>("source[data-src]").forEach((source) => {
+        source.src = source.dataset.src ?? "";
+        source.removeAttribute("data-src");
       });
+      video.dataset.loaded = "true";
+      video.load();
     };
-    syncPlayback();
+
+    const syncVideo = (video: HTMLVideoElement) => {
+      if (motionPreference.matches || video.dataset.inView !== "true") {
+        video.pause();
+        return;
+      }
+      loadVideo(video);
+      video.play().catch(() => undefined);
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        const video = entry.target as HTMLVideoElement;
+        video.dataset.inView = String(entry.isIntersecting);
+        syncVideo(video);
+      });
+    }, { rootMargin: "240px 0px" });
+
+    const syncPlayback = () => videos.forEach(syncVideo);
+    videos.forEach((video) => observer.observe(video));
     motionPreference.addEventListener("change", syncPlayback);
-    return () => motionPreference.removeEventListener("change", syncPlayback);
+
+    return () => {
+      observer.disconnect();
+      videos.forEach((video) => video.pause());
+      motionPreference.removeEventListener("change", syncPlayback);
+    };
   }, []);
 
   return (
@@ -228,7 +253,7 @@ export default function Home() {
         </div>
 
         <div className="network-dashboard" aria-label="Panel visual de la red Byte">
-          <div className="dash-top"><div className="dash-brand"><b><img src="assets/byte-symbol.png" alt="" aria-hidden="true" /></b><span>BYTE NETWORK</span></div><div className="dash-status"><i /> RED OPERATIVA</div><div className="dash-period">AHORA <span>⌄</span></div></div>
+          <div className="dash-top"><div className="dash-brand"><b><img src="assets/byte-symbol.png" width="181" height="209" alt="" aria-hidden="true" /></b><span>BYTE NETWORK</span></div><div className="dash-status"><i /> RED OPERATIVA</div><div className="dash-period">AHORA <span>⌄</span></div></div>
           <div className="dash-telemetry" aria-hidden="true"><span><i /> 99.9% DISPONIBILIDAD</span><span>COBERTURA · CIUDAD + CAMPO</span><span>MONITOREO 24/7</span></div>
           <div className="dash-body">
             <aside className="dash-sidebar" aria-hidden="true">
@@ -259,26 +284,26 @@ export default function Home() {
       <section className="advantages reveal" aria-label="Ventajas Byte">{advantages.map(([number, title, copy]) => <article key={number}><span>{number}</span><div className={"advantage-icon advantage-icon-" + number + " icon-shell"} aria-hidden="true"><IconGlyph name={"advantage" + number} /></div><h2>{title}</h2><p>{copy}</p></article>)}</section>
 
       <section className="about reveal" id="nosotros">
-        <div className="section-intro"><span className="section-tag">SOBRE BYTE</span><h2>Tecnología que conecta.<br /><em>Personas que acompañan.</em></h2><p>Nacimos en Lincoln en 2003 con una idea simple: llevar conectividad de calidad a cada persona, incluso donde parecía imposible.</p></div>
+        <div className="section-intro"><span className="section-tag">SOBRE BYTE</span><h2>Tecnología que conecta.<br /><em>Personas que acompañan.</em></h2><p>Nacimos en Lincoln en 2003 con una idea simple: llevar conectividad de calidad a cada rincón de la región, incluso donde parecía imposible.</p></div>
         <div className="about-layout">
           <div className="about-visual">
-            <img className="about-photo" src="assets/byte-network-team.webp" alt="Equipo técnico monitoreando la red de Byte" loading="lazy" decoding="async" />
+            <img className="about-photo" src="assets/byte-network-team.webp" width="1440" height="960" alt="Equipo técnico monitoreando la red de Byte" loading="lazy" decoding="async" />
             <div className="about-photo-shade" aria-hidden="true" />
             <span className="about-label"><i /> INFRAESTRUCTURA ACTIVA</span>
           </div>
-          <div className="about-content"><span className="section-tag">UNA RED QUE CRECE CON VOS</span><h3>Más de dos décadas acercando oportunidades.</h3><p>Hoy brindamos servicio en distintas localidades de la zona y seguimos ampliando nuestra red. La monitoreamos de forma constante para asegurar calidad y fiabilidad, acompañando a cada cliente con atención totalmente personalizada.</p><div className="metric-grid"><div><strong>2003</strong><span>El año en que empezó nuestra historia</span></div><div><strong>6</strong><span>Localidades y su zona rural conectadas</span></div><div><strong>Local</strong><span>Equipo cercano, respuestas reales</span></div></div><a className="text-button" href="#contacto">Conocé nuestra cobertura <span>↗</span></a></div>
+          <div className="about-content"><span className="section-tag">UNA RED QUE CRECE CON VOS</span><h3>Más de dos décadas acercando oportunidades.</h3><p>Hoy llegamos a distintas localidades de la zona y seguimos ampliando nuestra red. La monitoreamos de forma constante para ofrecer un servicio confiable, con atención cercana y personalizada.</p><div className="metric-grid"><div><strong>2003</strong><span>El año en que empezó nuestra historia</span></div><div><strong>6</strong><span>Localidades y zonas rurales conectadas</span></div><div><strong>Local</strong><span>Equipo cercano, respuestas reales</span></div></div><a className="text-button" href="#contacto">Conocé nuestra cobertura <span>↗</span></a></div>
         </div>
       </section>
 
       <section className="services reveal" id="servicios">
-        <div className="section-intro section-intro-centered"><span className="section-tag">NUESTROS SERVICIOS</span><h2>Una solución para cada<br /><em>forma de conectarte.</em></h2><p>Desde el hogar hasta una operación de gran escala, diseñamos la red que necesitás.</p></div>
+        <div className="section-intro section-intro-centered"><span className="section-tag">NUESTROS SERVICIOS</span><h2>Una solución para cada<br /><em>necesidad de conexión.</em></h2><p>Desde tu hogar hasta una operación a gran escala, diseñamos la red que necesitás.</p></div>
         <div className="services-list">{services.map((service) => <article className="service-card" key={service.number}><div className="service-top"><span className="service-number">{service.number}</span><div className={"service-icon icon-" + service.icon + " icon-shell"} aria-hidden="true"><IconGlyph name={service.icon} /></div></div><span className="service-label">{service.label}</span><h3>{service.title}</h3><p>{service.copy}</p><ul>{service.points.map((point) => <li key={point}><i>✓</i>{point}</li>)}</ul><a href="#contacto">Consultar servicio <span>↗</span></a></article>)}</div>
       </section>
 
       <section className="network-film reveal" aria-label="La red Byte en movimiento">
         <picture>
-          <source media="(max-width: 540px)" srcSet="assets/byte-robot-network-mobile.webp" />
-          <img className="network-film-image" src="assets/byte-robot-network.webp" alt="Androide futurista de Byte integrado a una red de conectividad" loading="lazy" decoding="async" />
+          <source media="(max-width: 540px)" srcSet="assets/byte-robot-network-mobile.webp" width="1086" height="1448" />
+          <img className="network-film-image" src="assets/byte-robot-network.webp" width="1672" height="941" alt="Androide futurista de Byte integrado a una red de conectividad" loading="lazy" decoding="async" />
         </picture>
 
         <div className="network-film-shade" aria-hidden="true" />
@@ -295,8 +320,8 @@ export default function Home() {
       <section className="process-section reveal">
         <div className="section-intro">
           <span className="section-tag">CÓMO TRABAJAMOS</span>
-          <h2>De tu ubicación a una<br /><em>conexión confiable.</em></h2>
-          <p>Un proceso claro, acompañado por especialistas locales de principio a fin.</p>
+          <h2>Conectarte es simple.<br /><em>Nosotros nos ocupamos.</em></h2>
+          <p>Un proceso claro, con especialistas locales que te acompañan de principio a fin.</p>
         </div>
         <div className="process-flow">
           <div className="process-beam" aria-hidden="true"><i /></div>
@@ -315,12 +340,12 @@ export default function Home() {
       </section>
 
       <section className="coverage reveal" id="cobertura">
-        <div className="coverage-copy"><span className="section-tag">COBERTURA REGIONAL</span><h2>Conectamos la ciudad.<br /><em>Y también el campo.</em></h2><p>Llegamos a localidades y zonas rurales donde conectarse siempre fue un desafío. Nuestra infraestructura crece para que la distancia deje de ser un límite.</p><div className="location-list">{locations.map((location) => <span key={location}><i />{location}</span>)}</div><a className="button button-primary" href="#contacto">Consultar mi ubicación <span>↗</span></a></div>
+        <div className="coverage-copy"><span className="section-tag">COBERTURA REGIONAL</span><h2>Conectamos la ciudad.<br /><em>Y también el campo.</em></h2><p>Llevamos conectividad a localidades y zonas rurales donde conectarse siempre fue un desafío. Nuestra infraestructura sigue creciendo para que la distancia deje de ser un límite.</p><div className="location-list">{locations.map((location) => <span key={location}><i />{location}</span>)}</div><a className="button button-primary" href="#contacto">Consultar mi ubicación <span>↗</span></a></div>
         <div className="coverage-map" aria-label="Visualización de la cobertura regional de Byte">
-          <video className="coverage-photo" autoPlay muted loop playsInline preload="metadata" poster="assets/byte-regional-network.webp" aria-label="Animación de localidades y zonas rurales conectadas por la red de Byte">
-            <source src="assets/byte-regional-loop.mp4" type="video/mp4" />
+          <video className="coverage-photo" data-lazy-video muted loop playsInline preload="none" width="1599" height="900" poster="assets/byte-regional-network.webp" aria-label="Animación de localidades y zonas rurales conectadas por la red de Byte">
+            <source data-src="assets/byte-regional-loop.mp4" type="video/mp4" />
           </video>
-          <div className="coverage-photo-shade" aria-hidden="true" /><div className="map-grid" aria-hidden="true" /><div className="map-radar radar-one" /><div className="map-radar radar-two" /><div className="map-radar radar-three" /><div className="map-core"><b><img src="assets/byte-symbol.png" alt="" aria-hidden="true" /></b><small>LINCOLN</small></div>{locations.slice(1).map((location, index) => <span className={"map-node map-node-" + (index + 1)} key={location}><i />{location}</span>)}<div className="map-card"><span>ZONA CONECTADA</span><strong>CIUDAD + CAMPO</strong><small>Infraestructura en expansión</small></div>
+          <div className="coverage-photo-shade" aria-hidden="true" /><div className="map-grid" aria-hidden="true" /><div className="map-radar radar-one" /><div className="map-radar radar-two" /><div className="map-radar radar-three" /><div className="map-core"><b><img src="assets/byte-symbol.png" width="181" height="209" alt="" aria-hidden="true" /></b><small>LINCOLN</small></div>{locations.slice(1).map((location, index) => <span className={"map-node map-node-" + (index + 1)} key={location}><i />{location}</span>)}<div className="map-card"><span>ZONA CONECTADA</span><strong>CIUDAD + CAMPO</strong><small>Infraestructura en expansión</small></div>
         </div>
       </section>
 
@@ -355,11 +380,11 @@ export default function Home() {
 
       <section className="faq reveal">
         <div className="faq-heading"><span className="section-tag">PREGUNTAS FRECUENTES</span><h2>Todo lo que necesitás saber.</h2><p>Si tu pregunta no está acá, escribinos. Nuestro equipo está listo para ayudarte.</p><a className="text-button" href="#contacto">Hablar con Byte <span>↗</span></a></div>
-        <div className="faq-list"><details open><summary>¿En qué localidades tienen cobertura?<span>+</span></summary><p>Brindamos servicio en Lincoln, General Pinto, Arenaza, El Triunfo, Bayauca, Bermúdez y en la zona rural comprendida entre estas localidades.</p></details><details><summary>¿Qué es internet simétrico?<span>+</span></summary><p>Es una conexión que ofrece la misma velocidad de subida y de bajada, ideal para empresas, videollamadas, nube y envío de archivos pesados.</p></details><details><summary>¿Puedo consultar disponibilidad en una zona rural?<span>+</span></summary><p>Sí. Analizamos cada ubicación para confirmar la mejor alternativa de conexión disponible.</p></details><details><summary>¿Cómo ingreso al área de clientes?<span>+</span></summary><p>Podés acceder desde el botón “Área clientes” para consultar tu estado de cuenta y administrar tu servicio.</p></details></div>
+        <div className="faq-list"><details open><summary>¿En qué localidades tienen cobertura?<span>+</span></summary><p>Brindamos servicio en Lincoln, General Pinto, Arenaza, El Triunfo, Bayauca y Bermúdez, además de las zonas rurales comprendidas entre estas localidades.</p></details><details><summary>¿Qué es internet simétrico?<span>+</span></summary><p>Es una conexión con la misma velocidad de subida y de bajada. Es ideal para empresas, videollamadas, trabajo en la nube y envío de archivos pesados.</p></details><details><summary>¿Puedo consultar disponibilidad en una zona rural?<span>+</span></summary><p>Sí. Analizamos cada ubicación para confirmar la mejor alternativa de conexión disponible.</p></details><details><summary>¿Cómo ingreso al área de clientes?<span>+</span></summary><p>Podés hacerlo desde el botón “Accedé a tu cuenta”, donde vas a poder consultar tu estado de cuenta y gestionar el servicio.</p></details></div>
       </section>
 
       <section className="contact reveal" id="contacto">
-        <div className="contact-copy"><span className="section-tag">HABLEMOS</span><h2>Tu próxima conexión<br /><em>empieza acá.</em></h2><p>Dejanos tus datos y te contactamos para recomendarte la mejor solución disponible en tu zona.</p><div className="contact-details"><a href="tel:+542355448231"><span>TELÉFONOS</span><b>2355 448231 · 448232 · 448269</b></a><a href="mailto:info@byteinformatica.com.ar"><span>EMAIL GENERAL</span><b>info@byteinformatica.com.ar</b></a><a href="mailto:atencionaclientes@byteinformatica.com.ar"><span>ATENCIÓN AL CLIENTE</span><b>atencionaclientes@byteinformatica.com.ar</b></a><a href="https://maps.google.com/?q=Rivadavia+1286+Lincoln+Buenos+Aires" target="_blank" rel="noreferrer"><span>OFICINA</span><b>Rivadavia 1286 · Lincoln, Bs. As.</b></a></div></div>
+        <div className="contact-copy"><span className="section-tag">HABLEMOS</span><h2>Tu próxima conexión<br /><em>empieza acá.</em></h2><p>Dejanos tus datos y te vamos a contactar para recomendarte la mejor opción disponible en tu zona.</p><div className="contact-details"><a href="tel:+542355448231"><span>TELÉFONOS</span><b>2355 448231 · 448232 · 448269</b></a><a href="mailto:info@byteinformatica.com.ar"><span>EMAIL GENERAL</span><b>info@byteinformatica.com.ar</b></a><a href="mailto:atencionaclientes@byteinformatica.com.ar"><span>ATENCIÓN AL CLIENTE</span><b>atencionaclientes@byteinformatica.com.ar</b></a><a href="https://maps.google.com/?q=Rivadavia+1286+Lincoln+Buenos+Aires" target="_blank" rel="noreferrer"><span>OFICINA</span><b>Rivadavia 1286 · Lincoln, Bs. As.</b></a></div></div>
         <form className="contact-form" onSubmit={sendForm}><div className="form-heading"><span>CONTANOS QUÉ NECESITÁS</span><i>01</i></div><div className="field-row"><label>Nombre completo<input name="name" type="text" placeholder="Tu nombre" required /></label><label>Teléfono<input name="phone" type="tel" placeholder="Tu número" required /></label></div><div className="field-row"><label>Email<input name="email" type="email" placeholder="nombre@email.com" required /></label><label>Localidad<input name="location" type="text" placeholder="¿Dónde estás?" required /></label></div><label>¿Qué servicio necesitás?<select name="service" defaultValue=""><option value="" disabled>Elegí una opción</option><option>Internet de banda ancha</option><option>Internet simétrico</option><option>Zonas WiFi</option><option>Quiero asesoramiento</option></select></label><label>Contanos un poco más<textarea name="message" placeholder="Escribí tu consulta..." rows={4} /></label><button className="form-submit" type="submit">Enviar consulta <span>↗</span></button><small>Al enviar, se abrirá tu aplicación de correo con la consulta preparada.</small></form>
       </section>
 

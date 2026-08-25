@@ -12,8 +12,8 @@ export const metadata: Metadata = {
 };
 
 const steps = [
-  ["01", "Completá tus datos", "Solo necesitamos la información esencial para ubicarte."],
-  ["02", "Evaluamos cobertura", "Revisamos la alternativa disponible para tu dirección."],
+  ["01", "Completá tus datos", "Solo necesitamos la información esencial para conocer tu ubicación."],
+  ["02", "Evaluamos la cobertura", "Verificamos qué servicios están disponibles en tu dirección."],
   ["03", "Te contactamos", "Un asesor local te explica la mejor opción para vos."],
 ];
 
@@ -28,11 +28,11 @@ export default function RequestServicePage() {
         <div className="request-copy">
           <span className="request-kicker"><i /> SOLICITAR SERVICIO · LINCOLN Y LA REGIÓN</span>
           <h1>La conexión que necesitás.<br /><em>Donde la necesitás.</em></h1>
-          <p>Contanos dónde estás y qué servicio buscás. Nuestro equipo evalúa la cobertura y te contacta con una propuesta pensada para tu ubicación.</p>
+          <p>Contanos dónde estás y qué servicio buscás. Nuestro equipo verifica la cobertura y te recomienda la mejor alternativa para tu zona.</p>
 
           <div className="request-trust">
             <span><Check aria-hidden="true" /> Evaluación personalizada</span>
-            <span><Check aria-hidden="true" /> Atención de un equipo local</span>
+            <span><Check aria-hidden="true" /> Atención local y personalizada</span>
           </div>
 
           <div className="request-steps" aria-label="Cómo funciona la solicitud">
@@ -54,7 +54,7 @@ export default function RequestServicePage() {
         <div>
           <span className="request-kicker"><i /> ¿PREFERÍS HABLAR CON NOSOTROS?</span>
           <h2>Estamos cerca para ayudarte.</h2>
-          <p>Podés comunicarte con Byte de lunes a viernes y recibir atención personalizada de nuestro equipo en Lincoln.</p>
+          <p>Atendemos de lunes a viernes desde Lincoln, con un equipo listo para orientarte y responder tus consultas.</p>
         </div>
         <div className="request-assistance__links">
           <a href="tel:+542355448231"><Phone aria-hidden="true" /><span><small>TELÉFONO</small>2355 448231</span><ArrowUpRight aria-hidden="true" /></a>
