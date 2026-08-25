@@ -1596,9 +1596,9 @@ body.menu-open{overflow:hidden;touch-action:none}
   position:relative;
   z-index:1;
   width:min(1280px,calc(100% - 48px));
-  min-height:100svh;
+  min-height:min(960px,100svh);
   margin:0 auto;
-  padding:150px 0 100px;
+  padding:132px 0 82px;
   display:grid;
   grid-template-columns:minmax(0,.9fr) minmax(480px,1.03fr);
   align-items:center;
