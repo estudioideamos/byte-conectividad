@@ -17,7 +17,7 @@ test("exporta la experiencia institucional completa de Byte", async () => {
   assert.match(html, /Rivadavia 1286/i);
   assert.match(html, /wa\.me\/5492355448231/i);
   assert.match(html, /Accedé a tu cuenta/i);
-  assert.match(html, /https:\/\/ap2\.factulinc\.com\.ar/i);
+  assert.match(html, /https:\/\/ap2\.factulinc\.com\.ar\/loginc\/200h1k1q1p1z1k1w1a0h130w220o0v/i);
   assert.doesNotMatch(html, /\\n\s*<canvas/i);
   assert.match(html, /icon-shell/i);
   assert.match(html, /icon-glyph/i);

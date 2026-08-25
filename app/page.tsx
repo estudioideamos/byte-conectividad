@@ -92,6 +92,18 @@ export default function Home() {
   const closeMenu = () => setMenuOpen(false);
 
   useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMenuOpen(false);
+    };
+    document.body.classList.toggle("menu-open", menuOpen);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.body.classList.remove("menu-open");
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [menuOpen]);
+
+  useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const context = canvas.getContext("2d");
@@ -220,12 +232,12 @@ export default function Home() {
           <a className="is-active" href="#inicio">Inicio</a><a href="#servicios">Servicios</a><a href="#cobertura">Cobertura</a><a href="#nosotros">Nosotros</a><a href="#contacto">Contacto</a>
         </nav>
         <div className="header-actions">
-          <a className="header-client" href="https://ap2.factulinc.com.ar" target="_blank" rel="noreferrer">Accedé a tu cuenta <span aria-hidden="true">↗</span></a>
-          <button className={"menu-toggle " + (menuOpen ? "is-open" : "")} type="button" aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"} aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}><i /><i /></button>
+          <a className="header-client" href="https://ap2.factulinc.com.ar/loginc/200h1k1q1p1z1k1w1a0h130w220o0v" target="_blank" rel="noreferrer">Accedé a tu cuenta <span aria-hidden="true">↗</span></a>
+          <button className={"menu-toggle " + (menuOpen ? "is-open" : "")} type="button" aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"} aria-expanded={menuOpen} aria-controls="mobile-navigation" onClick={() => setMenuOpen(!menuOpen)}><i /><i /></button>
         </div>
-        <div className={"mobile-menu " + (menuOpen ? "is-open" : "")}>
+        <div id="mobile-navigation" className={"mobile-menu " + (menuOpen ? "is-open" : "")} aria-hidden={!menuOpen}>
           <span className="mobile-menu-label">NAVEGACIÓN</span>
-          <a href="#inicio" onClick={closeMenu}>Inicio <b>01</b></a><a href="#servicios" onClick={closeMenu}>Servicios <b>02</b></a><a href="#cobertura" onClick={closeMenu}>Cobertura <b>03</b></a><a href="#nosotros" onClick={closeMenu}>Nosotros <b>04</b></a><a href="#contacto" onClick={closeMenu}>Contacto <b>05</b></a><a className="mobile-menu-client" href="https://ap2.factulinc.com.ar" target="_blank" rel="noreferrer">Accedé a tu cuenta <b>↗</b></a>
+          <a href="#inicio" onClick={closeMenu}>Inicio <b>01</b></a><a href="#servicios" onClick={closeMenu}>Servicios <b>02</b></a><a href="#cobertura" onClick={closeMenu}>Cobertura <b>03</b></a><a href="#nosotros" onClick={closeMenu}>Nosotros <b>04</b></a><a href="#contacto" onClick={closeMenu}>Contacto <b>05</b></a><a className="mobile-menu-client" href="https://ap2.factulinc.com.ar/loginc/200h1k1q1p1z1k1w1a0h130w220o0v" target="_blank" rel="noreferrer" onClick={closeMenu}>Accedé a tu cuenta <b>↗</b></a>
           <div className="mobile-menu-meta"><span>Lincoln, Buenos Aires</span><span>2355 448231</span></div>
         </div>
       </header>
@@ -340,7 +352,7 @@ export default function Home() {
 
       <section className="feature-section reveal"><div className="section-intro section-intro-centered"><span className="section-tag">PENSADA PARA LA REGIÓN</span><h2>La conexión que necesitás.<br /><em>Donde la necesitás.</em></h2></div><div className="feature-grid">{features.map(([icon, title, copy]) => <article key={title}><span className={"feature-icon feature-icon-" + icon + " icon-shell"} aria-hidden="true"><IconGlyph name={icon} /></span><h3>{title}</h3><p>{copy}</p></article>)}</div></section>
 
-      <section className="portal reveal"><div className="portal-glow" aria-hidden="true" /><div className="portal-copy"><span className="section-tag">ÁREA CLIENTES</span><h2>Tu cuenta, siempre a mano.</h2><p>Consultá tu estado de cuenta y administrá tu servicio desde el portal de clientes.</p><a className="button button-light" href="https://ap2.factulinc.com.ar" target="_blank" rel="noreferrer">Ingresar a mi cuenta <span>↗</span></a></div><div className="portal-console" aria-hidden="true"><div className="console-bar"><i /><i /><i /><span>MI CUENTA BYTE</span></div><div className="console-body"><span>ESTADO DEL SERVICIO</span><div className="console-status"><i /> Activo</div><strong>Todo en orden.</strong><div className="console-line"><i /></div><div className="console-buttons"><b>Cuenta</b><b>Comprobantes</b><b>Soporte</b></div></div></div></section>
+      <section className="portal reveal"><div className="portal-glow" aria-hidden="true" /><div className="portal-copy"><span className="section-tag">ÁREA CLIENTES</span><h2>Tu cuenta, siempre a mano.</h2><p>Consultá tu estado de cuenta y administrá tu servicio desde el portal de clientes.</p><a className="button button-light" href="https://ap2.factulinc.com.ar/loginc/200h1k1q1p1z1k1w1a0h130w220o0v" target="_blank" rel="noreferrer">Ingresar a mi cuenta <span>↗</span></a></div><div className="portal-console" aria-hidden="true"><div className="console-bar"><i /><i /><i /><span>MI CUENTA BYTE</span></div><div className="console-body"><span>ESTADO DEL SERVICIO</span><div className="console-status"><i /> Activo</div><strong>Todo en orden.</strong><div className="console-line"><i /></div><div className="console-buttons"><b>Cuenta</b><b>Comprobantes</b><b>Soporte</b></div></div></div></section>
 
       <section className="faq reveal">
         <div className="faq-heading"><span className="section-tag">PREGUNTAS FRECUENTES</span><h2>Todo lo que necesitás saber.</h2><p>Si tu pregunta no está acá, escribinos. Nuestro equipo está listo para ayudarte.</p><a className="text-button" href="#contacto">Hablar con Byte <span>↗</span></a></div>
@@ -355,7 +367,7 @@ export default function Home() {
       <section className="career reveal"><div><span className="section-tag">OPORTUNIDADES LABORALES</span><h2>¿Querés ser parte de Byte?</h2></div><p>Estamos construyendo la red del futuro con talento local.</p><a className="button button-secondary" href="mailto:info@byteinformatica.com.ar?subject=Quiero%20trabajar%20en%20Byte%20Conectividad">Enviar mi CV <span>↗</span></a></section>
 
       <footer>
-        <div className="footer-main"><div className="footer-brand"><img src="assets/byte-logo.png" alt="Byte Conectividad" /><p>Internet de alta velocidad para Lincoln y la región.</p></div><div className="footer-column"><span>NAVEGACIÓN</span><a href="#servicios">Servicios</a><a href="#cobertura">Cobertura</a><a href="#nosotros">Nosotros</a><a href="#contacto">Contacto</a></div><div className="footer-column"><span>SEGUINOS</span><a href="https://www.instagram.com/byteconectividad.20/" target="_blank" rel="noreferrer">Instagram ↗</a><a href="https://www.facebook.com/Byte-Conectividad-416914858648229" target="_blank" rel="noreferrer">Facebook ↗</a></div><div className="footer-column"><span>CLIENTES</span><a href="https://ap2.factulinc.com.ar" target="_blank" rel="noreferrer">Ingresar a mi cuenta ↗</a><a href="mailto:atencionaclientes@byteinformatica.com.ar">Soporte</a></div></div>
+        <div className="footer-main"><div className="footer-brand"><img src="assets/byte-logo.png" alt="Byte Conectividad" /><p>Internet de alta velocidad para Lincoln y la región.</p></div><div className="footer-column"><span>NAVEGACIÓN</span><a href="#servicios">Servicios</a><a href="#cobertura">Cobertura</a><a href="#nosotros">Nosotros</a><a href="#contacto">Contacto</a></div><div className="footer-column"><span>SEGUINOS</span><a href="https://www.instagram.com/byteconectividad.20/" target="_blank" rel="noreferrer">Instagram ↗</a><a href="https://www.facebook.com/Byte-Conectividad-416914858648229" target="_blank" rel="noreferrer">Facebook ↗</a></div><div className="footer-column"><span>CLIENTES</span><a href="https://ap2.factulinc.com.ar/loginc/200h1k1q1p1z1k1w1a0h130w220o0v" target="_blank" rel="noreferrer">Ingresar a mi cuenta ↗</a><a href="mailto:atencionaclientes@byteinformatica.com.ar">Soporte</a></div></div>
         <div className="footer-bottom"><span>© {new Date().getFullYear()} BYTE CONECTIVIDAD</span><span>INTERNET · INFRAESTRUCTURA · SOPORTE</span><a href="#inicio">VOLVER ARRIBA ↑</a></div>
       </footer>
 
