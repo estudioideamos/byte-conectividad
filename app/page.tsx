@@ -348,7 +348,7 @@ export default function Home() {
         <section className="byte-footer__cta reveal">
           <div className="byte-footer__cta-copy">
             <span className="section-tag"><i /> LA RED QUE TE ACOMPAÑA</span>
-            <h2>Donde estés, que tus ideas<br /><em>lleguen más lejos.</em></h2>
+            <h2><span className="byte-footer__cta-title-line">Donde estés, que tus ideas</span><em>lleguen más lejos.</em></h2>
             <p>Conectividad estable, soporte local y una solución pensada para tu zona.</p>
           </div>
           <a className="byte-footer__orbit" href="#contacto" aria-label="Consultar cobertura con Byte">
