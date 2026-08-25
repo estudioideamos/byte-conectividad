@@ -258,7 +258,7 @@ export default function Home() {
         </div>
 
         <div className="network-dashboard" aria-label="Panel visual de la red Byte">
-          <div className="dash-top"><div className="dash-brand"><b>B</b><span>BYTE NETWORK</span></div><div className="dash-status"><i /> RED OPERATIVA</div><div className="dash-period">AHORA <span>⌄</span></div></div>
+          <div className="dash-top"><div className="dash-brand"><b><img src="assets/byte-symbol.png" alt="" aria-hidden="true" /></b><span>BYTE NETWORK</span></div><div className="dash-status"><i /> RED OPERATIVA</div><div className="dash-period">AHORA <span>⌄</span></div></div>
           <div className="dash-body">
             <aside className="dash-sidebar" aria-hidden="true">
               <span className="dash-menu-active"><i>◫</i>Estado</span><span><i>⌁</i>Servicios</span><span><i>◎</i>Cobertura</span><span><i>◈</i>Soporte</span>
@@ -350,7 +350,7 @@ export default function Home() {
           <video className="coverage-photo" autoPlay muted loop playsInline preload="metadata" poster="assets/byte-regional-network.webp" aria-label="Animación de localidades y zonas rurales conectadas por la red de Byte">
             <source src="assets/byte-regional-loop.mp4" type="video/mp4" />
           </video>
-          <div className="coverage-photo-shade" aria-hidden="true" /><div className="map-grid" aria-hidden="true" /><div className="map-radar radar-one" /><div className="map-radar radar-two" /><div className="map-radar radar-three" /><div className="map-core"><b>B</b><small>LINCOLN</small></div>{locations.slice(1).map((location, index) => <span className={"map-node map-node-" + (index + 1)} key={location}><i />{location}</span>)}<div className="map-card"><span>ZONA CONECTADA</span><strong>CIUDAD + CAMPO</strong><small>Infraestructura en expansión</small></div>
+          <div className="coverage-photo-shade" aria-hidden="true" /><div className="map-grid" aria-hidden="true" /><div className="map-radar radar-one" /><div className="map-radar radar-two" /><div className="map-radar radar-three" /><div className="map-core"><b><img src="assets/byte-symbol.png" alt="" aria-hidden="true" /></b><small>LINCOLN</small></div>{locations.slice(1).map((location, index) => <span className={"map-node map-node-" + (index + 1)} key={location}><i />{location}</span>)}<div className="map-card"><span>ZONA CONECTADA</span><strong>CIUDAD + CAMPO</strong><small>Infraestructura en expansión</small></div>
         </div>
       </section>
 
@@ -424,7 +424,7 @@ export default function Home() {
 
           <div className="byte-footer__contact">
             <span>EQUIPO LOCAL</span>
-            <h3>¿Conectamos tu próximo proyecto?</h3>
+            <h3>Tu mejor conexión empieza con una charla.</h3>
             <a className="byte-footer__whatsapp" href="https://wa.me/5492355448231?text=Hola%20Byte%2C%20quiero%20consultar%20por%20el%20servicio%20de%20internet." target="_blank" rel="noreferrer">
               <MessageCircle aria-hidden="true" /><b>Hablar por WhatsApp</b><ArrowUpRight aria-hidden="true" />
             </a>

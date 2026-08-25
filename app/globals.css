@@ -1314,3 +1314,150 @@ body.menu-open{overflow:hidden;touch-action:none}
   .byte-footer__nav + .byte-footer__nav .byte-footer__nav-button{border-top:0}
   .byte-footer__contact{margin-top:50px}
 }
+
+/* Official Byte mark */
+.dash-brand b{
+  overflow:hidden;
+  padding:3px;
+  background:linear-gradient(145deg,rgba(61,92,255,.28),rgba(122,80,255,.2));
+  box-shadow:inset 0 0 0 1px rgba(136,151,255,.2),0 0 20px rgba(69,83,255,.16);
+}
+.dash-brand b img{width:18px;height:21px;display:block;object-fit:contain;filter:drop-shadow(0 0 5px rgba(116,137,255,.35))}
+.map-core b{width:48px;height:52px;display:grid;place-items:center}
+.map-core b img{width:40px;height:46px;display:block;object-fit:contain;filter:drop-shadow(0 0 9px rgba(111,131,255,.38))}
+
+/* Mobile UX refinement */
+@media (max-width:540px){
+  .site-header{padding:0 7px 0 13px}
+  .brand img{width:128px}
+  .menu-toggle{width:40px;height:40px;flex-basis:40px}
+
+  .mobile-menu{
+    height:100dvh;
+    min-height:100dvh;
+    overflow-y:auto;
+    overscroll-behavior:contain;
+  }
+  .mobile-menu>a{min-height:52px}
+  .mobile-menu>a.mobile-menu-client{min-height:54px}
+
+  .hero{padding:100px 16px 58px}
+  .eyebrow{margin:0 auto 22px;padding:7px 9px;font-size:7px;letter-spacing:.1em}
+  .hero h1{font-size:clamp(36px,10.8vw,44px);line-height:.95}
+  .hero-copy>p{margin:24px auto 26px;font-size:14px;line-height:1.58}
+  .hero-actions .button{min-height:54px}
+  .hero-checks{margin-top:20px;align-items:center;padding-left:0}
+  .hero-checks span{font-size:11px}
+
+  .network-dashboard{margin-top:36px}
+  .dash-top{height:56px;grid-template-columns:minmax(0,1fr) auto;gap:8px;padding:0 12px}
+  .dash-brand{min-width:0;gap:8px}
+  .dash-brand b{width:30px;height:30px;flex:0 0 30px;padding:4px}
+  .dash-brand b img{width:19px;height:22px}
+  .dash-brand span{overflow:hidden;font-size:7px;letter-spacing:.08em;text-overflow:ellipsis;white-space:nowrap}
+  .dash-period{padding:7px 9px}
+  .dash-period span{margin-left:7px}
+  .dash-content{padding:14px}
+  .dash-heading h2{font-size:17px;line-height:1.1}
+  .live-pill{padding:6px 8px;font-size:6px}
+  .chart-card{min-height:230px;padding:15px}
+  .chart-value strong{font-size:32px}
+  .line-chart{height:132px}
+
+  .trust-strip{padding:44px 0 30px}
+  .advantages{padding:48px 16px 72px}
+  .advantages article{min-height:230px;padding:26px}
+  .advantages article h2{font-size:24px}
+  .advantages article p{font-size:12px;line-height:1.62}
+
+  .about,.services,.feature-section,.faq,.contact,.process-section{padding:72px 16px}
+  .section-intro h2,.coverage-copy h2,.contact-copy h2,.portal-copy h2,.network-film-copy h2{
+    font-size:clamp(35px,10.2vw,42px);
+    line-height:.96;
+  }
+  .section-intro>p,.coverage-copy>p,.contact-copy>p{font-size:14px;line-height:1.65}
+  .about-layout{gap:44px}
+  .about-visual{min-height:390px}
+  .about-content h3{font-size:29px;line-height:1.05}
+
+  .services-list{gap:14px}
+  .service-card{min-height:0;padding:24px 22px}
+  .service-top{min-height:120px}
+  .service-card h3{margin:12px 0 15px;font-size:30px}
+  .service-card>p{min-height:0;font-size:13px;line-height:1.62}
+  .service-card ul{gap:9px;margin:20px 0 24px;padding:18px 0}
+  .service-card li{font-size:11px}
+
+  .network-film{min-height:540px;margin-bottom:72px;padding:36px 20px}
+  .network-film-copy p{font-size:13px;line-height:1.65}
+  .process-flow{gap:12px}
+  .process-step{min-height:250px;padding:26px}
+  .process-icon{margin-bottom:30px}
+  .process-summary{justify-content:center;text-align:center}
+
+  .coverage{gap:46px;padding:72px 16px}
+  .location-list{gap:11px 16px;margin:26px 0 30px;padding:20px 0}
+  .coverage-map{min-height:450px;border-radius:20px}
+  .map-core{width:96px;height:96px}
+  .map-core b{width:43px;height:47px}
+  .map-core b img{width:36px;height:42px}
+  .map-core small{font-size:6px}
+  .map-card{left:14px;bottom:14px;width:178px;padding:14px}
+  .map-card strong{font-size:14px}
+
+  .feature-grid{gap:0}
+  .feature-grid article{min-height:205px;padding:24px}
+  .feature-grid article h3{font-size:24px}
+  .feature-grid article p{font-size:12px;line-height:1.62}
+
+  .portal{margin:0 10px 72px;padding:40px 18px;gap:44px;border-radius:22px}
+  .portal-copy p{font-size:14px;line-height:1.65}
+  .portal-console{min-height:300px}
+  .console-body{padding:24px}
+
+  .faq{gap:44px}
+  .faq-list summary{min-height:64px;padding:18px 0;font-size:14px;line-height:1.35}
+  .faq-list details p{margin-right:0;font-size:12px;line-height:1.65}
+
+  .contact{gap:48px}
+  .contact-details{margin-top:32px}
+  .contact-details a{min-height:62px;padding:16px 0}
+  .contact-form{padding:25px 18px}
+  .contact-form label{margin-bottom:20px}
+  .form-submit{min-height:54px}
+
+  .career{margin:0 16px 72px;padding:26px 22px}
+  .career .button{width:100%;min-height:54px}
+
+  .byte-footer{padding-left:16px;padding-right:16px;padding-bottom:calc(88px + env(safe-area-inset-bottom))}
+  .byte-footer__cta{gap:34px;padding:64px 0 54px}
+  .byte-footer__cta h2{font-size:clamp(38px,11.2vw,46px);line-height:.93}
+  .byte-footer__cta p{font-size:13px;line-height:1.62}
+  .byte-footer__orbit{width:122px;height:122px}
+  .byte-footer__main{padding:52px 0 56px}
+  .byte-footer__brand{margin-bottom:40px}
+  .byte-footer__nav-button{min-height:56px}
+  .byte-footer__contact{margin-top:42px;padding-top:36px}
+  .byte-footer__contact h3{font-size:25px;line-height:1.08}
+  .byte-footer__whatsapp{min-height:52px}
+  .byte-footer__bottom{gap:18px;padding-top:26px}
+
+  .whatsapp{
+    right:10px;
+    bottom:calc(10px + env(safe-area-inset-bottom));
+    height:48px;
+    gap:10px;
+    padding:0 6px 0 13px;
+  }
+  .whatsapp i{width:34px;height:34px}
+}
+
+@media (max-width:380px){
+  .hero{padding-left:14px;padding-right:14px}
+  .hero h1{font-size:36px}
+  .dash-period span{display:none}
+  .service-card h3{font-size:28px}
+  .whatsapp{width:48px;padding:0;justify-content:center}
+  .whatsapp span{display:none}
+  .whatsapp i{width:36px;height:36px}
+}

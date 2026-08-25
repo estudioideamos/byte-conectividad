@@ -27,6 +27,8 @@ test("exporta la experiencia institucional completa de Byte", async () => {
   assert.match(html, /https:\/\/ideamos\.com\.ar/i);
   assert.match(html, /aria-controls="footer-explore"/i);
   assert.match(html, /aria-controls="footer-solutions"/i);
+  assert.match(html, /Tu mejor conexión empieza con una charla/i);
+  assert.ok((html.match(/byte-symbol\.png/g) || []).length >= 2);
   assert.doesNotMatch(html, /Your site is taking shape|codex-preview|SkeletonPreview/i);
 });
 
