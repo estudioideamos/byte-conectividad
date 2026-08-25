@@ -2053,3 +2053,7 @@ body.menu-open{overflow:hidden;touch-action:none}
   .request-footer nav a{font-size:12px}
   .request-footer__legal{font-size:9px}
 }
+
+
+/* Navigation weight */
+.desktop-nav a,.mobile-menu>a{font-weight:560}
