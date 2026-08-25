@@ -15,13 +15,21 @@ const advantages = [
   ["03", "Cobertura regional", "Conectamos ciudades y áreas rurales donde la distancia suele convertirse en una barrera."],
 ];
 const features = [
-  ["⌂", "Hogares conectados", "Internet para estudiar, entretenerte, trabajar y compartir sin interrupciones."],
-  ["↕", "Empresas ágiles", "Capacidad de subida y bajada para operaciones que no pueden esperar."],
-  ["◎", "Alcance rural", "Infraestructura diseñada para acercar conectividad donde otros no llegan."],
-  ["◌", "WiFi a medida", "Cobertura inteligente para oficinas, estancias, hoteles y grandes espacios."],
-  ["◈", "Soporte local", "Personas reales, cerca tuyo, listas para ayudarte cuando lo necesitás."],
-  ["↗", "Una red que crece", "Ampliamos nuestra infraestructura junto con las necesidades de la región."],
+  ["home", "Hogares conectados", "Internet para estudiar, entretenerte, trabajar y compartir sin interrupciones."],
+  ["business", "Empresas ágiles", "Capacidad de subida y bajada para operaciones que no pueden esperar."],
+  ["rural", "Alcance rural", "Infraestructura diseñada para acercar conectividad donde otros no llegan."],
+  ["wifi", "WiFi a medida", "Cobertura inteligente para oficinas, estancias, hoteles y grandes espacios."],
+  ["support", "Soporte local", "Personas reales, cerca tuyo, listas para ayudarte cuando lo necesitás."],
+  ["growth", "Una red que crece", "Ampliamos nuestra infraestructura junto con las necesidades de la región."],
 ];
+
+const processSteps = [
+  { number: "01", icon: "location", title: "Relevamos tu zona", copy: "Analizamos ubicación, alcance y necesidades reales." },
+  { number: "02", icon: "design", title: "Diseñamos la solución", copy: "Definimos la tecnología y cobertura más conveniente." },
+  { number: "03", icon: "install", title: "Activamos tu conexión", copy: "Instalación cuidada y puesta en marcha personalizada." },
+  { number: "04", icon: "monitor", title: "La acompañamos siempre", copy: "Monitoreo continuo y soporte local cuando lo necesitás." },
+];
+
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -141,6 +149,23 @@ export default function Home() {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const videos = Array.from(document.querySelectorAll<HTMLVideoElement>("video"));
+    const syncPlayback = () => {
+      videos.forEach((video) => {
+        if (motionPreference.matches) {
+          video.pause();
+        } else {
+          video.play().catch(() => undefined);
+        }
+      });
+    };
+    syncPlayback();
+    motionPreference.addEventListener("change", syncPlayback);
+    return () => motionPreference.removeEventListener("change", syncPlayback);
+  }, []);
+
   return (
     <main>
       <header className="site-header">
@@ -197,7 +222,7 @@ export default function Home() {
 
       <section className="trust-strip reveal" aria-label="Presencia regional"><p>Desde 2003 conectando personas, proyectos y oportunidades</p><div className="location-marquee"><div>{[...locations, ...locations].map((location, index) => <span key={location + index}><i />{location}</span>)}</div></div></section>
 
-      <section className="advantages reveal" aria-label="Ventajas Byte">{advantages.map(([number, title, copy]) => <article key={number}><span>{number}</span><div className="advantage-icon" aria-hidden="true"><i /><i /><b /></div><h2>{title}</h2><p>{copy}</p></article>)}</section>
+      <section className="advantages reveal" aria-label="Ventajas Byte">{advantages.map(([number, title, copy]) => <article key={number}><span>{number}</span><div className={"advantage-icon advantage-icon-" + number} aria-hidden="true"><i /><i /><b /></div><h2>{title}</h2><p>{copy}</p></article>)}</section>
 
       <section className="about reveal" id="nosotros">
         <div className="section-intro"><span className="section-tag">SOBRE BYTE</span><h2>Tecnología que conecta.<br /><em>Personas que acompañan.</em></h2><p>Nacimos en Lincoln en 2003 con una idea simple: llevar conectividad de calidad a cada persona, incluso donde parecía imposible.</p></div>
@@ -219,15 +244,54 @@ export default function Home() {
         <div className="services-list">{services.map((service) => <article className="service-card" key={service.number}><div className="service-top"><span className="service-number">{service.number}</span><div className={"service-icon icon-" + service.icon} aria-hidden="true"><i /><i /><i /></div></div><span className="service-label">{service.label}</span><h3>{service.title}</h3><p>{service.copy}</p><ul>{service.points.map((point) => <li key={point}><i>✓</i>{point}</li>)}</ul><a href="#contacto">Consultar servicio <span>↗</span></a></article>)}</div>
       </section>
 
+      <section className="network-film reveal" aria-label="La red Byte en movimiento">
+        <video className="network-film-video" autoPlay muted loop playsInline preload="metadata" poster="assets/byte-signal-poster.webp" aria-hidden="true">
+          <source src="assets/byte-signal-loop.mp4" type="video/mp4" />
+        </video>
+        <div className="network-film-shade" aria-hidden="true" />
+        <div className="network-film-copy">
+          <span className="section-tag">INFRAESTRUCTURA EN MOVIMIENTO</span>
+          <h2>Datos que viajan.<br /><em>Oportunidades que llegan.</em></h2>
+          <p>Cada señal recorre una red diseñada para conectar personas, empresas y proyectos en toda la región.</p>
+        </div>
+        <div className="film-hud" aria-hidden="true">
+          <span><i /> RED ACTIVA</span><span>CIUDAD</span><b>→</b><span>CAMPO</span><b>→</b><span>REGIÓN</span>
+        </div>
+      </section>
+
+      <section className="process-section reveal">
+        <div className="section-intro">
+          <span className="section-tag">CÓMO TRABAJAMOS</span>
+          <h2>De tu ubicación a una<br /><em>conexión confiable.</em></h2>
+          <p>Un proceso claro, acompañado por especialistas locales de principio a fin.</p>
+        </div>
+        <div className="process-flow">
+          <div className="process-beam" aria-hidden="true"><i /></div>
+          {processSteps.map((step) => (
+            <article className="process-step" key={step.number}>
+              <span className="process-number">{step.number}</span>
+              <div className={"process-icon process-icon-" + step.icon} aria-hidden="true"><i /><i /><b /></div>
+              <h3>{step.title}</h3>
+              <p>{step.copy}</p>
+            </article>
+          ))}
+        </div>
+        <div className="process-summary">
+          <span><i /> RESPUESTA CERCANA</span><span><i /> DISEÑO A MEDIDA</span><span><i /> MONITOREO CONSTANTE</span>
+        </div>
+      </section>
+
       <section className="coverage reveal" id="cobertura">
         <div className="coverage-copy"><span className="section-tag">COBERTURA REGIONAL</span><h2>Conectamos la ciudad.<br /><em>Y también el campo.</em></h2><p>Llegamos a localidades y zonas rurales donde conectarse siempre fue un desafío. Nuestra infraestructura crece para que la distancia deje de ser un límite.</p><div className="location-list">{locations.map((location) => <span key={location}><i />{location}</span>)}</div><a className="button button-primary" href="#contacto">Consultar mi ubicación <span>↗</span></a></div>
         <div className="coverage-map" aria-label="Visualización de la cobertura regional de Byte">
-          <img className="coverage-photo" src="assets/byte-regional-network.webp" alt="Localidades y zonas rurales conectadas por la red de Byte" loading="lazy" decoding="async" />
+          <video className="coverage-photo" autoPlay muted loop playsInline preload="metadata" poster="assets/byte-regional-network.webp" aria-label="Animación de localidades y zonas rurales conectadas por la red de Byte">
+            <source src="assets/byte-regional-loop.mp4" type="video/mp4" />
+          </video>
           <div className="coverage-photo-shade" aria-hidden="true" /><div className="map-grid" aria-hidden="true" /><div className="map-radar radar-one" /><div className="map-radar radar-two" /><div className="map-radar radar-three" /><div className="map-core"><b>B</b><small>LINCOLN</small></div>{locations.slice(1).map((location, index) => <span className={"map-node map-node-" + (index + 1)} key={location}><i />{location}</span>)}<div className="map-card"><span>ZONA CONECTADA</span><strong>CIUDAD + CAMPO</strong><small>Infraestructura en expansión</small></div>
         </div>
       </section>
 
-      <section className="feature-section reveal"><div className="section-intro section-intro-centered"><span className="section-tag">PENSADA PARA LA REGIÓN</span><h2>La conexión que necesitás.<br /><em>Donde la necesitás.</em></h2></div><div className="feature-grid">{features.map(([icon, title, copy]) => <article key={title}><span className="feature-icon">{icon}</span><h3>{title}</h3><p>{copy}</p></article>)}</div></section>
+      <section className="feature-section reveal"><div className="section-intro section-intro-centered"><span className="section-tag">PENSADA PARA LA REGIÓN</span><h2>La conexión que necesitás.<br /><em>Donde la necesitás.</em></h2></div><div className="feature-grid">{features.map(([icon, title, copy]) => <article key={title}><span className={"feature-icon feature-icon-" + icon} aria-hidden="true"><i /><i /><b /></span><h3>{title}</h3><p>{copy}</p></article>)}</div></section>
 
       <section className="portal reveal"><div className="portal-glow" aria-hidden="true" /><div className="portal-copy"><span className="section-tag">ÁREA CLIENTES</span><h2>Tu cuenta, siempre a mano.</h2><p>Consultá tu estado de cuenta y administrá tu servicio desde el portal de clientes.</p><a className="button button-light" href="https://ap2.factulinc.com.ar" target="_blank" rel="noreferrer">Ingresar a mi cuenta <span>↗</span></a></div><div className="portal-console" aria-hidden="true"><div className="console-bar"><i /><i /><i /><span>MI CUENTA BYTE</span></div><div className="console-body"><span>ESTADO DEL SERVICIO</span><div className="console-status"><i /> Activo</div><strong>Todo en orden.</strong><div className="console-line"><i /></div><div className="console-buttons"><b>Cuenta</b><b>Comprobantes</b><b>Soporte</b></div></div></div></section>
 
