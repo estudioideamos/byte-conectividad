@@ -276,9 +276,8 @@ export default function Home() {
       </section>
 
       <section className="network-film reveal" aria-label="La red Byte en movimiento">
-        <video className="network-film-video" autoPlay muted loop playsInline preload="metadata" poster="assets/byte-signal-poster.webp" aria-hidden="true">
-          <source src="assets/byte-signal-loop.mp4" type="video/mp4" />
-        </video>
+        <img className="network-film-image" src="assets/byte-robot-network.webp" alt="Androide futurista de Byte integrado a una red de conectividad" loading="lazy" decoding="async" />
+
         <div className="network-film-shade" aria-hidden="true" />
         <div className="network-film-copy">
           <span className="section-tag">INFRAESTRUCTURA EN MOVIMIENTO</span>
