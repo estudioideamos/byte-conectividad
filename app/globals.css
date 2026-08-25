@@ -1969,3 +1969,83 @@ body.menu-open{overflow:hidden;touch-action:none}
 @media (prefers-reduced-motion:reduce){
   .site-header,.go-top{transition:none!important}
 }
+
+/* Desktop typography legibility pass */
+@media (min-width:821px){
+  .desktop-nav a,.header-client{font-size:13px}
+  .eyebrow,.section-tag{font-size:11px}
+  .button,.text-button{font-size:13px}
+  .hero-checks{font-size:12px}
+
+  .dash-brand span{font-size:11px}
+  .dash-status,.dash-period,.dash-heading small,.live-pill{font-size:9px}
+  .dash-sidebar>span{font-size:10px}
+  .dash-user small{font-size:9px}
+  .card-title,.chart-axis,.coverage-legend{font-size:8px}
+  .chart-value span{font-size:10px}
+  .coverage-ring small{font-size:7px}
+  .node-list>span{font-size:9px}
+  .node-list b{font-size:8px}
+
+  .trust-strip>p{font-size:14px}
+  .advantages article>span,.about-label,.service-number,.service-label{font-size:9px}
+  .advantages p,.service-card>p,.feature-grid p,.process-step p,.faq-list details p,.career p{font-size:14px}
+  .about-core span,.about-float span{font-size:8px}
+  .about-core small{font-size:10px}
+  .about-float strong{font-size:14px}
+  .about-content>p,.coverage-copy>p,.portal-copy p{font-size:16px}
+  .metric-grid span{font-size:11px}
+  .service-card li,.location-list span{font-size:12px}
+  .service-card>a{font-size:13px}
+  .map-core small{font-size:8px}
+  .map-node,.map-card span,.map-card small{font-size:9px}
+  .map-card strong{font-size:16px}
+  .feature-grid h3{font-size:21px}
+  .film-hud,.process-number,.process-summary{font-size:9px}
+  .console-bar span,.console-body>span,.console-buttons b{font-size:9px}
+  .console-status{font-size:10px}
+  .faq-heading p{font-size:15px}
+
+  .contact-details span{font-size:9px}
+  .contact-details b{font-size:13px}
+  .form-heading{font-size:9px}
+  .contact-form label{font-size:10px}
+  .contact-form input,.contact-form textarea,.contact-form select{font-size:15px}
+  .form-submit{font-size:13px}
+  .contact-form small{font-size:10px}
+
+  .byte-footer__cta p{font-size:16px}
+  .byte-footer__orbit small{font-size:9px}
+  .byte-footer__brand>p{font-size:14px}
+  .byte-footer__status{font-size:8px}
+  .byte-footer__nav>span,.byte-footer__contact>span{font-size:9px}
+  .byte-footer__nav a{font-size:13px}
+  .byte-footer__contact>a:not(.byte-footer__whatsapp){font-size:12px}
+  .byte-footer__contact>p{font-size:11px}
+  .byte-footer__whatsapp b,.whatsapp{font-size:11px}
+  .byte-footer__bottom{font-size:9px}
+  .byte-footer__seal b{font-size:9px}
+  .byte-footer__seal small{font-size:8px}
+
+  .request-back{font-size:10px}
+  .request-kicker,.request-form__signal{font-size:9px}
+  .request-copy>p{font-size:17px}
+  .request-trust span{font-size:11px}
+  .request-steps article>span{font-size:9px}
+  .request-steps h2{font-size:16px}
+  .request-steps p{font-size:13px}
+  .request-form__top{font-size:9px}
+  .request-form__intro p{font-size:14px}
+  .request-field>span{font-size:12px}
+  .request-field input,.request-field select{font-size:14px}
+  .request-submit{font-size:13px}
+  .request-privacy{font-size:10px}
+  .request-success p{font-size:14px}
+  .request-success button{font-size:12px}
+  .request-assistance>div>p{font-size:15px}
+  .request-assistance__links span{font-size:14px}
+  .request-assistance__links small{font-size:9px}
+  .request-footer__brand p{font-size:13px}
+  .request-footer nav a{font-size:12px}
+  .request-footer__legal{font-size:9px}
+}
