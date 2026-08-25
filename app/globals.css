@@ -63,10 +63,10 @@ button, input, textarea, select { font: inherit; }
   font-weight: 650;
 }
 .header-client span { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 50%; background: white; color: #18203a; font-size: 16px; }
-.menu-toggle { display: none; position: relative; z-index: 60; width: 44px; height: 44px; border: 1px solid rgba(255,255,255,.12); border-radius: 50%; background: transparent; color: white; }
-.menu-toggle i { position: absolute; left: 13px; width: 16px; height: 1px; background: currentColor; transition: .25s ease; }
-.menu-toggle i:first-child { top: 17px; }.menu-toggle i:last-child { top: 24px; }
-.menu-toggle.is-open i:first-child { top: 21px; transform: rotate(45deg); }.menu-toggle.is-open i:last-child { top: 21px; transform: rotate(-45deg); }
+.menu-toggle { display: none; position: relative; z-index: 60; width: 44px; height: 44px; padding: 0; border: 1px solid rgba(255,255,255,.12); border-radius: 50%; background: transparent; color: white; }
+.menu-toggle i { position: absolute; left: 50%; top: 50%; width: 18px; height: 1px; margin: 0; background: currentColor; transform-origin: 50% 50%; transition: transform .28s cubic-bezier(.2,.7,.2,1); }
+.menu-toggle i:first-child { transform: translate(-50%,-50%) translateY(-4px); }.menu-toggle i:last-child { transform: translate(-50%,-50%) translateY(4px); }
+.menu-toggle.is-open i:first-child { transform: translate(-50%,-50%) rotate(45deg); }.menu-toggle.is-open i:last-child { transform: translate(-50%,-50%) rotate(-45deg); }
 .mobile-menu { display: none; }
 
 .hero {
