@@ -174,17 +174,18 @@ export default function Home() {
           <a className="is-active" href="#inicio">Inicio</a><a href="#servicios">Servicios</a><a href="#cobertura">Cobertura</a><a href="#nosotros">Nosotros</a><a href="#contacto">Contacto</a>
         </nav>
         <div className="header-actions">
-          <a className="header-client" href="#contacto">Consultar cobertura <span aria-hidden="true">↗</span></a>
+          <a className="header-client" href="https://ap2.factulinc.com.ar" target="_blank" rel="noreferrer">Accedé a tu cuenta <span aria-hidden="true">↗</span></a>
           <button className={"menu-toggle " + (menuOpen ? "is-open" : "")} type="button" aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"} aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}><i /><i /></button>
         </div>
         <div className={"mobile-menu " + (menuOpen ? "is-open" : "")}>
           <span className="mobile-menu-label">NAVEGACIÓN</span>
-          <a href="#inicio" onClick={closeMenu}>Inicio <b>01</b></a><a href="#servicios" onClick={closeMenu}>Servicios <b>02</b></a><a href="#cobertura" onClick={closeMenu}>Cobertura <b>03</b></a><a href="#nosotros" onClick={closeMenu}>Nosotros <b>04</b></a><a href="#contacto" onClick={closeMenu}>Contacto <b>05</b></a>
+          <a href="#inicio" onClick={closeMenu}>Inicio <b>01</b></a><a href="#servicios" onClick={closeMenu}>Servicios <b>02</b></a><a href="#cobertura" onClick={closeMenu}>Cobertura <b>03</b></a><a href="#nosotros" onClick={closeMenu}>Nosotros <b>04</b></a><a href="#contacto" onClick={closeMenu}>Contacto <b>05</b></a><a className="mobile-menu-client" href="https://ap2.factulinc.com.ar" target="_blank" rel="noreferrer">Accedé a tu cuenta <b>↗</b></a>
           <div className="mobile-menu-meta"><span>Lincoln, Buenos Aires</span><span>2355 448231</span></div>
         </div>
       </header>
 
-      <section className="hero" id="inicio">\n        <canvas ref={canvasRef} className="signal-canvas" aria-hidden="true" />
+      <section className="hero" id="inicio">
+        <canvas ref={canvasRef} className="signal-canvas" aria-hidden="true" />
         <div className="hero-grid" aria-hidden="true" /><div className="hero-aurora hero-aurora-one" aria-hidden="true" /><div className="hero-aurora hero-aurora-two" aria-hidden="true" />
         <div className="hero-copy">
           <div className="eyebrow"><span /> INTERNET DE ALTA VELOCIDAD · LINCOLN Y LA REGIÓN</div>

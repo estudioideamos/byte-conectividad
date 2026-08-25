@@ -16,6 +16,9 @@ test("exporta la experiencia institucional completa de Byte", async () => {
   assert.match(html, /General Pinto/i);
   assert.match(html, /Rivadavia 1286/i);
   assert.match(html, /wa\.me\/5492355448231/i);
+  assert.match(html, /Accedé a tu cuenta/i);
+  assert.match(html, /https:\/\/ap2\.factulinc\.com\.ar/i);
+  assert.doesNotMatch(html, /\\n\s*<canvas/i);
   assert.doesNotMatch(html, /Your site is taking shape|codex-preview|SkeletonPreview/i);
 });
 
