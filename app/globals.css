@@ -220,3 +220,179 @@ footer{padding:85px max(24px,calc((100vw - 1260px)/2)) 30px;border-top:1px solid
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
+
+
+/* Cinematic imagery, interactive network and premium motion */
+.signal-canvas {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: .78;
+  pointer-events: none;
+  mask-image: radial-gradient(ellipse at 50% 32%, #000 0 32%, transparent 76%);
+}
+.reveal {
+  opacity: 0;
+  transform: translateY(38px);
+  transition: opacity .85s cubic-bezier(.2,.7,.2,1), transform .85s cubic-bezier(.2,.7,.2,1);
+}
+.reveal.is-visible { opacity: 1; transform: none; }
+
+.network-dashboard::before {
+  content: "";
+  position: absolute;
+  z-index: 6;
+  top: -20%;
+  bottom: -20%;
+  left: -32%;
+  width: 18%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.055), transparent);
+  transform: skewX(-18deg);
+  animation: dashboardSweep 8s 2s ease-in-out infinite;
+  pointer-events: none;
+}
+.chart-card { position: relative; }
+.chart-card::after {
+  content: "";
+  position: absolute;
+  right: 12%;
+  top: 36%;
+  width: 7px;
+  height: 7px;
+  border: 2px solid #7184ff;
+  border-radius: 50%;
+  background: #0a0d18;
+  box-shadow: 0 0 0 5px rgba(99,119,255,.1), 0 0 18px #6e7fff;
+  animation: dataPulse 2.8s ease-in-out infinite;
+}
+.line-chart path:last-child {
+  stroke-dasharray: 1200;
+  stroke-dashoffset: 1200;
+  animation: drawLine 2.4s .45s cubic-bezier(.2,.7,.2,1) forwards;
+}
+
+.about-visual { isolation: isolate; background: #070914; }
+.about-photo {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 52% center;
+  filter: saturate(.82) contrast(1.06) brightness(.78);
+  transition: transform 1.2s cubic-bezier(.2,.7,.2,1), filter 1.2s ease;
+}
+.about-photo-shade {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(2,4,10,.1), rgba(2,4,10,.38)),
+    linear-gradient(90deg, rgba(3,5,11,.5), transparent 48%, rgba(3,5,11,.12));
+}
+.about-visual:hover .about-photo { transform: scale(1.045); filter: saturate(.95) contrast(1.04) brightness(.86); }
+.about-visual::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  right: 0;
+  top: -20%;
+  height: 22%;
+  background: linear-gradient(180deg, transparent, rgba(87,111,255,.12), transparent);
+  animation: imageScan 7s ease-in-out infinite;
+  pointer-events: none;
+}
+.about-label, .about-float { z-index: 4; }
+.about-photo-badge {
+  position: absolute;
+  z-index: 4;
+  right: 28px;
+  bottom: 28px;
+  min-width: 145px;
+  padding: 17px;
+  border: 1px solid rgba(255,255,255,.13);
+  border-radius: 13px;
+  background: rgba(7,10,19,.78);
+  box-shadow: 0 18px 50px rgba(0,0,0,.35);
+  backdrop-filter: blur(16px);
+}
+.about-photo-badge b { display: block; font-size: 29px; letter-spacing: -.05em; }
+.about-photo-badge span { display: block; margin-top: 5px; color: #758198; font: 6px var(--font-geist-mono),monospace; letter-spacing: .14em; }
+
+.coverage-map { isolation: isolate; background: #050711; }
+.coverage-photo {
+  position: absolute;
+  z-index: 0;
+  inset: -2%;
+  width: 104%;
+  height: 104%;
+  object-fit: cover;
+  filter: saturate(.92) contrast(1.08) brightness(.7);
+  animation: photoDrift 18s ease-in-out infinite alternate;
+}
+.coverage-photo-shade {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(2,4,11,.1), rgba(2,4,11,.38)),
+    radial-gradient(circle at 50% 49%, rgba(18,30,91,.05), rgba(2,4,11,.46) 82%);
+}
+.coverage-map .map-grid { z-index: 2; opacity: .55; mix-blend-mode: screen; }
+.map-radar, .map-core, .map-node, .map-card { z-index: 3; }
+.map-core { backdrop-filter: blur(12px); background: rgba(8,12,30,.72); }
+.map-node { padding: 5px 8px; border-radius: 999px; background: rgba(3,6,17,.55); backdrop-filter: blur(8px); }
+.map-node i { animation: dataPulse 2.4s ease-in-out infinite; }
+.map-node-2 i, .map-node-4 i { animation-delay: .8s; }
+.map-node-3 i, .map-node-5 i { animation-delay: 1.4s; }
+
+.service-icon { animation: iconFloat 5s ease-in-out infinite; }
+.service-card:nth-child(2) .service-icon { animation-delay: .7s; }
+.service-card:nth-child(3) .service-icon { animation-delay: 1.4s; }
+.feature-icon { position: relative; overflow: hidden; }
+.feature-icon::after {
+  content: "";
+  position: absolute;
+  inset: -30%;
+  background: radial-gradient(circle, rgba(117,135,255,.28), transparent 58%);
+  animation: featureGlow 3.6s ease-in-out infinite;
+}
+.button-primary, .form-submit, .header-client {
+  background-size: 180% 180%;
+  animation: gradientShift 7s ease infinite;
+}
+.whatsapp i { animation: whatsappPulse 2.8s ease-in-out infinite; }
+
+@keyframes dashboardSweep {
+  0%, 64% { left: -32%; opacity: 0; }
+  72% { opacity: 1; }
+  88%, 100% { left: 118%; opacity: 0; }
+}
+@keyframes drawLine { to { stroke-dashoffset: 0; } }
+@keyframes dataPulse { 50% { transform: scale(1.35); opacity: .55; } }
+@keyframes imageScan { 0%, 12% { top: -22%; opacity: 0; } 45% { opacity: 1; } 88%, 100% { top: 105%; opacity: 0; } }
+@keyframes photoDrift { from { transform: scale(1.01) translate3d(-.5%,0,0); } to { transform: scale(1.07) translate3d(1.2%,-1%,0); } }
+@keyframes iconFloat { 50% { transform: translateY(-8px) rotate(2deg); } }
+@keyframes featureGlow { 50% { transform: scale(1.35); opacity: .45; } }
+@keyframes gradientShift { 0%,100% { background-position: 0 50%; } 50% { background-position: 100% 50%; } }
+@keyframes whatsappPulse { 50% { box-shadow: 0 0 0 7px rgba(122,239,163,.08); } }
+
+@media (max-width:820px) {
+  .about-photo { object-position: 57% center; }
+  .about-photo-badge { right: 16px; bottom: 16px; }
+  .signal-canvas { opacity: .58; }
+}
+@media (max-width:540px) {
+  .about-photo { object-position: 54% center; }
+  .about-photo-badge { min-width: 118px; padding: 13px; }
+  .about-photo-badge b { font-size: 24px; }
+  .coverage-photo { inset: 0; width: 100%; height: 100%; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .reveal { opacity: 1; transform: none; }
+  .about-photo, .coverage-photo { transform: none!important; }
+}
