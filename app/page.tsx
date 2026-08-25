@@ -403,7 +403,7 @@ export default function Home() {
             <span>EQUIPO LOCAL</span>
             <h3>Tu mejor conexión empieza con una charla.</h3>
             <a className="byte-footer__whatsapp" href="https://wa.me/5492355448231?text=Hola%20Byte%2C%20quiero%20consultar%20por%20el%20servicio%20de%20internet." target="_blank" rel="noreferrer">
-              <MessageCircle aria-hidden="true" /><b>Hablar por WhatsApp</b><ArrowUpRight aria-hidden="true" />
+              <img className="whatsapp-mark whatsapp-mark--footer" src="assets/whatsapp.svg" alt="" aria-hidden="true" /><b>Hablar por WhatsApp</b><ArrowUpRight aria-hidden="true" />
             </a>
             <a href="tel:+542355448231">2355 448231</a>
             <a href="mailto:info@byteinformatica.com.ar">info@byteinformatica.com.ar</a>
@@ -421,7 +421,7 @@ export default function Home() {
         </div>
       </footer>
 
-      <a className="whatsapp" href="https://wa.me/5492355448231?text=Hola%20Byte%2C%20quiero%20consultar%20por%20el%20servicio%20de%20internet." target="_blank" rel="noreferrer" aria-label="Escribir a Byte por WhatsApp"><span>WhatsApp</span><i>↗</i></a>
+      <a className="whatsapp" href="https://wa.me/5492355448231?text=Hola%20Byte%2C%20quiero%20consultar%20por%20el%20servicio%20de%20internet." target="_blank" rel="noreferrer" aria-label="Escribir a Byte por WhatsApp"><span>WhatsApp</span><i><img className="whatsapp-mark whatsapp-mark--floating" src="assets/whatsapp.svg" alt="" aria-hidden="true" /></i></a>
     </main>
   );
 }
