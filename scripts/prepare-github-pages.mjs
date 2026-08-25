@@ -1,15 +1,29 @@
-import { readdir, readFile, writeFile } from "node:fs/promises";
+import { copyFile, mkdir, readdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 const repository = process.env.GITHUB_REPOSITORY?.split("/")[1];
-
-if (!repository) {
-  console.log("No GitHub repository detected; keeping root-relative asset paths.");
-  process.exit(0);
-}
-
 const outputRoot = path.resolve("dist/client");
 const textExtensions = new Set([".html", ".rsc", ".js", ".css", ".json", ".txt"]);
+
+async function createDirectoryRoute(routeName) {
+  const sourceBase = path.join(outputRoot, routeName);
+  const routeDirectory = path.join(outputRoot, routeName);
+  await mkdir(routeDirectory, { recursive: true });
+  await copyFile(sourceBase + ".html", path.join(routeDirectory, "index.html"));
+
+  try {
+    await copyFile(sourceBase + ".rsc", path.join(routeDirectory, "index.rsc"));
+  } catch (error) {
+    if (error?.code !== "ENOENT") throw error;
+  }
+}
+
+await createDirectoryRoute("solicitar-servicio");
+
+if (!repository) {
+  console.log("Prepared directory routes; no GitHub repository detected, so asset paths were unchanged.");
+  process.exit(0);
+}
 
 async function rewriteDirectory(directory) {
   const entries = await readdir(directory, { withFileTypes: true });
@@ -28,7 +42,7 @@ async function rewriteDirectory(directory) {
       }
 
       const source = await readFile(fullPath, "utf8");
-      const rewritten = source.replaceAll("/_next/", `/${repository}/_next/`);
+      const rewritten = source.replaceAll("/_next/", "/" + repository + "/_next/");
 
       if (rewritten !== source) {
         await writeFile(fullPath, rewritten);
@@ -38,4 +52,4 @@ async function rewriteDirectory(directory) {
 }
 
 await rewriteDirectory(outputRoot);
-console.log(`Prepared static assets for /${repository}/ on GitHub Pages.`);
+console.log("Prepared static assets and directory routes for /" + repository + "/ on GitHub Pages.");

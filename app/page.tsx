@@ -22,6 +22,7 @@ import {
   TrendingUp,
   Wifi,
 } from "lucide-react";
+import SiteHeader from "./SiteHeader";
 
 const services = [
   { number: "01", label: "PARA TU HOGAR", title: "Internet de banda ancha", copy: "Conexión de alta velocidad a través de nuestra red inalámbrica. Estable, confiable y con soporte local de verdad.", points: ["Navegación fluida", "Instalación personalizada", "Soporte cercano"], icon: "signal" },
@@ -81,7 +82,6 @@ function IconGlyph({ name }: { name: string }) {
 }
 
 export default function Home() {
-  const [menuOpen, setMenuOpen] = useState(false);
   const [footerOpen, setFooterOpen] = useState<"explore" | "solutions" | null>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -93,19 +93,6 @@ export default function Home() {
     window.location.href = "mailto:atencionaclientes@byteinformatica.com.ar?subject=" + subject + "&body=" + body;
   }
 
-  const closeMenu = () => setMenuOpen(false);
-
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setMenuOpen(false);
-    };
-    document.body.classList.toggle("menu-open", menuOpen);
-    window.addEventListener("keydown", handleKeyDown);
-    return () => {
-      document.body.classList.remove("menu-open");
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [menuOpen]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -230,21 +217,7 @@ export default function Home() {
 
   return (
     <main>
-      <header className="site-header">
-        <a className="brand" href="#inicio" aria-label="Byte Conectividad, inicio" onClick={closeMenu}><img src="assets/byte-logo.png" alt="Byte Conectividad" /></a>
-        <nav className="desktop-nav" aria-label="Navegación principal">
-          <a className="is-active" href="#inicio">Inicio</a><a href="#servicios">Servicios</a><a href="#cobertura">Cobertura</a><a href="#nosotros">Nosotros</a><a href="#contacto">Contacto</a>
-        </nav>
-        <div className="header-actions">
-          <a className="header-client" href="https://ap2.factulinc.com.ar/loginc/200h1k1q1p1z1k1w1a0h130w220o0v" target="_blank" rel="noreferrer">Accedé a tu cuenta <span aria-hidden="true">↗</span></a>
-          <button className={"menu-toggle " + (menuOpen ? "is-open" : "")} type="button" aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"} aria-expanded={menuOpen} aria-controls="mobile-navigation" onClick={() => setMenuOpen(!menuOpen)}><i /><i /></button>
-        </div>
-        <div id="mobile-navigation" className={"mobile-menu " + (menuOpen ? "is-open" : "")} aria-hidden={!menuOpen}>
-          <span className="mobile-menu-label">NAVEGACIÓN</span>
-          <a href="#inicio" onClick={closeMenu}>Inicio <b>01</b></a><a href="#servicios" onClick={closeMenu}>Servicios <b>02</b></a><a href="#cobertura" onClick={closeMenu}>Cobertura <b>03</b></a><a href="#nosotros" onClick={closeMenu}>Nosotros <b>04</b></a><a href="#contacto" onClick={closeMenu}>Contacto <b>05</b></a><a className="mobile-menu-client" href="https://ap2.factulinc.com.ar/loginc/200h1k1q1p1z1k1w1a0h130w220o0v" target="_blank" rel="noreferrer" onClick={closeMenu}>Accedé a tu cuenta <b>↗</b></a>
-          <div className="mobile-menu-meta"><span>Lincoln, Buenos Aires</span><span>2355 448231</span></div>
-        </div>
-      </header>
+      <SiteHeader />
 
       <section className="hero" id="inicio">
         <canvas ref={canvasRef} className="signal-canvas" aria-hidden="true" />
@@ -406,6 +379,7 @@ export default function Home() {
               <a href="#cobertura" onClick={() => setFooterOpen(null)}>Cobertura <b>↗</b></a>
               <a href="#nosotros" onClick={() => setFooterOpen(null)}>Nosotros <b>↗</b></a>
               <a href="#contacto" onClick={() => setFooterOpen(null)}>Contacto <b>↗</b></a>
+              <a href="solicitar-servicio/" onClick={() => setFooterOpen(null)}>Solicitar servicio <b>↗</b></a>
             </nav>
           </div>
 
