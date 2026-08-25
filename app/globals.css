@@ -1787,7 +1787,7 @@ body.menu-open{overflow:hidden;touch-action:none}
 .request-footer__brand img{display:block;width:100%;height:auto}
 .request-footer__logo-byte{
   position:absolute;inset:0;pointer-events:none;
-  clip-path:inset(0 53.12% 0 20.6%);
+  clip-path:inset(0 58.54% 0 20.6%);
   filter:brightness(0) invert(1);
 }
 .request-footer__brand p{margin-top:20px;color:#707a8d;font-size:11px}
