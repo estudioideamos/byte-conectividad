@@ -3,30 +3,25 @@
 import { FormEvent, useState } from "react";
 
 const services = [
-  {
-    number: "01",
-    kicker: "PARA TU HOGAR",
-    title: "Internet\nde banda ancha",
-    copy: "Conexión de alta velocidad a través de nuestra red inalámbrica. Estable, confiable y con soporte local de verdad.",
-    symbol: "waves",
-  },
-  {
-    number: "02",
-    kicker: "PARA EMPRESAS",
-    title: "Internet\nsimétrico",
-    copy: "La misma velocidad de subida y de bajada para trabajar, compartir archivos, hacer videollamadas y crecer sin límites.",
-    symbol: "arrows",
-  },
-  {
-    number: "03",
-    kicker: "SOLUCIONES A MEDIDA",
-    title: "Zonas\nWiFi",
-    copy: "Diseñamos redes WiFi para oficinas, estancias, hoteles y grandes empresas, con cobertura pensada para cada espacio.",
-    symbol: "rings",
-  },
+  { number: "01", label: "PARA TU HOGAR", title: "Internet de banda ancha", copy: "Conexión de alta velocidad a través de nuestra red inalámbrica. Estable, confiable y con soporte local de verdad.", points: ["Navegación fluida", "Instalación personalizada", "Soporte cercano"], icon: "signal" },
+  { number: "02", label: "PARA EMPRESAS", title: "Internet simétrico", copy: "La misma velocidad de subida y de bajada para trabajar, compartir archivos, hacer videollamadas y crecer sin límites.", points: ["Subida y bajada equivalentes", "Mayor rendimiento", "Solución profesional"], icon: "sync" },
+  { number: "03", label: "SOLUCIONES A MEDIDA", title: "Zonas WiFi", copy: "Diseñamos redes WiFi para oficinas, estancias, hoteles y grandes empresas, con cobertura pensada para cada espacio.", points: ["Diseño a medida", "Cobertura optimizada", "Escalabilidad"], icon: "nodes" },
 ];
 
 const locations = ["Lincoln", "General Pinto", "Arenaza", "El Triunfo", "Bayauca", "Bermúdez"];
+const advantages = [
+  ["01", "Red monitoreada", "Supervisamos nuestra infraestructura de forma constante para sostener una conexión estable y confiable."],
+  ["02", "Atención personalizada", "Un equipo local que conoce tu zona, entiende lo que necesitás y te acompaña de verdad."],
+  ["03", "Cobertura regional", "Conectamos ciudades y áreas rurales donde la distancia suele convertirse en una barrera."],
+];
+const features = [
+  ["⌂", "Hogares conectados", "Internet para estudiar, entretenerte, trabajar y compartir sin interrupciones."],
+  ["↕", "Empresas ágiles", "Capacidad de subida y bajada para operaciones que no pueden esperar."],
+  ["◎", "Alcance rural", "Infraestructura diseñada para acercar conectividad donde otros no llegan."],
+  ["◌", "WiFi a medida", "Cobertura inteligente para oficinas, estancias, hoteles y grandes espacios."],
+  ["◈", "Soporte local", "Personas reales, cerca tuyo, listas para ayudarte cuando lo necesitás."],
+  ["↗", "Una red que crece", "Ampliamos nuestra infraestructura junto con las necesidades de la región."],
+];
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -34,11 +29,9 @@ export default function Home() {
   function sendForm(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    const subject = encodeURIComponent(`Consulta web · ${data.get("service") || "Información general"}`);
-    const body = encodeURIComponent(
-      `Nombre: ${data.get("name")}\nTeléfono: ${data.get("phone")}\nEmail: ${data.get("email")}\nLocalidad: ${data.get("location")}\nServicio: ${data.get("service")}\n\nMensaje:\n${data.get("message")}`
-    );
-    window.location.href = `mailto:atencionaclientes@byteinformatica.com.ar?subject=${subject}&body=${body}`;
+    const subject = encodeURIComponent("Consulta web · " + (data.get("service") || "Información general"));
+    const body = encodeURIComponent("Nombre: " + data.get("name") + "\nTeléfono: " + data.get("phone") + "\nEmail: " + data.get("email") + "\nLocalidad: " + data.get("location") + "\nServicio: " + data.get("service") + "\n\nMensaje:\n" + data.get("message"));
+    window.location.href = "mailto:atencionaclientes@byteinformatica.com.ar?subject=" + subject + "&body=" + body;
   }
 
   const closeMenu = () => setMenuOpen(false);
@@ -46,278 +39,101 @@ export default function Home() {
   return (
     <main>
       <header className="site-header">
-        <a className="brand" href="#inicio" aria-label="Byte Conectividad, inicio" onClick={closeMenu}>
-          <img src="assets/byte-logo.png" alt="Byte Conectividad" />
-        </a>
+        <a className="brand" href="#inicio" aria-label="Byte Conectividad, inicio" onClick={closeMenu}><img src="assets/byte-logo.png" alt="Byte Conectividad" /></a>
         <nav className="desktop-nav" aria-label="Navegación principal">
-          <a href="#servicios">Servicios</a>
-          <a href="#cobertura">Cobertura</a>
-          <a href="#nosotros">Nosotros</a>
-          <a href="#contacto">Contacto</a>
+          <a className="is-active" href="#inicio">Inicio</a><a href="#servicios">Servicios</a><a href="#cobertura">Cobertura</a><a href="#nosotros">Nosotros</a><a href="#contacto">Contacto</a>
         </nav>
         <div className="header-actions">
-          <a className="header-client" href="https://ap2.factulinc.com.ar" target="_blank" rel="noreferrer">
-            Área clientes <span aria-hidden="true">↗</span>
-          </a>
-          <button
-            className={`menu-toggle ${menuOpen ? "is-open" : ""}`}
-            type="button"
-            aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
-            aria-expanded={menuOpen}
-            onClick={() => setMenuOpen(!menuOpen)}
-          >
-            <i /><i />
-          </button>
+          <a className="header-client" href="#contacto">Consultar cobertura <span aria-hidden="true">↗</span></a>
+          <button className={"menu-toggle " + (menuOpen ? "is-open" : "")} type="button" aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"} aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}><i /><i /></button>
         </div>
-        <div className={`mobile-menu ${menuOpen ? "is-open" : ""}`}>
+        <div className={"mobile-menu " + (menuOpen ? "is-open" : "")}>
           <span className="mobile-menu-label">NAVEGACIÓN</span>
-          <a href="#servicios" onClick={closeMenu}>Servicios <b>01</b></a>
-          <a href="#cobertura" onClick={closeMenu}>Cobertura <b>02</b></a>
-          <a href="#nosotros" onClick={closeMenu}>Nosotros <b>03</b></a>
-          <a href="#contacto" onClick={closeMenu}>Contacto <b>04</b></a>
-          <div className="mobile-menu-meta">
-            <span>Lincoln, Buenos Aires</span>
-            <span>2355 448231</span>
-          </div>
+          <a href="#inicio" onClick={closeMenu}>Inicio <b>01</b></a><a href="#servicios" onClick={closeMenu}>Servicios <b>02</b></a><a href="#cobertura" onClick={closeMenu}>Cobertura <b>03</b></a><a href="#nosotros" onClick={closeMenu}>Nosotros <b>04</b></a><a href="#contacto" onClick={closeMenu}>Contacto <b>05</b></a>
+          <div className="mobile-menu-meta"><span>Lincoln, Buenos Aires</span><span>2355 448231</span></div>
         </div>
       </header>
 
       <section className="hero" id="inicio">
-        <div className="hero-grid" aria-hidden="true" />
-        <div className="hero-glow hero-glow-one" aria-hidden="true" />
-        <div className="hero-glow hero-glow-two" aria-hidden="true" />
-
+        <div className="hero-grid" aria-hidden="true" /><div className="hero-aurora hero-aurora-one" aria-hidden="true" /><div className="hero-aurora hero-aurora-two" aria-hidden="true" />
         <div className="hero-copy">
-          <div className="eyebrow"><span /> Internet de alta velocidad · Lincoln y la región</div>
+          <div className="eyebrow"><span /> INTERNET DE ALTA VELOCIDAD · LINCOLN Y LA REGIÓN</div>
           <h1>Conectividad que<br /><em>llega más lejos.</em></h1>
-          <p>
-            Una red pensada para acercarte a lo que importa. Internet estable,
-            atención cercana y soluciones a medida para hogares, empresas y zonas rurales.
-          </p>
-          <div className="hero-actions">
-            <a className="button button-primary" href="#contacto">
-              Consultar cobertura <span aria-hidden="true">↗</span>
-            </a>
-            <a className="button button-ghost" href="#servicios">
-              Explorar servicios <span aria-hidden="true">↓</span>
-            </a>
-          </div>
-          <div className="hero-proof">
-            <div><strong>+20</strong><span>años conectando la región</span></div>
-            <div><strong>24/7</strong><span>monitoreo constante</span></div>
-          </div>
+          <p>Una red pensada para acercarte a lo que importa. Internet estable, atención cercana y soluciones a medida para hogares, empresas y zonas rurales.</p>
+          <div className="hero-actions"><a className="button button-primary" href="#contacto">Consultar cobertura <span>↗</span></a><a className="button button-secondary" href="#servicios">Explorar servicios <span>↓</span></a></div>
+          <div className="hero-checks"><span><i>✓</i> Atención personalizada</span><span><i>✓</i> Monitoreo constante</span></div>
         </div>
 
-        <div className="network-visual" aria-label="Red de conectividad Byte activa">
-          <div className="visual-label"><span /> RED BYTE <b>ONLINE</b></div>
-          <div className="orbital orbital-a" />
-          <div className="orbital orbital-b" />
-          <div className="orbital orbital-c" />
-          <div className="signal-core">
-            <span className="signal-logo">B</span>
-            <small>NODO CENTRAL</small>
-            <b>LINCOLN</b>
+        <div className="network-dashboard" aria-label="Panel visual de la red Byte">
+          <div className="dash-top"><div className="dash-brand"><b>B</b><span>BYTE NETWORK</span></div><div className="dash-status"><i /> RED OPERATIVA</div><div className="dash-period">AHORA <span>⌄</span></div></div>
+          <div className="dash-body">
+            <aside className="dash-sidebar" aria-hidden="true">
+              <span className="dash-menu-active"><i>◫</i>Estado</span><span><i>⌁</i>Servicios</span><span><i>◎</i>Cobertura</span><span><i>◈</i>Soporte</span>
+              <div className="dash-user"><b>BC</b><small>EQUIPO BYTE</small></div>
+            </aside>
+            <div className="dash-content">
+              <div className="dash-heading"><div><small>ESTADO DE LA RED</small><h2>Conectividad regional</h2></div><span className="live-pill"><i /> EN LÍNEA</span></div>
+              <div className="dash-grid">
+                <article className="chart-card">
+                  <div className="card-title"><span>ACTIVIDAD DE RED</span><b>Últimas 24 h</b></div><div className="chart-value"><strong>Activa</strong><span>flujo estable</span></div>
+                  <svg className="line-chart" viewBox="0 0 640 220" role="img" aria-label="Actividad estable de la red">
+                    <defs><linearGradient id="lineGlow" x1="0" x2="1"><stop stopColor="#3b72ff"/><stop offset="1" stopColor="#8455ff"/></linearGradient><linearGradient id="areaGlow" x1="0" y1="0" x2="0" y2="1"><stop stopColor="#476cff" stopOpacity=".35"/><stop offset="1" stopColor="#476cff" stopOpacity="0"/></linearGradient></defs>
+                    <path d="M0,183 C55,170 72,129 125,140 C174,151 192,96 242,110 C294,125 311,65 365,76 C420,88 442,42 496,52 C553,62 584,23 640,30 L640,220 L0,220 Z" fill="url(#areaGlow)"/><path d="M0,183 C55,170 72,129 125,140 C174,151 192,96 242,110 C294,125 311,65 365,76 C420,88 442,42 496,52 C553,62 584,23 640,30" fill="none" stroke="url(#lineGlow)" strokeWidth="5" strokeLinecap="round"/>
+                  </svg>
+                  <div className="chart-axis"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
+                </article>
+                <article className="coverage-card"><div className="card-title"><span>COBERTURA</span><b>REGIÓN</b></div><div className="coverage-ring"><span><strong>6</strong><small>LOCALIDADES</small></span></div><div className="coverage-legend"><span><i /> Urbana</span><span><i /> Rural</span></div></article>
+                <article className="nodes-card"><div className="card-title"><span>NODOS PRINCIPALES</span><b>VER TODOS ↗</b></div><div className="node-list">{locations.slice(0, 4).map((location, index) => <span key={location}><i className={"node-dot node-dot-" + index} />{location}<b>Activo</b></span>)}</div></article>
+              </div>
+            </div>
           </div>
-          {[
-            ["LINCOLN", "node-1"],
-            ["G. PINTO", "node-2"],
-            ["ARENAZA", "node-3"],
-            ["BAYAUCA", "node-4"],
-            ["EL TRIUNFO", "node-5"],
-          ].map(([label, className]) => (
-            <span className={`network-node ${className}`} key={label}>
-              <i /> {label}
-            </span>
-          ))}
-          <div className="data-card data-card-top"><span>SEÑAL</span><strong>99.8%</strong><i /></div>
-          <div className="data-card data-card-bottom"><span>ESTADO DE RED</span><strong>ÓPTIMO</strong><i /></div>
         </div>
-
-        <div className="scroll-cue"><span>SCROLL</span><i /></div>
       </section>
 
-      <section className="services section-light" id="servicios">
-        <div className="section-heading">
-          <div>
-            <span className="section-index">01 / SERVICIOS</span>
-            <h2>Una solución para<br />cada forma de <em>conectarte.</em></h2>
-          </div>
-          <p>
-            Desde el hogar hasta una operación de gran escala, diseñamos la red
-            que necesitás con tecnología confiable y acompañamiento personalizado.
-          </p>
+      <section className="trust-strip" aria-label="Presencia regional"><p>Desde 2003 conectando personas, proyectos y oportunidades</p><div className="location-marquee"><div>{[...locations, ...locations].map((location, index) => <span key={location + index}><i />{location}</span>)}</div></div></section>
+
+      <section className="advantages" aria-label="Ventajas Byte">{advantages.map(([number, title, copy]) => <article key={number}><span>{number}</span><div className="advantage-icon" aria-hidden="true"><i /><i /><b /></div><h2>{title}</h2><p>{copy}</p></article>)}</section>
+
+      <section className="about" id="nosotros">
+        <div className="section-intro"><span className="section-tag">SOBRE BYTE</span><h2>Tecnología que conecta.<br /><em>Personas que acompañan.</em></h2><p>Nacimos en Lincoln en 2003 con una idea simple: llevar conectividad de calidad a cada persona, incluso donde parecía imposible.</p></div>
+        <div className="about-layout">
+          <div className="about-visual"><div className="about-grid" aria-hidden="true" /><span className="about-label"><i /> INFRAESTRUCTURA ACTIVA</span><div className="about-orbit orbit-one"><i /></div><div className="about-orbit orbit-two"><i /></div><div className="about-core"><b>B</b><span>NODO CENTRAL</span><small>LINCOLN</small></div><div className="about-float float-one"><span>ALCANCE</span><strong>REGIONAL</strong></div><div className="about-float float-two"><span>SOPORTE</span><strong>LOCAL</strong></div></div>
+          <div className="about-content"><span className="section-tag">UNA RED QUE CRECE CON VOS</span><h3>Más de dos décadas acercando oportunidades.</h3><p>Hoy brindamos servicio en distintas localidades de la zona y seguimos ampliando nuestra red. La monitoreamos de forma constante para asegurar calidad y fiabilidad, acompañando a cada cliente con atención totalmente personalizada.</p><div className="metric-grid"><div><strong>2003</strong><span>El año en que empezó nuestra historia</span></div><div><strong>6</strong><span>Localidades y su zona rural conectadas</span></div><div><strong>Local</strong><span>Equipo cercano, respuestas reales</span></div></div><a className="text-button" href="#contacto">Conocé nuestra cobertura <span>↗</span></a></div>
         </div>
-        <div className="service-grid">
-          {services.map((service) => (
-            <article className="service-card" key={service.number}>
-              <div className={`service-symbol symbol-${service.symbol}`} aria-hidden="true">
-                <i /><i /><i />
-              </div>
-              <div className="service-number">{service.number}</div>
-              <div className="service-content">
-                <span>{service.kicker}</span>
-                <h3>{service.title.split("\n").map((line) => <span key={line}>{line}</span>)}</h3>
-                <p>{service.copy}</p>
-                <a href="#contacto" aria-label={`Consultar por ${service.title.replace("\n", " ")}`}>
-                  Consultar servicio <b aria-hidden="true">↗</b>
-                </a>
-              </div>
-            </article>
-          ))}
-        </div>
+      </section>
+
+      <section className="services" id="servicios">
+        <div className="section-intro section-intro-centered"><span className="section-tag">NUESTROS SERVICIOS</span><h2>Una solución para cada<br /><em>forma de conectarte.</em></h2><p>Desde el hogar hasta una operación de gran escala, diseñamos la red que necesitás.</p></div>
+        <div className="services-list">{services.map((service) => <article className="service-card" key={service.number}><div className="service-top"><span className="service-number">{service.number}</span><div className={"service-icon icon-" + service.icon} aria-hidden="true"><i /><i /><i /></div></div><span className="service-label">{service.label}</span><h3>{service.title}</h3><p>{service.copy}</p><ul>{service.points.map((point) => <li key={point}><i>✓</i>{point}</li>)}</ul><a href="#contacto">Consultar servicio <span>↗</span></a></article>)}</div>
       </section>
 
       <section className="coverage" id="cobertura">
-        <div className="coverage-map" aria-hidden="true">
-          <div className="map-noise" />
-          <span className="map-line line-a" /><span className="map-line line-b" />
-          <span className="map-line line-c" /><span className="map-line line-d" />
-          {locations.map((location, index) => (
-            <div className={`map-point point-${index + 1}`} key={location}>
-              <i /><span>{location}</span>
-            </div>
-          ))}
-          <div className="map-scan" />
-        </div>
-        <div className="coverage-copy">
-          <span className="section-index">02 / COBERTURA</span>
-          <h2>Conectamos<br />la ciudad.<br /><em>Y el campo.</em></h2>
-          <p>
-            Llegamos a localidades y zonas rurales donde conectarse siempre fue
-            un desafío. Nuestra infraestructura crece para que la distancia deje de ser un límite.
-          </p>
-          <div className="location-list">
-            {locations.map((location) => <span key={location}><i />{location}</span>)}
-            <span className="location-rural"><i />Toda la zona rural comprendida entre estas localidades</span>
-          </div>
-          <a className="text-link" href="#contacto">Consultar mi ubicación <span>↗</span></a>
-        </div>
+        <div className="coverage-copy"><span className="section-tag">COBERTURA REGIONAL</span><h2>Conectamos la ciudad.<br /><em>Y también el campo.</em></h2><p>Llegamos a localidades y zonas rurales donde conectarse siempre fue un desafío. Nuestra infraestructura crece para que la distancia deje de ser un límite.</p><div className="location-list">{locations.map((location) => <span key={location}><i />{location}</span>)}</div><a className="button button-primary" href="#contacto">Consultar mi ubicación <span>↗</span></a></div>
+        <div className="coverage-map" aria-label="Mapa conceptual de cobertura Byte"><div className="map-grid" aria-hidden="true" /><div className="map-radar radar-one" /><div className="map-radar radar-two" /><div className="map-radar radar-three" /><div className="map-core"><b>B</b><small>LINCOLN</small></div>{locations.slice(1).map((location, index) => <span className={"map-node map-node-" + (index + 1)} key={location}><i />{location}</span>)}<div className="map-card"><span>ZONA CONECTADA</span><strong>CIUDAD + CAMPO</strong><small>Infraestructura en expansión</small></div></div>
       </section>
 
-      <section className="manifesto" aria-label="Nuestra promesa">
-        <div className="manifesto-orbit" aria-hidden="true"><i /><i /><i /></div>
-        <span className="section-index">CONEXIÓN SIN FRONTERAS</span>
-        <h2>Menos distancia.<br /><em>Más posibilidades.</em></h2>
-        <p>Para estudiar. Para trabajar. Para crear. Para estar cerca.</p>
-        <div className="manifesto-marquee" aria-hidden="true">
-          <div>
-            <span>SIEMPRE CONECTADOS</span><i>✦</i><span>RED EN MOVIMIENTO</span><i>✦</i>
-            <span>SIEMPRE CONECTADOS</span><i>✦</i><span>RED EN MOVIMIENTO</span><i>✦</i>
-          </div>
-        </div>
-      </section>
+      <section className="feature-section"><div className="section-intro section-intro-centered"><span className="section-tag">PENSADA PARA LA REGIÓN</span><h2>La conexión que necesitás.<br /><em>Donde la necesitás.</em></h2></div><div className="feature-grid">{features.map(([icon, title, copy]) => <article key={title}><span className="feature-icon">{icon}</span><h3>{title}</h3><p>{copy}</p></article>)}</div></section>
 
-      <section className="about section-light" id="nosotros">
-        <div className="about-main">
-          <div className="about-copy">
-            <span className="section-index">03 / SOBRE BYTE</span>
-            <h2>Tecnología de punta.<br /><em>Trato de siempre.</em></h2>
-            <p className="about-lead">
-              Nacimos en Lincoln en 2003 con una idea simple: llevar conectividad de calidad
-              a cada persona, incluso donde parecía imposible.
-            </p>
-            <p>
-              Hoy brindamos servicio en distintas localidades de la zona y seguimos ampliando
-              nuestra red. La monitoreamos de forma constante para asegurar calidad y fiabilidad,
-              y acompañamos a cada cliente con atención totalmente personalizada.
-            </p>
-          </div>
-          <div className="about-metrics">
-            <div><span>DESDE</span><strong>2003</strong><p>Más de dos décadas creciendo junto a la región.</p></div>
-            <div><span>ORIGEN</span><strong>Lincoln</strong><p>Equipo local, respuestas cercanas y conocimiento real de la zona.</p></div>
-            <div><span>COMPROMISO</span><strong>Siempre</strong><p>Monitoreo continuo para una conexión estable y confiable.</p></div>
-          </div>
-        </div>
-        <div className="career-banner">
-          <div><span>OPORTUNIDADES LABORALES</span><h3>¿Querés ser parte de Byte?</h3></div>
-          <p>Estamos construyendo la red del futuro con talento local.</p>
-          <a href="mailto:info@byteinformatica.com.ar?subject=Quiero%20trabajar%20en%20Byte%20Conectividad">
-            Enviar mi CV <span>↗</span>
-          </a>
-        </div>
-      </section>
+      <section className="portal"><div className="portal-glow" aria-hidden="true" /><div className="portal-copy"><span className="section-tag">ÁREA CLIENTES</span><h2>Tu cuenta, siempre a mano.</h2><p>Consultá tu estado de cuenta y administrá tu servicio desde el portal de clientes.</p><a className="button button-light" href="https://ap2.factulinc.com.ar" target="_blank" rel="noreferrer">Ingresar a mi cuenta <span>↗</span></a></div><div className="portal-console" aria-hidden="true"><div className="console-bar"><i /><i /><i /><span>MI CUENTA BYTE</span></div><div className="console-body"><span>ESTADO DEL SERVICIO</span><div className="console-status"><i /> Activo</div><strong>Todo en orden.</strong><div className="console-line"><i /></div><div className="console-buttons"><b>Cuenta</b><b>Comprobantes</b><b>Soporte</b></div></div></div></section>
 
-      <section className="client-portal">
-        <div className="portal-visual" aria-hidden="true">
-          <div className="portal-ring portal-ring-one" /><div className="portal-ring portal-ring-two" />
-          <div className="portal-core">B</div>
-        </div>
-        <div className="portal-copy">
-          <span className="section-index">ÁREA CLIENTES</span>
-          <h2>Tu cuenta,<br />siempre a mano.</h2>
-          <p>Consultá tu estado de cuenta y administrá tu servicio desde el portal de clientes.</p>
-          <a className="button button-primary" href="https://ap2.factulinc.com.ar" target="_blank" rel="noreferrer">
-            Ingresar a mi cuenta <span>↗</span>
-          </a>
-        </div>
+      <section className="faq">
+        <div className="faq-heading"><span className="section-tag">PREGUNTAS FRECUENTES</span><h2>Todo lo que necesitás saber.</h2><p>Si tu pregunta no está acá, escribinos. Nuestro equipo está listo para ayudarte.</p><a className="text-button" href="#contacto">Hablar con Byte <span>↗</span></a></div>
+        <div className="faq-list"><details open><summary>¿En qué localidades tienen cobertura?<span>+</span></summary><p>Brindamos servicio en Lincoln, General Pinto, Arenaza, El Triunfo, Bayauca, Bermúdez y en la zona rural comprendida entre estas localidades.</p></details><details><summary>¿Qué es internet simétrico?<span>+</span></summary><p>Es una conexión que ofrece la misma velocidad de subida y de bajada, ideal para empresas, videollamadas, nube y envío de archivos pesados.</p></details><details><summary>¿Puedo consultar disponibilidad en una zona rural?<span>+</span></summary><p>Sí. Analizamos cada ubicación para confirmar la mejor alternativa de conexión disponible.</p></details><details><summary>¿Cómo ingreso al área de clientes?<span>+</span></summary><p>Podés acceder desde el botón “Área clientes” para consultar tu estado de cuenta y administrar tu servicio.</p></details></div>
       </section>
 
       <section className="contact" id="contacto">
-        <div className="contact-copy">
-          <span className="section-index">04 / CONTACTO</span>
-          <h2>Hablemos de tu<br />próxima <em>conexión.</em></h2>
-          <p>
-            Dejanos tus datos y te contactamos para recomendarte la mejor solución
-            disponible en tu zona.
-          </p>
-          <div className="contact-details">
-            <a href="tel:+542355448231"><span>TELÉFONOS</span><b>2355 448231 · 448232 · 448269</b></a>
-            <a href="mailto:info@byteinformatica.com.ar"><span>EMAIL GENERAL</span><b>info@byteinformatica.com.ar</b></a>
-            <a href="mailto:atencionaclientes@byteinformatica.com.ar"><span>ATENCIÓN AL CLIENTE</span><b>atencionaclientes@byteinformatica.com.ar</b></a>
-            <a href="https://maps.google.com/?q=Rivadavia+1286+Lincoln+Buenos+Aires" target="_blank" rel="noreferrer"><span>OFICINA</span><b>Rivadavia 1286 · Lincoln, Bs. As.</b></a>
-          </div>
-        </div>
-        <form className="contact-form" onSubmit={sendForm}>
-          <div className="field-row">
-            <label>Nombre completo<input name="name" type="text" placeholder="Tu nombre" required /></label>
-            <label>Teléfono<input name="phone" type="tel" placeholder="Tu número" required /></label>
-          </div>
-          <div className="field-row">
-            <label>Email<input name="email" type="email" placeholder="nombre@email.com" required /></label>
-            <label>Localidad<input name="location" type="text" placeholder="¿Dónde estás?" required /></label>
-          </div>
-          <label>¿Qué servicio necesitás?
-            <select name="service" defaultValue="">
-              <option value="" disabled>Elegí una opción</option>
-              <option>Internet de banda ancha</option>
-              <option>Internet simétrico</option>
-              <option>Zonas WiFi</option>
-              <option>Quiero asesoramiento</option>
-            </select>
-          </label>
-          <label>Contanos un poco más
-            <textarea name="message" placeholder="Escribí tu consulta..." rows={4} />
-          </label>
-          <button className="form-submit" type="submit">Enviar consulta <span aria-hidden="true">↗</span></button>
-          <small>Al enviar, se abrirá tu aplicación de correo con la consulta preparada.</small>
-        </form>
+        <div className="contact-copy"><span className="section-tag">HABLEMOS</span><h2>Tu próxima conexión<br /><em>empieza acá.</em></h2><p>Dejanos tus datos y te contactamos para recomendarte la mejor solución disponible en tu zona.</p><div className="contact-details"><a href="tel:+542355448231"><span>TELÉFONOS</span><b>2355 448231 · 448232 · 448269</b></a><a href="mailto:info@byteinformatica.com.ar"><span>EMAIL GENERAL</span><b>info@byteinformatica.com.ar</b></a><a href="mailto:atencionaclientes@byteinformatica.com.ar"><span>ATENCIÓN AL CLIENTE</span><b>atencionaclientes@byteinformatica.com.ar</b></a><a href="https://maps.google.com/?q=Rivadavia+1286+Lincoln+Buenos+Aires" target="_blank" rel="noreferrer"><span>OFICINA</span><b>Rivadavia 1286 · Lincoln, Bs. As.</b></a></div></div>
+        <form className="contact-form" onSubmit={sendForm}><div className="form-heading"><span>CONTANOS QUÉ NECESITÁS</span><i>01</i></div><div className="field-row"><label>Nombre completo<input name="name" type="text" placeholder="Tu nombre" required /></label><label>Teléfono<input name="phone" type="tel" placeholder="Tu número" required /></label></div><div className="field-row"><label>Email<input name="email" type="email" placeholder="nombre@email.com" required /></label><label>Localidad<input name="location" type="text" placeholder="¿Dónde estás?" required /></label></div><label>¿Qué servicio necesitás?<select name="service" defaultValue=""><option value="" disabled>Elegí una opción</option><option>Internet de banda ancha</option><option>Internet simétrico</option><option>Zonas WiFi</option><option>Quiero asesoramiento</option></select></label><label>Contanos un poco más<textarea name="message" placeholder="Escribí tu consulta..." rows={4} /></label><button className="form-submit" type="submit">Enviar consulta <span>↗</span></button><small>Al enviar, se abrirá tu aplicación de correo con la consulta preparada.</small></form>
       </section>
 
+      <section className="career"><div><span className="section-tag">OPORTUNIDADES LABORALES</span><h2>¿Querés ser parte de Byte?</h2></div><p>Estamos construyendo la red del futuro con talento local.</p><a className="button button-secondary" href="mailto:info@byteinformatica.com.ar?subject=Quiero%20trabajar%20en%20Byte%20Conectividad">Enviar mi CV <span>↗</span></a></section>
+
       <footer>
-        <div className="footer-top">
-          <img src="assets/byte-logo.png" alt="Byte Conectividad" />
-          <p>Internet de alta velocidad<br />para Lincoln y la región.</p>
-          <div className="footer-social">
-            <a href="https://www.instagram.com/byteconectividad.20/" target="_blank" rel="noreferrer">Instagram ↗</a>
-            <a href="https://www.facebook.com/Byte-Conectividad-416914858648229" target="_blank" rel="noreferrer">Facebook ↗</a>
-          </div>
-        </div>
-        <div className="footer-bottom">
-          <span>© {new Date().getFullYear()} BYTE CONECTIVIDAD</span>
-          <span>INTERNET · INFRAESTRUCTURA · SOPORTE</span>
-          <a href="#inicio">VOLVER ARRIBA ↑</a>
-        </div>
+        <div className="footer-main"><div className="footer-brand"><img src="assets/byte-logo.png" alt="Byte Conectividad" /><p>Internet de alta velocidad para Lincoln y la región.</p></div><div className="footer-column"><span>NAVEGACIÓN</span><a href="#servicios">Servicios</a><a href="#cobertura">Cobertura</a><a href="#nosotros">Nosotros</a><a href="#contacto">Contacto</a></div><div className="footer-column"><span>SEGUINOS</span><a href="https://www.instagram.com/byteconectividad.20/" target="_blank" rel="noreferrer">Instagram ↗</a><a href="https://www.facebook.com/Byte-Conectividad-416914858648229" target="_blank" rel="noreferrer">Facebook ↗</a></div><div className="footer-column"><span>CLIENTES</span><a href="https://ap2.factulinc.com.ar" target="_blank" rel="noreferrer">Ingresar a mi cuenta ↗</a><a href="mailto:atencionaclientes@byteinformatica.com.ar">Soporte</a></div></div>
+        <div className="footer-bottom"><span>© {new Date().getFullYear()} BYTE CONECTIVIDAD</span><span>INTERNET · INFRAESTRUCTURA · SOPORTE</span><a href="#inicio">VOLVER ARRIBA ↑</a></div>
       </footer>
 
-      <a
-        className="whatsapp"
-        href="https://wa.me/5492355448231?text=Hola%20Byte%2C%20quiero%20consultar%20por%20el%20servicio%20de%20internet."
-        target="_blank"
-        rel="noreferrer"
-        aria-label="Escribir a Byte por WhatsApp"
-      >
-        <span>WhatsApp</span><i>↗</i>
-      </a>
+      <a className="whatsapp" href="https://wa.me/5492355448231?text=Hola%20Byte%2C%20quiero%20consultar%20por%20el%20servicio%20de%20internet." target="_blank" rel="noreferrer" aria-label="Escribir a Byte por WhatsApp"><span>WhatsApp</span><i>↗</i></a>
     </main>
   );
 }
