@@ -1,16 +1,13 @@
 "use client";
 
-import { FormEvent, useEffect, useRef, useState } from "react";
+import { FormEvent, useEffect, useRef } from "react";
 import {
   Activity,
   ArrowUpDown,
-  ArrowUpRight,
   Building2,
   DraftingCompass,
-  Facebook,
   Headphones,
   House,
-  Instagram,
   MapPin,
   MessageCircle,
   MonitorCheck,
@@ -23,6 +20,7 @@ import {
   Wifi,
 } from "lucide-react";
 import SiteHeader from "./SiteHeader";
+import ByteFooter from "./ByteFooter";
 
 const services = [
   { number: "01", label: "PARA TU HOGAR", title: "Internet de banda ancha", copy: "Conexión de alta velocidad a través de nuestra red inalámbrica. Estable, confiable y con soporte local de verdad.", points: ["Navegación fluida", "Instalación personalizada", "Soporte cercano"], icon: "signal" },
@@ -82,7 +80,6 @@ function IconGlyph({ name }: { name: string }) {
 }
 
 export default function Home() {
-  const [footerOpen, setFooterOpen] = useState<"explore" | "solutions" | null>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   function sendForm(event: FormEvent<HTMLFormElement>) {
@@ -232,6 +229,7 @@ export default function Home() {
 
         <div className="network-dashboard" aria-label="Panel visual de la red Byte">
           <div className="dash-top"><div className="dash-brand"><b><img src="assets/byte-symbol.png" alt="" aria-hidden="true" /></b><span>BYTE NETWORK</span></div><div className="dash-status"><i /> RED OPERATIVA</div><div className="dash-period">AHORA <span>⌄</span></div></div>
+          <div className="dash-telemetry" aria-hidden="true"><span><i /> 99.9% DISPONIBILIDAD</span><span>COBERTURA · CIUDAD + CAMPO</span><span>MONITOREO 24/7</span></div>
           <div className="dash-body">
             <aside className="dash-sidebar" aria-hidden="true">
               <span className="dash-menu-active"><i>◫</i>Estado</span><span><i>⌁</i>Servicios</span><span><i>◎</i>Cobertura</span><span><i>◈</i>Soporte</span>
@@ -267,9 +265,6 @@ export default function Home() {
             <img className="about-photo" src="assets/byte-network-team.webp" alt="Equipo técnico monitoreando la red de Byte" loading="lazy" decoding="async" />
             <div className="about-photo-shade" aria-hidden="true" />
             <span className="about-label"><i /> INFRAESTRUCTURA ACTIVA</span>
-            <div className="about-photo-badge"><b>24/7</b><span>RED MONITOREADA</span></div>
-            <div className="about-float float-one"><span>ALCANCE</span><strong>REGIONAL</strong></div>
-            <div className="about-float float-two"><span>SOPORTE</span><strong>LOCAL</strong></div>
           </div>
           <div className="about-content"><span className="section-tag">UNA RED QUE CRECE CON VOS</span><h3>Más de dos décadas acercando oportunidades.</h3><p>Hoy brindamos servicio en distintas localidades de la zona y seguimos ampliando nuestra red. La monitoreamos de forma constante para asegurar calidad y fiabilidad, acompañando a cada cliente con atención totalmente personalizada.</p><div className="metric-grid"><div><strong>2003</strong><span>El año en que empezó nuestra historia</span></div><div><strong>6</strong><span>Localidades y su zona rural conectadas</span></div><div><strong>Local</strong><span>Equipo cercano, respuestas reales</span></div></div><a className="text-button" href="#contacto">Conocé nuestra cobertura <span>↗</span></a></div>
         </div>
@@ -343,85 +338,7 @@ export default function Home() {
 
       <section className="career reveal"><div><span className="section-tag">OPORTUNIDADES LABORALES</span><h2>¿Querés ser parte de Byte?</h2></div><p>Estamos construyendo la red del futuro con talento local.</p><a className="button button-secondary" href="mailto:info@byteinformatica.com.ar?subject=Quiero%20trabajar%20en%20Byte%20Conectividad">Enviar mi CV <span>↗</span></a></section>
 
-      <footer className="byte-footer">
-        <div className="byte-footer__aurora" aria-hidden="true" />
-        <section className="byte-footer__cta reveal">
-          <div className="byte-footer__cta-copy">
-            <span className="section-tag"><i /> LA RED QUE TE ACOMPAÑA</span>
-            <h2><span className="byte-footer__cta-title-line">Donde estés, que tus ideas</span><em>lleguen más lejos.</em></h2>
-            <p>Conectividad estable, soporte local y una solución pensada para tu zona.</p>
-          </div>
-          <a className="byte-footer__orbit" href="#contacto" aria-label="Consultar cobertura con Byte">
-            <span className="byte-footer__orbit-ring" aria-hidden="true" />
-            <small>HABLEMOS</small>
-            <ArrowUpRight aria-hidden="true" />
-          </a>
-        </section>
-
-        <div className="byte-footer__main">
-          <div className="byte-footer__brand">
-            <span className="brand-color-logo brand-color-logo--footer">
-              <img src="assets/byte-logo.png" alt="Byte Conectividad" />
-              <img className="brand-color-logo__byte" src="assets/byte-logo.png" alt="" aria-hidden="true" />
-            </span>
-            <p>Internet de alta velocidad para Lincoln y la región. Tecnología que conecta, personas que acompañan.</p>
-            <span className="byte-footer__status"><i /> RED OPERATIVA · SOPORTE LOCAL</span>
-            <div className="byte-footer__social" aria-label="Redes sociales">
-              <a href="https://www.instagram.com/byteconectividad.20/" target="_blank" rel="noreferrer" aria-label="Instagram de Byte"><Instagram aria-hidden="true" /></a>
-              <a href="https://www.facebook.com/Byte-Conectividad-416914858648229" target="_blank" rel="noreferrer" aria-label="Facebook de Byte"><Facebook aria-hidden="true" /></a>
-            </div>
-          </div>
-
-          <div className={"byte-footer__nav " + (footerOpen === "explore" ? "is-open" : "")}>
-            <span className="byte-footer__nav-heading">EXPLORÁ</span>
-            <button className="byte-footer__nav-button" type="button" aria-expanded={footerOpen === "explore"} aria-controls="footer-explore" onClick={() => setFooterOpen(footerOpen === "explore" ? null : "explore")}>
-              <span>EXPLORÁ</span><i aria-hidden="true" />
-            </button>
-            <nav id="footer-explore" className="byte-footer__nav-list" aria-label="Explorar Byte">
-              <a href="#servicios" onClick={() => setFooterOpen(null)}>Servicios <b>↗</b></a>
-              <a href="#cobertura" onClick={() => setFooterOpen(null)}>Cobertura <b>↗</b></a>
-              <a href="#nosotros" onClick={() => setFooterOpen(null)}>Nosotros <b>↗</b></a>
-              <a href="#contacto" onClick={() => setFooterOpen(null)}>Contacto <b>↗</b></a>
-              <a href="solicitar-servicio/" onClick={() => setFooterOpen(null)}>Solicitar servicio <b>↗</b></a>
-            </nav>
-          </div>
-
-          <div className={"byte-footer__nav " + (footerOpen === "solutions" ? "is-open" : "")}>
-            <span className="byte-footer__nav-heading">SOLUCIONES</span>
-            <button className="byte-footer__nav-button" type="button" aria-expanded={footerOpen === "solutions"} aria-controls="footer-solutions" onClick={() => setFooterOpen(footerOpen === "solutions" ? null : "solutions")}>
-              <span>SOLUCIONES</span><i aria-hidden="true" />
-            </button>
-            <nav id="footer-solutions" className="byte-footer__nav-list" aria-label="Soluciones Byte">
-              <a href="#servicios" onClick={() => setFooterOpen(null)}>Internet para hogares</a>
-              <a href="#servicios" onClick={() => setFooterOpen(null)}>Internet para empresas</a>
-              <a href="#cobertura" onClick={() => setFooterOpen(null)}>Conectividad rural</a>
-              <a href="#servicios" onClick={() => setFooterOpen(null)}>Zonas WiFi</a>
-            </nav>
-          </div>
-
-          <div className="byte-footer__contact">
-            <span>EQUIPO LOCAL</span>
-            <h3>Tu mejor conexión empieza con una charla.</h3>
-            <a className="byte-footer__whatsapp" href="https://wa.me/5492355448231?text=Hola%20Byte%2C%20quiero%20consultar%20por%20el%20servicio%20de%20internet." target="_blank" rel="noreferrer">
-              <img className="whatsapp-mark whatsapp-mark--footer" src="assets/whatsapp.svg" alt="" aria-hidden="true" /><b>Hablar por WhatsApp</b><ArrowUpRight aria-hidden="true" />
-            </a>
-            <a href="tel:+542355448231">2355 448231</a>
-            <a href="mailto:info@byteinformatica.com.ar">info@byteinformatica.com.ar</a>
-            <p>Rivadavia 1286 · Lincoln, Bs. As.</p>
-          </div>
-        </div>
-
-        <div className="byte-footer__bottom">
-          <span>© {new Date().getFullYear()} Byte Conectividad.<br />Todos los derechos reservados.</span>
-          <div className="byte-footer__seal" aria-label="Byte Conectividad, conectando desde 2003">
-            <b><i /> BYTE NETWORK</b>
-            <small>LINCOLN · DESDE 2003</small>
-          </div>
-          <span className="byte-footer__ideamos">Diseño y desarrollo para ir más lejos — <a href="https://ideamos.com.ar" target="_blank" rel="noreferrer">Estudio Ideamos <b>↗</b></a></span>
-        </div>
-      </footer>
-
-      <a className="whatsapp" href="https://wa.me/5492355448231?text=Hola%20Byte%2C%20quiero%20consultar%20por%20el%20servicio%20de%20internet." target="_blank" rel="noreferrer" aria-label="Escribir a Byte por WhatsApp"><span>WhatsApp</span><i><img className="whatsapp-mark whatsapp-mark--floating" src="assets/whatsapp.svg" alt="" aria-hidden="true" /></i></a>
+      <ByteFooter animate />
     </main>
   );
 }

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { ArrowLeft, ArrowUpRight, Check, Facebook, Instagram, Mail, MapPin, Phone } from "lucide-react";
+import { ArrowUpRight, Check, Mail, MapPin, Phone } from "lucide-react";
 import SiteHeader from "../SiteHeader";
+import ByteFooter from "../ByteFooter";
 import ServiceRequestForm from "./ServiceRequestForm";
 
 export const dynamic = "force-static";
@@ -25,7 +26,6 @@ export default function RequestServicePage() {
         <div className="request-atmosphere" aria-hidden="true"><i /><i /><i /></div>
 
         <div className="request-copy">
-          <a className="request-back" href="../#inicio"><ArrowLeft aria-hidden="true" /> Volver al inicio</a>
           <span className="request-kicker"><i /> SOLICITAR SERVICIO · LINCOLN Y LA REGIÓN</span>
           <h1>La conexión que necesitás.<br /><em>Donde la necesitás.</em></h1>
           <p>Contanos dónde estás y qué servicio buscás. Nuestro equipo evalúa la cobertura y te contacta con una propuesta pensada para tu ubicación.</p>
@@ -63,26 +63,7 @@ export default function RequestServicePage() {
         </div>
       </section>
 
-      <footer className="request-footer">
-        <div className="request-footer__brand">
-          <span className="request-footer__logo">
-            <img src="../assets/byte-logo.png" alt="Byte Conectividad" />
-            <img className="request-footer__logo-byte" src="../assets/byte-logo.png" alt="" aria-hidden="true" />
-          </span>
-          <p>Internet de alta velocidad para Lincoln y la región.</p>
-        </div>
-        <nav aria-label="Navegación secundaria">
-          <a href="../#servicios">Servicios</a>
-          <a href="../#cobertura">Cobertura</a>
-          <a href="../#nosotros">Nosotros</a>
-          <a href="../#contacto">Contacto</a>
-        </nav>
-        <div className="request-footer__social">
-          <a href="https://www.instagram.com/byteconectividad.20/" target="_blank" rel="noreferrer" aria-label="Instagram de Byte"><Instagram aria-hidden="true" /></a>
-          <a href="https://www.facebook.com/Byte-Conectividad-416914858648229" target="_blank" rel="noreferrer" aria-label="Facebook de Byte"><Facebook aria-hidden="true" /></a>
-        </div>
-        <p className="request-footer__legal">© {new Date().getFullYear()} Byte Conectividad · Diseño y desarrollo por <a href="https://ideamos.com.ar" target="_blank" rel="noreferrer">Estudio Ideamos ↗</a></p>
-      </footer>
+      <ByteFooter homePrefix="../" assetPrefix="../" requestHref="./" />
     </main>
   );
 }
