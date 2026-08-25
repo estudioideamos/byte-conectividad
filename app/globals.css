@@ -793,3 +793,95 @@ main{width:100%;max-width:none;overflow-x:hidden}
   .dash-period{padding:7px 8px}
   .dash-period span{margin-left:7px}
 }
+
+
+/* Stable vector icon shells */
+.icon-shell{
+  position:relative;
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+  isolation:isolate;
+}
+.icon-shell::before{
+  content:"";
+  position:absolute;
+  z-index:0;
+  inset:8px;
+  border:1px solid rgba(135,153,255,.17);
+  border-radius:inherit;
+  background:radial-gradient(circle at 50% 45%,rgba(91,112,255,.12),transparent 64%);
+  box-shadow:inset 0 0 18px rgba(85,104,255,.08);
+  animation:iconFramePulse 4.6s ease-in-out infinite;
+}
+.icon-shell::after{
+  content:"";
+  position:absolute;
+  z-index:1;
+  width:72%;
+  height:72%;
+  left:14%;
+  top:14%;
+  border-radius:50%;
+  background:radial-gradient(circle at 50% 18%,rgba(170,181,255,.18),transparent 62%);
+  opacity:.7;
+  animation:iconHaloBreathe 3.8s ease-in-out infinite;
+  pointer-events:none;
+}
+.icon-shell .icon-glyph{
+  position:relative;
+  z-index:3;
+  width:44%;
+  height:44%;
+  color:#91a4ff;
+  fill:none;
+  filter:drop-shadow(0 0 7px rgba(103,126,255,.48));
+  animation:iconGlyphBreathe 4.2s ease-in-out infinite;
+}
+.icon-shell .icon-spark{
+  position:absolute;
+  z-index:4;
+  top:22%;
+  right:21%;
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:#7af2aa;
+  box-shadow:0 0 7px #7af2aa,0 0 18px rgba(122,242,170,.68);
+  animation:iconSpark 2.6s ease-in-out infinite;
+}
+.icon-shell .icon-spark::after{
+  content:"";
+  position:absolute;
+  inset:-5px;
+  border:1px solid rgba(122,242,170,.18);
+  border-radius:50%;
+}
+.service-icon.icon-shell{border-radius:50%}
+.service-icon.icon-shell::before{inset:11px;border-radius:50%;border-style:dashed}
+.service-icon.icon-shell .icon-glyph{width:48%;height:48%}
+.service-icon.icon-shell .icon-spark{top:23%;right:22%}
+.advantage-icon.icon-shell::before{border-radius:17px}
+.advantage-icon.icon-shell .icon-glyph{width:43%;height:43%}
+.feature-icon.icon-shell::before{inset:7px;border-radius:14px}
+.feature-icon.icon-shell .icon-glyph{width:46%;height:46%}
+.feature-icon.icon-shell .icon-spark{width:5px;height:5px;top:20%;right:18%}
+.process-icon.icon-shell::before{border-radius:50%;border-style:dashed}
+.process-icon.icon-shell .icon-glyph{width:44%;height:44%}
+.service-card:nth-child(2) .icon-shell::before,.feature-grid article:nth-child(2n) .icon-shell::before,.process-step:nth-child(2n) .icon-shell::before{animation-delay:.7s}
+.service-card:nth-child(3) .icon-shell::after,.feature-grid article:nth-child(3n) .icon-shell::after,.process-step:nth-child(3n) .icon-shell::after{animation-delay:1.2s}
+.icon-shell.feature-icon-growth .icon-glyph,.icon-shell.process-icon-monitor .icon-glyph{color:#82a0ff}
+.icon-shell.feature-icon-support .icon-spark,.icon-shell.advantage-icon-02 .icon-spark{top:auto;bottom:20%;right:18%}
+
+@keyframes iconFramePulse{
+  0%,100%{border-color:rgba(135,153,255,.14);opacity:.72}
+  50%{border-color:rgba(135,153,255,.34);opacity:1}
+}
+@keyframes iconHaloBreathe{0%,100%{transform:scale(.9);opacity:.42}50%{transform:scale(1.08);opacity:.82}}
+@keyframes iconGlyphBreathe{0%,100%{transform:translateY(0);filter:drop-shadow(0 0 7px rgba(103,126,255,.42))}50%{transform:translateY(-1px);filter:drop-shadow(0 0 11px rgba(103,126,255,.68))}}
+@keyframes iconSpark{0%,100%{transform:scale(.82);opacity:.7}50%{transform:scale(1.18);opacity:1}}
+
+@media (max-width:540px){
+  .icon-shell::after{animation:none;opacity:.6}
+  .feature-icon.icon-shell{width:66px;height:66px}
+}

@@ -1,6 +1,24 @@
 "use client";
 
 import { FormEvent, useEffect, useRef, useState } from "react";
+import {
+  Activity,
+  ArrowUpDown,
+  Building2,
+  DraftingCompass,
+  Headphones,
+  House,
+  MapPin,
+  MessageCircle,
+  MonitorCheck,
+  Network,
+  Radio,
+  RadioTower,
+  Router,
+  Share2,
+  TrendingUp,
+  Wifi,
+} from "lucide-react";
 
 const services = [
   { number: "01", label: "PARA TU HOGAR", title: "Internet de banda ancha", copy: "Conexión de alta velocidad a través de nuestra red inalámbrica. Estable, confiable y con soporte local de verdad.", points: ["Navegación fluida", "Instalación personalizada", "Soporte cercano"], icon: "signal" },
@@ -30,6 +48,34 @@ const processSteps = [
   { number: "04", icon: "monitor", title: "La acompañamos siempre", copy: "Monitoreo continuo y soporte local cuando lo necesitás." },
 ];
 
+const iconGlyphs = {
+  signal: Radio,
+  sync: ArrowUpDown,
+  nodes: Share2,
+  advantage01: Activity,
+  advantage02: MessageCircle,
+  advantage03: Network,
+  home: House,
+  business: Building2,
+  rural: RadioTower,
+  wifi: Wifi,
+  support: Headphones,
+  growth: TrendingUp,
+  location: MapPin,
+  design: DraftingCompass,
+  install: Router,
+  monitor: MonitorCheck,
+} as const;
+
+function IconGlyph({ name }: { name: string }) {
+  const Glyph = iconGlyphs[name as keyof typeof iconGlyphs] ?? Network;
+  return (
+    <>
+      <Glyph className="icon-glyph" strokeWidth={1.65} aria-hidden="true" />
+      <span className="icon-spark" aria-hidden="true" />
+    </>
+  );
+}
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -223,7 +269,7 @@ export default function Home() {
 
       <section className="trust-strip reveal" aria-label="Presencia regional"><p>Desde 2003 conectando personas, proyectos y oportunidades</p><div className="location-marquee"><div>{[...locations, ...locations].map((location, index) => <span key={location + index}><i />{location}</span>)}</div></div></section>
 
-      <section className="advantages reveal" aria-label="Ventajas Byte">{advantages.map(([number, title, copy]) => <article key={number}><span>{number}</span><div className={"advantage-icon advantage-icon-" + number} aria-hidden="true"><i /><i /><b /></div><h2>{title}</h2><p>{copy}</p></article>)}</section>
+      <section className="advantages reveal" aria-label="Ventajas Byte">{advantages.map(([number, title, copy]) => <article key={number}><span>{number}</span><div className={"advantage-icon advantage-icon-" + number + " icon-shell"} aria-hidden="true"><IconGlyph name={"advantage" + number} /></div><h2>{title}</h2><p>{copy}</p></article>)}</section>
 
       <section className="about reveal" id="nosotros">
         <div className="section-intro"><span className="section-tag">SOBRE BYTE</span><h2>Tecnología que conecta.<br /><em>Personas que acompañan.</em></h2><p>Nacimos en Lincoln en 2003 con una idea simple: llevar conectividad de calidad a cada persona, incluso donde parecía imposible.</p></div>
@@ -242,7 +288,7 @@ export default function Home() {
 
       <section className="services reveal" id="servicios">
         <div className="section-intro section-intro-centered"><span className="section-tag">NUESTROS SERVICIOS</span><h2>Una solución para cada<br /><em>forma de conectarte.</em></h2><p>Desde el hogar hasta una operación de gran escala, diseñamos la red que necesitás.</p></div>
-        <div className="services-list">{services.map((service) => <article className="service-card" key={service.number}><div className="service-top"><span className="service-number">{service.number}</span><div className={"service-icon icon-" + service.icon} aria-hidden="true"><i /><i /><i /></div></div><span className="service-label">{service.label}</span><h3>{service.title}</h3><p>{service.copy}</p><ul>{service.points.map((point) => <li key={point}><i>✓</i>{point}</li>)}</ul><a href="#contacto">Consultar servicio <span>↗</span></a></article>)}</div>
+        <div className="services-list">{services.map((service) => <article className="service-card" key={service.number}><div className="service-top"><span className="service-number">{service.number}</span><div className={"service-icon icon-" + service.icon + " icon-shell"} aria-hidden="true"><IconGlyph name={service.icon} /></div></div><span className="service-label">{service.label}</span><h3>{service.title}</h3><p>{service.copy}</p><ul>{service.points.map((point) => <li key={point}><i>✓</i>{point}</li>)}</ul><a href="#contacto">Consultar servicio <span>↗</span></a></article>)}</div>
       </section>
 
       <section className="network-film reveal" aria-label="La red Byte en movimiento">
@@ -271,7 +317,7 @@ export default function Home() {
           {processSteps.map((step) => (
             <article className="process-step" key={step.number}>
               <span className="process-number">{step.number}</span>
-              <div className={"process-icon process-icon-" + step.icon} aria-hidden="true"><i /><i /><b /></div>
+              <div className={"process-icon process-icon-" + step.icon + " icon-shell"} aria-hidden="true"><IconGlyph name={step.icon} /></div>
               <h3>{step.title}</h3>
               <p>{step.copy}</p>
             </article>
@@ -292,7 +338,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="feature-section reveal"><div className="section-intro section-intro-centered"><span className="section-tag">PENSADA PARA LA REGIÓN</span><h2>La conexión que necesitás.<br /><em>Donde la necesitás.</em></h2></div><div className="feature-grid">{features.map(([icon, title, copy]) => <article key={title}><span className={"feature-icon feature-icon-" + icon} aria-hidden="true"><i /><i /><b /></span><h3>{title}</h3><p>{copy}</p></article>)}</div></section>
+      <section className="feature-section reveal"><div className="section-intro section-intro-centered"><span className="section-tag">PENSADA PARA LA REGIÓN</span><h2>La conexión que necesitás.<br /><em>Donde la necesitás.</em></h2></div><div className="feature-grid">{features.map(([icon, title, copy]) => <article key={title}><span className={"feature-icon feature-icon-" + icon + " icon-shell"} aria-hidden="true"><IconGlyph name={icon} /></span><h3>{title}</h3><p>{copy}</p></article>)}</div></section>
 
       <section className="portal reveal"><div className="portal-glow" aria-hidden="true" /><div className="portal-copy"><span className="section-tag">ÁREA CLIENTES</span><h2>Tu cuenta, siempre a mano.</h2><p>Consultá tu estado de cuenta y administrá tu servicio desde el portal de clientes.</p><a className="button button-light" href="https://ap2.factulinc.com.ar" target="_blank" rel="noreferrer">Ingresar a mi cuenta <span>↗</span></a></div><div className="portal-console" aria-hidden="true"><div className="console-bar"><i /><i /><i /><span>MI CUENTA BYTE</span></div><div className="console-body"><span>ESTADO DEL SERVICIO</span><div className="console-status"><i /> Activo</div><strong>Todo en orden.</strong><div className="console-line"><i /></div><div className="console-buttons"><b>Cuenta</b><b>Comprobantes</b><b>Soporte</b></div></div></div></section>
 
