@@ -82,6 +82,7 @@ function IconGlyph({ name }: { name: string }) {
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [footerOpen, setFooterOpen] = useState<"explore" | "solutions" | null>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   function sendForm(event: FormEvent<HTMLFormElement>) {
@@ -395,21 +396,31 @@ export default function Home() {
             </div>
           </div>
 
-          <nav className="byte-footer__nav" aria-label="Explorar Byte">
-            <span>EXPLORÁ</span>
-            <a href="#servicios">Servicios <b>↗</b></a>
-            <a href="#cobertura">Cobertura <b>↗</b></a>
-            <a href="#nosotros">Nosotros <b>↗</b></a>
-            <a href="#contacto">Contacto <b>↗</b></a>
-          </nav>
+          <div className={"byte-footer__nav " + (footerOpen === "explore" ? "is-open" : "")}>
+            <span className="byte-footer__nav-heading">EXPLORÁ</span>
+            <button className="byte-footer__nav-button" type="button" aria-expanded={footerOpen === "explore"} aria-controls="footer-explore" onClick={() => setFooterOpen(footerOpen === "explore" ? null : "explore")}>
+              <span>EXPLORÁ</span><i aria-hidden="true" />
+            </button>
+            <nav id="footer-explore" className="byte-footer__nav-list" aria-label="Explorar Byte">
+              <a href="#servicios" onClick={() => setFooterOpen(null)}>Servicios <b>↗</b></a>
+              <a href="#cobertura" onClick={() => setFooterOpen(null)}>Cobertura <b>↗</b></a>
+              <a href="#nosotros" onClick={() => setFooterOpen(null)}>Nosotros <b>↗</b></a>
+              <a href="#contacto" onClick={() => setFooterOpen(null)}>Contacto <b>↗</b></a>
+            </nav>
+          </div>
 
-          <nav className="byte-footer__nav" aria-label="Soluciones Byte">
-            <span>SOLUCIONES</span>
-            <a href="#servicios">Internet para hogares</a>
-            <a href="#servicios">Internet para empresas</a>
-            <a href="#cobertura">Conectividad rural</a>
-            <a href="#servicios">Zonas WiFi</a>
-          </nav>
+          <div className={"byte-footer__nav " + (footerOpen === "solutions" ? "is-open" : "")}>
+            <span className="byte-footer__nav-heading">SOLUCIONES</span>
+            <button className="byte-footer__nav-button" type="button" aria-expanded={footerOpen === "solutions"} aria-controls="footer-solutions" onClick={() => setFooterOpen(footerOpen === "solutions" ? null : "solutions")}>
+              <span>SOLUCIONES</span><i aria-hidden="true" />
+            </button>
+            <nav id="footer-solutions" className="byte-footer__nav-list" aria-label="Soluciones Byte">
+              <a href="#servicios" onClick={() => setFooterOpen(null)}>Internet para hogares</a>
+              <a href="#servicios" onClick={() => setFooterOpen(null)}>Internet para empresas</a>
+              <a href="#cobertura" onClick={() => setFooterOpen(null)}>Conectividad rural</a>
+              <a href="#servicios" onClick={() => setFooterOpen(null)}>Zonas WiFi</a>
+            </nav>
+          </div>
 
           <div className="byte-footer__contact">
             <span>EQUIPO LOCAL</span>
