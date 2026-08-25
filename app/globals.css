@@ -1624,7 +1624,7 @@ body.menu-open{overflow:hidden;touch-action:none}
 .request-copy{position:relative}
 .request-back{
   width:max-content;min-height:38px;margin-bottom:42px;padding:0 14px;
-  display:inline-flex;align-items:center;gap:9px;
+  display:flex;align-items:center;gap:9px;
   border:1px solid rgba(255,255,255,.08);border-radius:999px;
   color:#8e98aa;background:rgba(255,255,255,.02);
   font:8px var(--font-geist-mono),monospace;letter-spacing:.14em;text-transform:uppercase;
@@ -1632,6 +1632,7 @@ body.menu-open{overflow:hidden;touch-action:none}
 }
 .request-back svg{width:13px}
 .request-back:hover{color:#fff;border-color:rgba(111,130,255,.3);transform:translateX(-3px)}
+.request-copy>.request-kicker{display:flex;width:max-content;max-width:100%}
 .request-kicker,.request-form__signal{
   display:inline-flex;align-items:center;gap:9px;color:#7d879c;
   font:7px var(--font-geist-mono),monospace;letter-spacing:.21em;
@@ -1811,7 +1812,7 @@ body.menu-open{overflow:hidden;touch-action:none}
     grid-template-columns:1fr;gap:54px;align-items:start;
   }
   .request-atmosphere i:first-child{width:250px;height:250px;right:-22%;top:7%}
-  .request-back{margin-bottom:32px}
+  .request-back{margin-bottom:30px}
   .request-copy h1{max-width:620px;margin-top:22px;font-size:clamp(43px,12.1vw,63px);line-height:.96}
   .request-copy>p{font-size:14px;line-height:1.66}
   .request-trust{margin:25px 0 36px}
