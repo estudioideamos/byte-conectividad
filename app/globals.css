@@ -2757,15 +2757,13 @@ body.menu-open{overflow:hidden;touch-action:none}
 .register-page .register-note p,
 .register-page .register-final p{color:#a7b1c3}
 @media (min-width:981px){
-  .register-page{overflow-x:clip;overflow-y:visible}
+  .register-page{overflow:visible}
   .register-page .register-hero{align-items:start}
   .register-page .register-hero__copy{
     position:sticky;
-    top:108px;
-    min-height:min(760px,calc(100vh - 128px));
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
+    top:116px;
+    min-height:0;
+    display:block;
     align-self:start;
   }
 }
