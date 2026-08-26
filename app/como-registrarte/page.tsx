@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ArrowDown, ArrowUpRight, Check, Clock3, CreditCard, FileDown, MailCheck, MousePointerClick, ShieldCheck, UserRoundPlus } from "lucide-react";
+import { ArrowDown, ArrowUpRight, Check, CircleUserRound, Clock3, CreditCard, FileDown, KeyRound, LayoutDashboard, MailCheck, MonitorSmartphone, MousePointerClick, ReceiptText, ShieldCheck, UserRoundPlus } from "lucide-react";
 import ByteFooter from "../ByteFooter";
 import SiteHeader from "../SiteHeader";
 
@@ -11,10 +11,54 @@ export const metadata: Metadata = {
 };
 
 const steps = [
-  { number: "01", icon: MousePointerClick, label: "INGRESÁ AL PORTAL", title: "Accedé a tu cuenta.", copy: "Desde cualquier página de Byte, tocá el botón “Accedé a tu cuenta”. Se abrirá el portal oficial de clientes." },
-  { number: "02", icon: UserRoundPlus, label: "CREÁ TU USUARIO", title: "Elegí “Registrarse”.", copy: "En la pantalla de acceso, seleccioná la opción “Registrarse” para comenzar el alta de tu usuario." },
-  { number: "03", icon: ShieldCheck, label: "COMPLETÁ TUS DATOS", title: "Usá tu correo de facturación.", copy: "Ingresá el mismo correo en el que recibís la factura mensual. Creá una contraseña, repetila y presioná “Aceptar”." },
-  { number: "04", icon: Check, label: "TODO LISTO", title: "Ingresá y gestioná tu servicio.", copy: "Volvé a la pantalla de acceso e iniciá sesión con el correo y la contraseña que acabás de crear." },
+  {
+    number: "01",
+    icon: MonitorSmartphone,
+    detailIcon: MousePointerClick,
+    label: "INGRESÁ AL PORTAL",
+    title: "Buscá “Accedé a tu cuenta”.",
+    copy: "Encontrá el botón en la barra superior de cualquier página de Byte. Al tocarlo, vas a ingresar al portal oficial de clientes.",
+    points: ["Está visible en todo el sitio", "Se abre en una pestaña segura"],
+    focus: "TOCÁ ACCEDÉ A TU CUENTA",
+    image: "../assets/register-step-01.jpg",
+    alt: "Mockup de un celular que señala el acceso a la cuenta en la navegación del sitio de Byte",
+  },
+  {
+    number: "02",
+    icon: CircleUserRound,
+    detailIcon: UserRoundPlus,
+    label: "CREÁ TU USUARIO",
+    title: "Elegí la opción “Registrarse”.",
+    copy: "En la pantalla de ingreso, buscá la opción que aparece debajo de los campos de correo y contraseña. Desde ahí comienza el alta.",
+    points: ["No completes el inicio de sesión todavía", "Seleccioná “Registrarse”"],
+    focus: "ELEGÍ REGISTRARSE",
+    image: "../assets/register-step-02.jpg",
+    alt: "Mockup del portal de clientes que destaca la opción para crear un usuario",
+  },
+  {
+    number: "03",
+    icon: ShieldCheck,
+    detailIcon: KeyRound,
+    label: "COMPLETÁ TUS DATOS",
+    title: "Usá tu correo de facturación.",
+    copy: "Ingresá el mismo correo en el que recibís la factura mensual. Después, creá una contraseña segura y repetila para confirmarla.",
+    points: ["Escribí el correo registrado en Byte", "Creá y repetí tu contraseña", "Presioná “Aceptar” para continuar"],
+    focus: "CORREO + CONTRASEÑA",
+    image: "../assets/register-step-03.jpg",
+    alt: "Mockup de una notebook y un celular con el formulario seguro de registro",
+  },
+  {
+    number: "04",
+    icon: LayoutDashboard,
+    detailIcon: ReceiptText,
+    label: "TODO LISTO",
+    title: "Ingresá y gestioná tu servicio.",
+    copy: "Volvé a la pantalla de acceso e iniciá sesión con el correo y la contraseña que acabás de crear. Tu cuenta ya está lista para usar.",
+    points: ["Consultá tu cuenta corriente", "Descargá facturas", "Pagá con débito, QR o billeteras virtuales"],
+    focus: "CUENTA ACTIVA",
+    image: "../assets/register-step-04.jpg",
+    alt: "Mockup del panel de clientes con facturas, resumen de cuenta y opciones de pago",
+  },
 ];
 
 const benefits = [
@@ -59,12 +103,25 @@ export default function RegisterPage() {
         </div>
 
         <div className="register-steps__list">
-          {steps.map(({ number, icon: Icon, label, title, copy }) => (
+          {steps.map(({ number, icon: Icon, detailIcon: DetailIcon, label, title, copy, points, focus, image, alt }) => (
             <article className="register-step" key={number}>
-              <span className="register-step__number">{number}</span>
-              <div className="register-step__icon"><Icon aria-hidden="true" /></div>
-              <div className="register-step__content"><small>{label}</small><h3>{title}</h3><p>{copy}</p></div>
-              <span className="register-step__status"><Check aria-hidden="true" /></span>
+              <div className="register-step__visual">
+                <img src={image} width="1536" height="1024" alt={alt} loading="lazy" decoding="async" />
+                <span className="register-step__visual-number" aria-hidden="true">{number}</span>
+                <span className="register-step__focus"><i />{focus}</span>
+              </div>
+
+              <div className="register-step__body">
+                <div className="register-step__heading">
+                  <div className="register-step__icon" aria-hidden="true"><Icon className="register-step__icon-main" /><DetailIcon className="register-step__icon-detail" /></div>
+                  <div className="register-step__meta"><span>PASO {number}</span><small>{label}</small></div>
+                  <span className="register-step__status"><Check aria-hidden="true" /></span>
+                </div>
+                <div className="register-step__content"><h3>{title}</h3><p>{copy}</p></div>
+                <ul className="register-step__points">
+                  {points.map((point) => <li key={point}><Check aria-hidden="true" />{point}</li>)}
+                </ul>
+              </div>
             </article>
           ))}
         </div>

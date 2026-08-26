@@ -83,6 +83,10 @@ test("exporta la guía individual para registrarse", async () => {
   assert.match(html, /Cómo registrarte \| Byte Conectividad/i);
   assert.match(html, /Registrate una vez/i);
   assert.match(html, /Usá tu correo de facturación/i);
+  assert.equal((html.match(/register-step-0[1-4]\.jpg/g) || []).length >= 4, true);
+  assert.equal((html.match(/loading="lazy"/g) || []).length >= 4, true);
+  assert.match(html, /TOCÁ ACCEDÉ A TU CUENTA/i);
+  assert.match(html, /ELEGÍ REGISTRARSE/i);
   assert.match(html, /Pagá con débito, QR o billeteras virtuales/i);
   assert.match(html, /href="\.\.\/solicitar-servicio\/?"/i);
   assert.match(html, /href="\.\.\/#servicios"/i);
