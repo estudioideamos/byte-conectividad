@@ -2756,6 +2756,19 @@ body.menu-open{overflow:hidden;touch-action:none}
 .register-page .register-step__content p,
 .register-page .register-note p,
 .register-page .register-final p{color:#a7b1c3}
+@media (min-width:981px){
+  .register-page{overflow-x:clip;overflow-y:visible}
+  .register-page .register-hero{align-items:start}
+  .register-page .register-hero__copy{
+    position:sticky;
+    top:108px;
+    min-height:min(760px,calc(100vh - 128px));
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-self:start;
+  }
+}
 @media (max-width:540px){
   .register-page .register-hero__copy h1{font-size:inherit}
   .register-page .register-hero__copy h1>span{font-size:clamp(30px,9.15vw,40px);line-height:1;letter-spacing:-.055em}
