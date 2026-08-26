@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ArrowDown, ArrowUpRight, Check, CircleUserRound, Clock3, CreditCard, FileDown, KeyRound, LayoutDashboard, MailCheck, MonitorSmartphone, MousePointerClick, ReceiptText, ShieldCheck, UserRoundPlus } from "lucide-react";
+import { ArrowDown, ArrowUpRight, Check, CircleUserRound, Clock3, CreditCard, FileDown, KeyRound, LayoutDashboard, MailCheck, MonitorSmartphone, MousePointerClick, QrCode, ReceiptText, ShieldCheck, UserRoundPlus, WalletCards } from "lucide-react";
 import ByteFooter from "../ByteFooter";
 import SiteHeader from "../SiteHeader";
 
@@ -77,7 +77,7 @@ export default function RegisterPage() {
         <div className="register-atmosphere" aria-hidden="true"><i /><i /><i /></div>
         <div className="register-hero__copy">
           <span className="register-kicker"><i /> ÁREA DE CLIENTES · GUÍA DE ACCESO</span>
-          <h1>Registrate una vez.<br /><em>Gestioná todo más fácil.</em></h1>
+          <h1><span>Registrate una vez.</span><em>Gestioná todo más fácil.</em></h1>
           <p>Creá tu usuario con el mismo correo que usás para recibir la factura y accedé a toda la información de tu servicio desde un solo lugar.</p>
           <div className="register-hero__actions">
             <a className="button button-primary" href={accountUrl} target="_blank" rel="noreferrer">Empezar registro <span>↗</span></a>
@@ -88,7 +88,20 @@ export default function RegisterPage() {
 
         <aside className="register-overview" aria-label="Funciones disponibles en el portal de clientes">
           <div className="register-overview__top"><span>MI CUENTA BYTE</span><b><i /> DISPONIBLE 24/7</b></div>
-          <h2>Todo tu servicio,<br />en un solo lugar.</h2>
+          <div className="register-overview__headline"><span>AUTOGESTIÓN ONLINE</span><h2>Tu cuenta Byte.<br /><em>Todo bajo control.</em></h2></div>
+          <div className="register-overview__visual">
+            <img src="../assets/register-account-command-center.jpg" width="1536" height="1024" alt="Portal de clientes de Byte disponible en computadora y celular" decoding="async" fetchPriority="high" />
+            <span className="register-overview__live"><i /> SESIÓN SEGURA</span>
+            <span className="register-overview__receipt"><MailCheck aria-hidden="true" /> COMPROBANTE POR EMAIL</span>
+            <div className="register-overview__payments" aria-label="Medios de pago disponibles">
+              <small>MEDIOS DE PAGO</small>
+              <div>
+                <span><CreditCard aria-hidden="true" /> Débito</span>
+                <span><QrCode aria-hidden="true" /> QR</span>
+                <span><WalletCards aria-hidden="true" /> Billeteras virtuales</span>
+              </div>
+            </div>
+          </div>
           <div className="register-overview__grid">
             {benefits.map(([Icon, title, copy]) => <article key={title}><Icon aria-hidden="true" /><div><strong>{title}</strong><p>{copy}</p></div></article>)}
           </div>

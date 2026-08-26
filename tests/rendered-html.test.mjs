@@ -48,6 +48,7 @@ test("incluye metadatos sociales y controles accesibles", async () => {
   assert.match(html, /property="og:image"/i);
   assert.match(html, /content="https:\/\/[^"]+\/og\.jpg"/i);
   assert.match(html, /name="twitter:card" content="summary_large_image"/i);
+  assert.match(html, /rel="icon"[^>]+favicon\.png/i);
   assert.match(html, /aria-label="Abrir menú"/i);
   assert.match(html, /aria-label="Escribir a Byte por WhatsApp"/i);
   assert.match(css, /prefers-reduced-motion/i);
@@ -82,6 +83,10 @@ test("exporta la guía individual para registrarse", async () => {
 
   assert.match(html, /Cómo registrarte \| Byte Conectividad/i);
   assert.match(html, /Registrate una vez/i);
+  assert.match(html, /register-account-command-center\.jpg/i);
+  assert.match(html, /Tu cuenta Byte/i);
+  assert.match(html, /Medios de pago disponibles/i);
+  assert.match(html, /Billeteras virtuales/i);
   assert.match(html, /Usá tu correo de facturación/i);
   assert.equal((html.match(/register-step-0[1-4]\.jpg/g) || []).length >= 4, true);
   assert.equal((html.match(/loading="lazy"/g) || []).length >= 4, true);
