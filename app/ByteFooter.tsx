@@ -64,8 +64,8 @@ export default function ByteFooter({ homePrefix = "", assetPrefix = "", requestH
               <a href={sectionHref("cobertura")} onClick={closeFooter}>Cobertura <b>↗</b></a>
               <a href={sectionHref("nosotros")} onClick={closeFooter}>Nosotros <b>↗</b></a>
               <a href={sectionHref("contacto")} onClick={closeFooter}>Contacto <b>↗</b></a>
-              <a href={registerHref} onClick={closeFooter}>Cómo registrarte <b>↗</b></a>
               <a href={requestHref} onClick={closeFooter}>Solicitar servicio <b>↗</b></a>
+              <a href={registerHref} onClick={closeFooter}>Cómo registrarte <b>↗</b></a>
             </nav>
           </div>
 

@@ -80,7 +80,7 @@ export default function RegisterPage() {
           <h1><span>Registrate una vez.</span><em>Gestioná todo más fácil.</em></h1>
           <p>Creá tu usuario con el mismo correo que usás para recibir la factura y accedé a toda la información de tu servicio desde un solo lugar.</p>
           <div className="register-hero__actions">
-            <a className="button button-primary" href={accountUrl} target="_blank" rel="noreferrer">Empezar registro <span>↗</span></a>
+            <a className="button button-primary" href={accountUrl} target="_blank" rel="noreferrer">Crear mi cuenta <span>↗</span></a>
             <a className="button button-secondary" href="#pasos">Ver el paso a paso <ArrowDown aria-hidden="true" /></a>
           </div>
           <span className="register-safe"><ShieldCheck aria-hidden="true" /> Acceso seguro al portal oficial de Byte</span>
@@ -93,15 +93,16 @@ export default function RegisterPage() {
             <img src="../assets/register-account-command-center.jpg" width="1536" height="1024" alt="Portal de clientes de Byte disponible en computadora y celular" decoding="async" fetchPriority="high" />
             <span className="register-overview__live"><i /> SESIÓN SEGURA</span>
             <span className="register-overview__receipt"><MailCheck aria-hidden="true" /> COMPROBANTE POR EMAIL</span>
-            <div className="register-overview__payments" aria-label="Medios de pago disponibles">
-              <small>MEDIOS DE PAGO</small>
-              <div>
-                <span><CreditCard aria-hidden="true" /> Débito</span>
-                <span><QrCode aria-hidden="true" /> QR</span>
-                <span><WalletCards aria-hidden="true" /> Billeteras virtuales</span>
-              </div>
+          </div>
+          <div className="register-overview__payments" aria-label="Medios de pago disponibles">
+            <div className="register-overview__payments-copy"><small>MEDIOS DE PAGO</small><strong>Elegí cómo pagar</strong></div>
+            <div>
+              <span><CreditCard aria-hidden="true" /> Débito</span>
+              <span><QrCode aria-hidden="true" /> QR</span>
+              <span><WalletCards aria-hidden="true" /> Billeteras virtuales</span>
             </div>
           </div>
+          <span className="register-overview__features-label">GESTIONES DISPONIBLES</span>
           <div className="register-overview__grid">
             {benefits.map(([Icon, title, copy]) => <article key={title}><Icon aria-hidden="true" /><div><strong>{title}</strong><p>{copy}</p></div></article>)}
           </div>

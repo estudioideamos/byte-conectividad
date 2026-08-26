@@ -71,8 +71,8 @@ export default function SiteHeader({
         <a href={sectionHref("cobertura")}>Cobertura</a>
         <a href={sectionHref("nosotros")}>Nosotros</a>
         <a href={sectionHref("contacto")}>Contacto</a>
-        <a className={registerActive ? "is-active" : undefined} href={registerHref}>Cómo registrarte</a>
         <a className={requestActive ? "is-active" : undefined} href={requestHref}>Solicitar servicio</a>
+        <a className={registerActive ? "is-active" : undefined} href={registerHref}>Cómo registrarte</a>
       </nav>
 
       <div className="header-actions">
@@ -97,8 +97,8 @@ export default function SiteHeader({
         <a href={sectionHref("cobertura")} onClick={closeMenu}>Cobertura <b>02</b></a>
         <a href={sectionHref("nosotros")} onClick={closeMenu}>Nosotros <b>03</b></a>
         <a href={sectionHref("contacto")} onClick={closeMenu}>Contacto <b>04</b></a>
-        <a className={registerActive ? "is-active" : undefined} href={registerHref} onClick={closeMenu}>Cómo registrarte <b>05</b></a>
-        <a className="mobile-menu-request" href={requestHref} onClick={closeMenu}>Solicitar servicio <b>06</b></a>
+        <a className="mobile-menu-request" href={requestHref} onClick={closeMenu}>Solicitar servicio <b>05</b></a>
+        <a className={registerActive ? "is-active" : undefined} href={registerHref} onClick={closeMenu}>Cómo registrarte <b>06</b></a>
         <a className="mobile-menu-client" href={accountUrl} target="_blank" rel="noreferrer" onClick={closeMenu}>
           Accedé a tu cuenta <b>↗</b>
         </a>
