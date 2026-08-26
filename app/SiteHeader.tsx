@@ -10,6 +10,8 @@ type SiteHeaderProps = {
   assetPrefix?: string;
   requestHref?: string;
   requestActive?: boolean;
+  registerHref?: string;
+  registerActive?: boolean;
 };
 
 export default function SiteHeader({
@@ -17,6 +19,8 @@ export default function SiteHeader({
   assetPrefix = "",
   requestHref = "solicitar-servicio/",
   requestActive = false,
+  registerHref = "como-registrarte/",
+  registerActive = false,
 }: SiteHeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -63,11 +67,11 @@ export default function SiteHeader({
       </a>
 
       <nav className="desktop-nav" aria-label="Navegación principal">
-        <a className={!requestActive ? "is-active" : undefined} href={sectionHref("inicio")}>Inicio</a>
         <a href={sectionHref("servicios")}>Servicios</a>
         <a href={sectionHref("cobertura")}>Cobertura</a>
         <a href={sectionHref("nosotros")}>Nosotros</a>
         <a href={sectionHref("contacto")}>Contacto</a>
+        <a className={registerActive ? "is-active" : undefined} href={registerHref}>Cómo registrarte</a>
         <a className={requestActive ? "is-active" : undefined} href={requestHref}>Solicitar servicio</a>
       </nav>
 
@@ -89,11 +93,11 @@ export default function SiteHeader({
 
       <div id="mobile-navigation" className={"mobile-menu " + (menuOpen ? "is-open" : "")} aria-hidden={!menuOpen}>
         <span className="mobile-menu-label">NAVEGACIÓN</span>
-        <a href={sectionHref("inicio")} onClick={closeMenu}>Inicio <b>01</b></a>
-        <a href={sectionHref("servicios")} onClick={closeMenu}>Servicios <b>02</b></a>
-        <a href={sectionHref("cobertura")} onClick={closeMenu}>Cobertura <b>03</b></a>
-        <a href={sectionHref("nosotros")} onClick={closeMenu}>Nosotros <b>04</b></a>
-        <a href={sectionHref("contacto")} onClick={closeMenu}>Contacto <b>05</b></a>
+        <a href={sectionHref("servicios")} onClick={closeMenu}>Servicios <b>01</b></a>
+        <a href={sectionHref("cobertura")} onClick={closeMenu}>Cobertura <b>02</b></a>
+        <a href={sectionHref("nosotros")} onClick={closeMenu}>Nosotros <b>03</b></a>
+        <a href={sectionHref("contacto")} onClick={closeMenu}>Contacto <b>04</b></a>
+        <a className={registerActive ? "is-active" : undefined} href={registerHref} onClick={closeMenu}>Cómo registrarte <b>05</b></a>
         <a className="mobile-menu-request" href={requestHref} onClick={closeMenu}>Solicitar servicio <b>06</b></a>
         <a className="mobile-menu-client" href={accountUrl} target="_blank" rel="noreferrer" onClick={closeMenu}>
           Accedé a tu cuenta <b>↗</b>

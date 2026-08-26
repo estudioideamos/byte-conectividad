@@ -19,6 +19,7 @@ async function createDirectoryRoute(routeName) {
 }
 
 await createDirectoryRoute("solicitar-servicio");
+await createDirectoryRoute("como-registrarte");
 
 if (!repository) {
   console.log("Prepared directory routes; no GitHub repository detected, so asset paths were unchanged.");

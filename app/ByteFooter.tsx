@@ -7,10 +7,11 @@ type ByteFooterProps = {
   homePrefix?: string;
   assetPrefix?: string;
   requestHref?: string;
+  registerHref?: string;
   animate?: boolean;
 };
 
-export default function ByteFooter({ homePrefix = "", assetPrefix = "", requestHref = "solicitar-servicio/", animate = false }: ByteFooterProps) {
+export default function ByteFooter({ homePrefix = "", assetPrefix = "", requestHref = "solicitar-servicio/", registerHref = "como-registrarte/", animate = false }: ByteFooterProps) {
   const [footerOpen, setFooterOpen] = useState<"explore" | "solutions" | null>(null);
   const sectionHref = (id: string) => homePrefix + "#" + id;
   const closeFooter = () => setFooterOpen(null);
@@ -63,6 +64,7 @@ export default function ByteFooter({ homePrefix = "", assetPrefix = "", requestH
               <a href={sectionHref("cobertura")} onClick={closeFooter}>Cobertura <b>↗</b></a>
               <a href={sectionHref("nosotros")} onClick={closeFooter}>Nosotros <b>↗</b></a>
               <a href={sectionHref("contacto")} onClick={closeFooter}>Contacto <b>↗</b></a>
+              <a href={registerHref} onClick={closeFooter}>Cómo registrarte <b>↗</b></a>
               <a href={requestHref} onClick={closeFooter}>Solicitar servicio <b>↗</b></a>
             </nav>
           </div>

@@ -20,7 +20,7 @@ const steps = [
 export default function RequestServicePage() {
   return (
     <main className="request-page" id="inicio">
-      <SiteHeader homePrefix="../" assetPrefix="../" requestHref="./" requestActive />
+      <SiteHeader homePrefix="../" assetPrefix="../" requestHref="./" registerHref="../como-registrarte/" requestActive />
 
       <section className="request-hero">
         <div className="request-atmosphere" aria-hidden="true"><i /><i /><i /></div>
@@ -63,7 +63,7 @@ export default function RequestServicePage() {
         </div>
       </section>
 
-      <ByteFooter homePrefix="../" assetPrefix="../" requestHref="./" />
+      <ByteFooter homePrefix="../" assetPrefix="../" requestHref="./" registerHref="../como-registrarte/" />
     </main>
   );
 }

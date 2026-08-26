@@ -280,6 +280,16 @@ export default function Home() {
       </section>
 
       <section className="trust-strip reveal" aria-label="Presencia regional"><p>Desde 2003 conectando personas, proyectos y oportunidades</p><div className="location-marquee"><div>{[...locations, ...locations].map((location, index) => <span key={location + index}><i />{location}</span>)}</div></div></section>
+      <section className="coverage reveal" id="cobertura">
+        <div className="coverage-copy"><span className="section-tag">COBERTURA REGIONAL</span><h2>Conectamos la ciudad.<br /><em>Y también el campo.</em></h2><p>Llevamos conectividad a localidades y zonas rurales donde conectarse siempre fue un desafío. Nuestra infraestructura sigue creciendo para que la distancia deje de ser un límite.</p><div className="location-list">{locations.map((location) => <span key={location}><i />{location}</span>)}</div><a className="button button-primary" href="#contacto">Consultar mi ubicación <span>↗</span></a></div>
+        <div className="coverage-map" aria-label="Visualización de la cobertura regional de Byte">
+          <video className="coverage-photo" data-lazy-video muted loop playsInline preload="none" width="1599" height="900" poster="assets/byte-regional-network.webp" aria-label="Animación de localidades y zonas rurales conectadas por la red de Byte">
+            <source data-src="assets/byte-regional-loop.mp4" type="video/mp4" />
+          </video>
+          <div className="coverage-photo-shade" aria-hidden="true" /><div className="map-grid" aria-hidden="true" /><div className="map-radar radar-one" /><div className="map-radar radar-two" /><div className="map-radar radar-three" /><div className="map-core"><b><img src="assets/byte-symbol.png" width="181" height="209" alt="" aria-hidden="true" /></b><small>LINCOLN</small></div>{locations.slice(1).map((location, index) => <span className={"map-node map-node-" + (index + 1)} key={location}><i />{location}</span>)}<div className="map-card"><span>ZONA CONECTADA</span><strong>CIUDAD + CAMPO</strong><small>Infraestructura en expansión</small></div>
+        </div>
+      </section>
+
 
       <section className="advantages reveal" aria-label="Ventajas Byte">{advantages.map(([number, title, copy]) => <article key={number}><span>{number}</span><div className={"advantage-icon advantage-icon-" + number + " icon-shell"} aria-hidden="true"><IconGlyph name={"advantage" + number} /></div><h2>{title}</h2><p>{copy}</p></article>)}</section>
 
@@ -339,16 +349,6 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="coverage reveal" id="cobertura">
-        <div className="coverage-copy"><span className="section-tag">COBERTURA REGIONAL</span><h2>Conectamos la ciudad.<br /><em>Y también el campo.</em></h2><p>Llevamos conectividad a localidades y zonas rurales donde conectarse siempre fue un desafío. Nuestra infraestructura sigue creciendo para que la distancia deje de ser un límite.</p><div className="location-list">{locations.map((location) => <span key={location}><i />{location}</span>)}</div><a className="button button-primary" href="#contacto">Consultar mi ubicación <span>↗</span></a></div>
-        <div className="coverage-map" aria-label="Visualización de la cobertura regional de Byte">
-          <video className="coverage-photo" data-lazy-video muted loop playsInline preload="none" width="1599" height="900" poster="assets/byte-regional-network.webp" aria-label="Animación de localidades y zonas rurales conectadas por la red de Byte">
-            <source data-src="assets/byte-regional-loop.mp4" type="video/mp4" />
-          </video>
-          <div className="coverage-photo-shade" aria-hidden="true" /><div className="map-grid" aria-hidden="true" /><div className="map-radar radar-one" /><div className="map-radar radar-two" /><div className="map-radar radar-three" /><div className="map-core"><b><img src="assets/byte-symbol.png" width="181" height="209" alt="" aria-hidden="true" /></b><small>LINCOLN</small></div>{locations.slice(1).map((location, index) => <span className={"map-node map-node-" + (index + 1)} key={location}><i />{location}</span>)}<div className="map-card"><span>ZONA CONECTADA</span><strong>CIUDAD + CAMPO</strong><small>Infraestructura en expansión</small></div>
-        </div>
-      </section>
-
       <section className="feature-section reveal"><div className="section-intro section-intro-centered"><span className="section-tag">PENSADA PARA LA REGIÓN</span><h2>La conexión que necesitás.<br /><em>Donde la necesitás.</em></h2></div><div className="feature-grid">{features.map(([icon, title, copy]) => <article key={title}><span className={"feature-icon feature-icon-" + icon + " icon-shell"} aria-hidden="true"><IconGlyph name={icon} /></span><h3>{title}</h3><p>{copy}</p></article>)}</div></section>
 
       <section className="portal reveal">
@@ -356,31 +356,31 @@ export default function Home() {
         <div className="portal-matrix" aria-hidden="true"><i /><i /><i /></div>
         <div className="portal-copy">
           <span className="section-tag"><i /> ÁREA CLIENTES</span>
-          <h2>Tu conexión,<br /><em>siempre bajo control.</em></h2>
-          <p>Consultá tu cuenta, revisá el estado del servicio y accedé al soporte de Byte desde donde estés.</p>
-          <div className="portal-proof" aria-label="Funciones del portal"><span><i /> Estado en tiempo real</span><span><i /> Cuenta y comprobantes</span><span><i /> Soporte directo</span></div>
-          <a className="button button-light" href="https://ap2.factulinc.com.ar/loginc/200h1k1q1p1z1k1w1a0h130w220o0v" target="_blank" rel="noreferrer">Accedé a tu cuenta <span>↗</span></a>
+          <h2>Tu cuenta, más simple.<br /><em>Todo en un solo lugar.</em></h2>
+          <p>Consultá tu cuenta corriente, descargá tus facturas y realizá pagos online con débito, QR o billeteras virtuales.</p>
+          <div className="portal-proof" aria-label="Funciones del portal"><span><i /> Cuenta corriente</span><span><i /> Facturas para descargar</span><span><i /> Pagos online</span></div>
+          <div className="portal-actions"><a className="button button-light" href="https://ap2.factulinc.com.ar/loginc/200h1k1q1p1z1k1w1a0h130w220o0v" target="_blank" rel="noreferrer">Accedé a tu cuenta <span>↗</span></a><a className="text-button portal-guide" href="como-registrarte/">¿Primera vez? Cómo registrarte <span>↗</span></a></div>
         </div>
         <div className="portal-console" aria-hidden="true">
           <div className="console-bar"><div className="console-dots"><i /><i /><i /></div><span>MI CUENTA BYTE</span><b><i /> EN LÍNEA</b></div>
           <div className="console-body">
             <div className="console-head"><span>RESUMEN DEL SERVICIO</span><small>ACTUALIZADO AHORA</small></div>
             <div className="console-status"><i /> SERVICIO ACTIVO</div>
-            <strong>Todo conectado.</strong>
-            <p>Tu cuenta y tu conexión funcionan con normalidad.</p>
+            <strong>Tu cuenta, al día.</strong>
+            <p>Facturas, pagos y comprobantes en un solo lugar.</p>
             <div className="console-signal">
               <div><span>ACTIVIDAD DEL SERVICIO</span><b>ÚLTIMAS 24 H</b></div>
               <div className="console-line"><i /></div>
               <div className="console-axis"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
             </div>
-            <div className="console-info-grid"><span><small>CUENTA</small><b>Al día</b></span><span><small>CONEXIÓN</small><b>Estable</b></span><span><small>SOPORTE</small><b>Disponible</b></span></div>
+            <div className="console-info-grid"><span><small>CUENTA CORRIENTE</small><b>Disponible</b></span><span><small>FACTURAS</small><b>Descargar</b></span><span><small>PAGOS</small><b>Online</b></span></div>
           </div>
         </div>
       </section>
 
       <section className="faq reveal">
         <div className="faq-heading"><span className="section-tag">PREGUNTAS FRECUENTES</span><h2>Todo lo que necesitás saber.</h2><p>Si tu pregunta no está acá, escribinos. Nuestro equipo está listo para ayudarte.</p><a className="text-button" href="#contacto">Hablar con Byte <span>↗</span></a></div>
-        <div className="faq-list"><details open><summary>¿En qué localidades tienen cobertura?<span>+</span></summary><p>Brindamos servicio en Lincoln, General Pinto, Arenaza, El Triunfo, Bayauca y Bermúdez, además de las zonas rurales comprendidas entre estas localidades.</p></details><details><summary>¿Qué es internet simétrico?<span>+</span></summary><p>Es una conexión con la misma velocidad de subida y de bajada. Es ideal para empresas, videollamadas, trabajo en la nube y envío de archivos pesados.</p></details><details><summary>¿Puedo consultar disponibilidad en una zona rural?<span>+</span></summary><p>Sí. Analizamos cada ubicación para confirmar la mejor alternativa de conexión disponible.</p></details><details><summary>¿Cómo ingreso al área de clientes?<span>+</span></summary><p>Podés hacerlo desde el botón “Accedé a tu cuenta”, donde vas a poder consultar tu estado de cuenta y gestionar el servicio.</p></details></div>
+        <div className="faq-list"><details open><summary>¿En qué localidades tienen cobertura?<span>+</span></summary><p>Brindamos servicio en Lincoln, General Pinto, Arenaza, El Triunfo, Bayauca y Bermúdez, además de las zonas rurales comprendidas entre estas localidades.</p></details><details><summary>¿Qué es internet simétrico?<span>+</span></summary><p>Es una conexión con la misma velocidad de subida y de bajada. Es ideal para empresas, videollamadas, trabajo en la nube y envío de archivos pesados.</p></details><details><summary>¿Puedo consultar disponibilidad en una zona rural?<span>+</span></summary><p>Sí. Analizamos cada ubicación para confirmar la mejor alternativa de conexión disponible.</p></details><details><summary>¿Cómo ingreso al área de clientes?<span>+</span></summary><p>Entrá desde “Accedé a tu cuenta”. Si todavía no tenés usuario, seguí nuestra <a href="como-registrarte/">guía para registrarte paso a paso</a>.</p></details></div>
       </section>
 
       <section className="contact reveal" id="contacto">

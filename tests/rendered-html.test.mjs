@@ -4,6 +4,7 @@ import test from "node:test";
 
 const output = new URL("../dist/client/index.html", import.meta.url);
 const requestOutput = new URL("../dist/client/solicitar-servicio/index.html", import.meta.url);
+const registerOutput = new URL("../dist/client/como-registrarte/index.html", import.meta.url);
 const requestSource = new URL("../app/solicitar-servicio/ServiceRequestForm.tsx", import.meta.url);
 const styles = new URL("../app/globals.css", import.meta.url);
 
@@ -21,6 +22,11 @@ test("exporta la experiencia institucional completa de Byte", async () => {
   assert.match(html, /Accedé a tu cuenta/i);
   assert.match(html, /https:\/\/ap2\.factulinc\.com\.ar\/loginc\/200h1k1q1p1z1k1w1a0h130w220o0v/i);
   assert.match(html, /href="solicitar-servicio\/?"/i);
+  assert.match(html, /href="como-registrarte\/?"/i);
+  assert.doesNotMatch(html, />Inicio <b>01<\/b>/i);
+  assert.ok(html.indexOf('id="cobertura"') < html.indexOf('id="nosotros"'));
+  assert.match(html, /Cuenta corriente/i);
+  assert.match(html, /billeteras virtuales/i);
   assert.doesNotMatch(html, /\\n\s*<canvas/i);
   assert.match(html, /icon-shell/i);
   assert.match(html, /icon-glyph/i);
@@ -70,4 +76,14 @@ test("mantiene el formulario en modo demo sin envíos externos", async () => {
   assert.match(source, /Demo visual: por ahora, los datos no se envían ni se guardan/i);
   assert.match(source, /setStatus\("success"\)/i);
   assert.doesNotMatch(source, /fetch\(|FormSubmit|formsubmit\.co|mailto:/i);
+});
+test("exporta la guía individual para registrarse", async () => {
+  const html = await readFile(registerOutput, "utf8");
+
+  assert.match(html, /Cómo registrarte \| Byte Conectividad/i);
+  assert.match(html, /Registrate una vez/i);
+  assert.match(html, /Usá tu correo de facturación/i);
+  assert.match(html, /Pagá con débito, QR o billeteras virtuales/i);
+  assert.match(html, /href="\.\.\/solicitar-servicio\/?"/i);
+  assert.match(html, /href="\.\.\/#servicios"/i);
 });
