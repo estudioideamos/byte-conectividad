@@ -97,6 +97,7 @@ test("exporta la guía individual para registrarse", async () => {
   assert.match(html, /ELEGÍ REGISTRARSE/i);
   assert.match(html, /Pagá con débito, QR o billeteras virtuales/i);
   assert.match(await readFile(styles, "utf8"), /\.register-page \.register-hero__copy\{[^}]*position:sticky/s);
+  assert.match(await readFile(styles, "utf8"), /html,body\{[^}]*overflow-x:clip/s);
   assert.match(html, /href="\.\.\/solicitar-servicio\/?"/i);
   assert.match(html, /href="\.\.\/#servicios"/i);
 });
