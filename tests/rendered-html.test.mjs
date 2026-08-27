@@ -7,6 +7,7 @@ const requestOutput = new URL("../dist/client/solicitar-servicio/index.html", im
 const registerOutput = new URL("../dist/client/como-registrarte/index.html", import.meta.url);
 const requestSource = new URL("../app/solicitar-servicio/ServiceRequestForm.tsx", import.meta.url);
 const styles = new URL("../app/globals.css", import.meta.url);
+const htaccessOutput = new URL("../dist/client/.htaccess", import.meta.url);
 
 test("exporta la experiencia institucional completa de Byte", async () => {
   const html = await readFile(output, "utf8");
@@ -54,6 +55,12 @@ test("incluye metadatos sociales y controles accesibles", async () => {
   assert.match(css, /prefers-reduced-motion/i);
 });
 
+test("prepara HTTPS canónico para el hosting definitivo", async () => {
+  const htaccess = await readFile(htaccessOutput, "utf8");
+
+  assert.match(htaccess, /https:\/\/byteconectividad\.com\.ar%\{REQUEST_URI\}/i);
+  assert.match(htaccess, /Strict-Transport-Security/i);
+});
 test("exporta la página individual para solicitar servicio", async () => {
   const html = await readFile(requestOutput, "utf8");
 
