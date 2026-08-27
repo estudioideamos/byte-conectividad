@@ -83,6 +83,7 @@ test("exporta la guía individual para registrarse", async () => {
 
   assert.match(html, /Cómo registrarte \| Byte Conectividad/i);
   assert.match(html, /Registrate una vez/i);
+  assert.match(html, /register-hero__copy-column/i);
   assert.match(html, /Crear mi cuenta/i);
   assert.match(html, /href="\.\.\/solicitar-servicio\/?">Solicitar servicio<\/a><a[^>]*href="\.\/">Cómo registrarte<\/a>/i);
   assert.match(html, /register-account-command-center\.jpg/i);

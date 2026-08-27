@@ -75,15 +75,17 @@ export default function RegisterPage() {
 
       <section className="register-hero">
         <div className="register-atmosphere" aria-hidden="true"><i /><i /><i /></div>
-        <div className="register-hero__copy">
-          <span className="register-kicker"><i /> ÁREA DE CLIENTES · GUÍA DE ACCESO</span>
-          <h1><span>Registrate una vez.</span><em>Gestioná todo más fácil.</em></h1>
-          <p>Creá tu usuario con el mismo correo que usás para recibir la factura y accedé a toda la información de tu servicio desde un solo lugar.</p>
-          <div className="register-hero__actions">
-            <a className="button button-primary" href={accountUrl} target="_blank" rel="noreferrer">Crear mi cuenta <span>↗</span></a>
-            <a className="button button-secondary" href="#pasos">Ver el paso a paso <ArrowDown aria-hidden="true" /></a>
+        <div className="register-hero__copy-column">
+          <div className="register-hero__copy">
+            <span className="register-kicker"><i /> ÁREA DE CLIENTES · GUÍA DE ACCESO</span>
+            <h1><span>Registrate una vez.</span><em>Gestioná todo más fácil.</em></h1>
+            <p>Creá tu usuario con el mismo correo que usás para recibir la factura y accedé a toda la información de tu servicio desde un solo lugar.</p>
+            <div className="register-hero__actions">
+              <a className="button button-primary" href={accountUrl} target="_blank" rel="noreferrer">Crear mi cuenta <span>↗</span></a>
+              <a className="button button-secondary" href="#pasos">Ver el paso a paso <ArrowDown aria-hidden="true" /></a>
+            </div>
+            <span className="register-safe"><ShieldCheck aria-hidden="true" /> Acceso seguro al portal oficial de Byte</span>
           </div>
-          <span className="register-safe"><ShieldCheck aria-hidden="true" /> Acceso seguro al portal oficial de Byte</span>
         </div>
 
         <aside className="register-overview" aria-label="Funciones disponibles en el portal de clientes">
