@@ -82,9 +82,13 @@ function IconGlyph({ name }: { name: string }) {
 
 export default function Home() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const formStartedAtRef = useRef(Date.now());
+  const formStartedAtRef = useRef(0);
   const [formStatus, setFormStatus] = useState<ContactFormStatus>("idle");
   const [formMessage, setFormMessage] = useState("");
+
+  useEffect(() => {
+    formStartedAtRef.current = Date.now();
+  }, []);
 
   async function sendForm(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();

@@ -1,13 +1,17 @@
 "use client";
 
-import { FormEvent, useRef, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import { AlertCircle, ArrowUpRight, CheckCircle2, Eye, RotateCcw, Send } from "lucide-react";
 import { submitContactForm, type ContactFormStatus } from "../lib/contactForm";
 
 export default function ServiceRequestForm() {
   const [status, setStatus] = useState<ContactFormStatus>("idle");
   const [statusMessage, setStatusMessage] = useState("");
-  const startedAtRef = useRef(Date.now());
+  const startedAtRef = useRef(0);
+
+  useEffect(() => {
+    startedAtRef.current = Date.now();
+  }, []);
 
   async function sendRequest(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
