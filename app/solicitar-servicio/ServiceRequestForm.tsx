@@ -1,34 +1,54 @@
 "use client";
 
-import { FormEvent, useState } from "react";
-import { ArrowUpRight, CheckCircle2, Eye, Send, RotateCcw } from "lucide-react";
-
-type FormStatus = "idle" | "success";
+import { FormEvent, useRef, useState } from "react";
+import { AlertCircle, ArrowUpRight, CheckCircle2, Eye, RotateCcw, Send } from "lucide-react";
+import { submitContactForm, type ContactFormStatus } from "../lib/contactForm";
 
 export default function ServiceRequestForm() {
-  const [status, setStatus] = useState<FormStatus>("idle");
+  const [status, setStatus] = useState<ContactFormStatus>("idle");
+  const [statusMessage, setStatusMessage] = useState("");
+  const startedAtRef = useRef(Date.now());
 
-  function previewConfirmation(event: FormEvent<HTMLFormElement>) {
+  async function sendRequest(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setStatus("success");
+    const form = event.currentTarget;
+    setStatus("sending");
+    setStatusMessage("");
+
+    try {
+      const result = await submitContactForm(form, "service-request", startedAtRef.current);
+      form.reset();
+      startedAtRef.current = Date.now();
+      setStatusMessage(result.message || "Recibimos tu solicitud. Te vamos a contactar a la brevedad.");
+      setStatus("success");
+    } catch (error) {
+      setStatusMessage(error instanceof Error ? error.message : "No pudimos enviar la solicitud. Intentá nuevamente.");
+      setStatus("error");
+    }
+  }
+
+  function resetForm() {
+    startedAtRef.current = Date.now();
+    setStatusMessage("");
+    setStatus("idle");
   }
 
   if (status === "success") {
     return (
       <div className="request-success" role="status" aria-live="polite">
         <span className="request-success__icon"><CheckCircle2 aria-hidden="true" /></span>
-        <span className="request-form__signal"><i /> VISTA DE CONFIRMACIÓN</span>
-        <h2>Listo. Esta es la confirmación de la demo.</h2>
-        <p>Por ahora, el formulario no envía ni guarda información. El envío definitivo se activará en una próxima etapa.</p>
-        <button type="button" onClick={() => setStatus("idle")}>
-          <RotateCcw aria-hidden="true" /> Volver al formulario
+        <span className="request-form__signal"><i /> SOLICITUD RECIBIDA</span>
+        <h2>Listo. Tu consulta ya llegó a Byte.</h2>
+        <p>{statusMessage}</p>
+        <button type="button" onClick={resetForm}>
+          <RotateCcw aria-hidden="true" /> Enviar otra solicitud
         </button>
       </div>
     );
   }
 
   return (
-    <form className="request-form" onSubmit={previewConfirmation}>
+    <form className="request-form" onSubmit={sendRequest}>
       <div className="request-form__top">
         <span>SOLICITUD EN LÍNEA</span>
         <b>01</b>
@@ -38,6 +58,10 @@ export default function ServiceRequestForm() {
         <span className="request-form__signal"><i /> RESPUESTA PERSONALIZADA</span>
         <h2>Contanos dónde querés conectarte.</h2>
         <p>Con tus datos verificamos la cobertura y te recomendamos la alternativa más conveniente.</p>
+      </div>
+
+      <div className="form-honeypot" aria-hidden="true">
+        <label>Empresa<input name="company" type="text" tabIndex={-1} autoComplete="off" /></label>
       </div>
 
       <label className="request-field request-field--full">
@@ -72,13 +96,18 @@ export default function ServiceRequestForm() {
         <input name="email" type="email" autoComplete="email" inputMode="email" placeholder="nombre@email.com" required />
       </label>
 
-      <button className="request-submit" type="submit">
+      <button className="request-submit" type="submit" disabled={status === "sending"} aria-busy={status === "sending"}>
         <Send aria-hidden="true" />
-        <span>Enviar solicitud</span>
+        <span>{status === "sending" ? "Enviando solicitud..." : "Enviar solicitud"}</span>
         <i><ArrowUpRight aria-hidden="true" /></i>
       </button>
 
-      <p className="request-privacy"><Eye aria-hidden="true" /> Demo visual: por ahora, los datos no se envían ni se guardan.</p>
+      {status === "error" && (
+        <p className="request-feedback request-feedback--error" role="alert">
+          <AlertCircle aria-hidden="true" /> {statusMessage}
+        </p>
+      )}
+      <p className="request-privacy"><Eye aria-hidden="true" /> Tus datos se envían de forma segura al equipo de Byte y no se comparten con terceros.</p>
     </form>
   );
 }

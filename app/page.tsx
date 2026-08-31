@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useEffect, useRef } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import {
   Activity,
   ArrowUpDown,
@@ -21,6 +21,7 @@ import {
 } from "lucide-react";
 import SiteHeader from "./SiteHeader";
 import ByteFooter from "./ByteFooter";
+import { submitContactForm, type ContactFormStatus } from "./lib/contactForm";
 
 const services = [
   { number: "01", label: "PARA TU HOGAR", title: "Internet de banda ancha", copy: "Internet de alta velocidad a través de nuestra red inalámbrica, con una conexión estable y soporte local.", points: ["Navegación fluida", "Instalación personalizada", "Soporte cercano"], icon: "signal" },
@@ -81,13 +82,26 @@ function IconGlyph({ name }: { name: string }) {
 
 export default function Home() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const formStartedAtRef = useRef(Date.now());
+  const [formStatus, setFormStatus] = useState<ContactFormStatus>("idle");
+  const [formMessage, setFormMessage] = useState("");
 
-  function sendForm(event: FormEvent<HTMLFormElement>) {
+  async function sendForm(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const subject = encodeURIComponent("Consulta web · " + (data.get("service") || "Información general"));
-    const body = encodeURIComponent("Nombre: " + data.get("name") + "\nTeléfono: " + data.get("phone") + "\nEmail: " + data.get("email") + "\nLocalidad: " + data.get("location") + "\nServicio: " + data.get("service") + "\n\nMensaje:\n" + data.get("message"));
-    window.location.href = "mailto:atencionaclientes@byteinformatica.com.ar?subject=" + subject + "&body=" + body;
+    const form = event.currentTarget;
+    setFormStatus("sending");
+    setFormMessage("");
+
+    try {
+      const result = await submitContactForm(form, "contact", formStartedAtRef.current);
+      form.reset();
+      formStartedAtRef.current = Date.now();
+      setFormMessage(result.message || "Recibimos tu consulta. Te vamos a contactar a la brevedad.");
+      setFormStatus("success");
+    } catch (error) {
+      setFormMessage(error instanceof Error ? error.message : "No pudimos enviar tu consulta. Intentá nuevamente.");
+      setFormStatus("error");
+    }
   }
 
 
@@ -385,7 +399,17 @@ export default function Home() {
 
       <section className="contact reveal" id="contacto">
         <div className="contact-copy"><span className="section-tag">HABLEMOS</span><h2>Tu próxima conexión<br /><em>empieza acá.</em></h2><p>Dejanos tus datos y te vamos a contactar para recomendarte la mejor opción disponible en tu zona.</p><div className="contact-details"><a href="tel:+542355448231"><span>TELÉFONOS</span><b>2355 448231 · 448232 · 448269</b></a><a href="mailto:info@byteinformatica.com.ar"><span>EMAIL GENERAL</span><b>info@byteinformatica.com.ar</b></a><a href="mailto:atencionaclientes@byteinformatica.com.ar"><span>ATENCIÓN AL CLIENTE</span><b>atencionaclientes@byteinformatica.com.ar</b></a><a href="https://maps.google.com/?q=Rivadavia+1286+Lincoln+Buenos+Aires" target="_blank" rel="noreferrer"><span>OFICINA</span><b>Rivadavia 1286 · Lincoln, Bs. As.</b></a></div></div>
-        <form className="contact-form" onSubmit={sendForm}><div className="form-heading"><span>CONTANOS QUÉ NECESITÁS</span><i>01</i></div><div className="field-row"><label>Nombre completo<input name="name" type="text" placeholder="Tu nombre" required /></label><label>Teléfono<input name="phone" type="tel" placeholder="Tu número" required /></label></div><div className="field-row"><label>Email<input name="email" type="email" placeholder="nombre@email.com" required /></label><label>Localidad<input name="location" type="text" placeholder="¿Dónde estás?" required /></label></div><label>¿Qué servicio necesitás?<select name="service" defaultValue=""><option value="" disabled>Elegí una opción</option><option>Internet de banda ancha</option><option>Internet simétrico</option><option>Zonas WiFi</option><option>Quiero asesoramiento</option></select></label><label>Contanos un poco más<textarea name="message" placeholder="Escribí tu consulta..." rows={4} /></label><button className="form-submit" type="submit">Enviar consulta <span>↗</span></button><small>Al enviar, se abrirá tu aplicación de correo con la consulta preparada.</small></form>
+        <form className="contact-form" onSubmit={sendForm}>
+          <div className="form-heading"><span>CONTANOS QUÉ NECESITÁS</span><i>01</i></div>
+          <div className="form-honeypot" aria-hidden="true"><label>Empresa<input name="company" type="text" tabIndex={-1} autoComplete="off" /></label></div>
+          <div className="field-row"><label>Nombre completo<input name="name" type="text" autoComplete="name" placeholder="Tu nombre" required /></label><label>Teléfono<input name="phone" type="tel" autoComplete="tel" inputMode="tel" placeholder="Tu número" required /></label></div>
+          <div className="field-row"><label>Email<input name="email" type="email" autoComplete="email" inputMode="email" placeholder="nombre@email.com" required /></label><label>Localidad<input name="location" type="text" autoComplete="address-level2" placeholder="¿Dónde estás?" required /></label></div>
+          <label>¿Qué servicio necesitás?<select name="service" defaultValue="" required><option value="" disabled>Elegí una opción</option><option>Internet de banda ancha</option><option>Internet simétrico</option><option>Zonas WiFi</option><option>Quiero asesoramiento</option></select></label>
+          <label>Contanos un poco más<textarea name="message" placeholder="Escribí tu consulta..." rows={4} maxLength={2000} /></label>
+          <button className="form-submit" type="submit" disabled={formStatus === "sending"} aria-busy={formStatus === "sending"}>{formStatus === "sending" ? "Enviando consulta..." : "Enviar consulta"} <span>↗</span></button>
+          {formStatus !== "idle" && formStatus !== "sending" && <p className={"form-feedback form-feedback--" + formStatus} role="status" aria-live="polite">{formMessage}</p>}
+          <small>Tus datos se envían de forma segura al equipo de Byte y no se comparten con terceros.</small>
+        </form>
       </section>
 
       <section className="career reveal"><div><span className="section-tag">OPORTUNIDADES LABORALES</span><h2>¿Querés ser parte de Byte?</h2></div><p>Estamos construyendo la red del futuro con talento local.</p><a className="button button-secondary" href="mailto:info@byteinformatica.com.ar?subject=Quiero%20trabajar%20en%20Byte%20Conectividad">Enviar mi CV <span>↗</span></a></section>

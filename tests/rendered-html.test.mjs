@@ -5,7 +5,10 @@ import test from "node:test";
 const output = new URL("../dist/client/index.html", import.meta.url);
 const requestOutput = new URL("../dist/client/solicitar-servicio/index.html", import.meta.url);
 const registerOutput = new URL("../dist/client/como-registrarte/index.html", import.meta.url);
+const homeSource = new URL("../app/page.tsx", import.meta.url);
 const requestSource = new URL("../app/solicitar-servicio/ServiceRequestForm.tsx", import.meta.url);
+const contactHelperSource = new URL("../app/lib/contactForm.ts", import.meta.url);
+const contactEndpointSource = new URL("../public/api/contact.php", import.meta.url);
 const styles = new URL("../app/globals.css", import.meta.url);
 const htaccessOutput = new URL("../dist/client/.htaccess", import.meta.url);
 
@@ -78,12 +81,32 @@ test("exporta la página individual para solicitar servicio", async () => {
   assert.match(html, /href="\.\.\/#contacto"/i);
 });
 
-test("mantiene el formulario en modo demo sin envíos externos", async () => {
-  const source = await readFile(requestSource, "utf8");
+test("conecta ambos formularios con el endpoint propio y sin intermediarios", async () => {
+  const [home, request, helper, endpoint] = await Promise.all([
+    readFile(homeSource, "utf8"),
+    readFile(requestSource, "utf8"),
+    readFile(contactHelperSource, "utf8"),
+    readFile(contactEndpointSource, "utf8"),
+  ]);
 
-  assert.match(source, /Demo visual: por ahora, los datos no se envían ni se guardan/i);
-  assert.match(source, /setStatus\("success"\)/i);
-  assert.doesNotMatch(source, /fetch\(|FormSubmit|formsubmit\.co|mailto:/i);
+  assert.match(home, /submitContactForm\(form,\s*"contact"/i);
+  assert.match(request, /submitContactForm\(form,\s*"service-request"/i);
+  assert.match(home, /name="company"/i);
+  assert.match(request, /name="company"/i);
+  assert.match(helper, /https:\/\/byteconectividad\.com\.ar\/api\/contact\.php/i);
+  assert.match(helper, /fetch\(CONTACT_ENDPOINT/i);
+  assert.doesNotMatch(home + request + helper, /FormSubmit|formsubmit\.co/i);
+  assert.doesNotMatch(home, /window\.location\.href\s*=\s*"mailto:/i);
+  assert.doesNotMatch(request, /Demo visual|no se envían ni se guardan/i);
+
+  assert.match(endpoint, /PHPMailer\\PHPMailer\\PHPMailer/i);
+  assert.match(endpoint, /ENCRYPTION_STARTTLS/i);
+  assert.match(endpoint, /\/\.private\/mail-config\.php/i);
+  assert.match(endpoint, /enforceRateLimit\(\)/i);
+  assert.match(endpoint, /addReplyTo\(\$email,\s*\$name\)/i);
+  assert.match(endpoint, /addAddress\(\(string\) \$config\['recipient'\]/i);
+  assert.doesNotMatch(endpoint, /\bmail\s*\(/i);
+  assert.doesNotMatch(endpoint, /Rivadavia1286/i);
 });
 test("exporta la guía individual para registrarse", async () => {
   const html = await readFile(registerOutput, "utf8");

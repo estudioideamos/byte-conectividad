@@ -79,7 +79,7 @@ export default function RootLayout({
         <meta name="referrer" content="strict-origin-when-cross-origin" />
         <meta
           httpEquiv="Content-Security-Policy"
-          content="default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self' mailto:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; media-src 'self'; connect-src 'self'; upgrade-insecure-requests"
+          content="default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; media-src 'self'; connect-src 'self' https://byteconectividad.com.ar; upgrade-insecure-requests"
         />
       </head>
       <body
