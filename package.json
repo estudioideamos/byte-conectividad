@@ -16,7 +16,7 @@
     "check": "npm run lint && npm run typecheck && npm run build:pages && npm test"
   },
   "dependencies": {
-    "lucide-react": "^0.468.0",
+    "lucide-react": "^1.37.0",
     "react": "19.2.8",
     "react-dom": "19.2.8"
   },
