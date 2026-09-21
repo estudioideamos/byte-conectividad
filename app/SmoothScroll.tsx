@@ -30,7 +30,7 @@ export default function SmoothScroll() {
         stop();
         return;
       }
-      current += remaining * (1 - Math.exp(-elapsed / 150));
+      current += remaining * (1 - Math.exp(-elapsed / 220));
       window.scrollTo({
         top: current,
         behavior: "instant",
@@ -63,7 +63,7 @@ export default function SmoothScroll() {
       direction = nextDirection;
       const unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? window.innerHeight : 1;
       target = Math.max(0, Math.min(
-        target + event.deltaY * unit * 0.65,
+        target + event.deltaY * unit * 0.4,
         document.documentElement.scrollHeight - window.innerHeight,
       ));
       if (!frame) frame = requestAnimationFrame(animate);
