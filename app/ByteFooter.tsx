@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, Facebook, Instagram } from "lucide-react";
 
 type ByteFooterProps = {
@@ -13,6 +13,19 @@ type ByteFooterProps = {
 
 export default function ByteFooter({ homePrefix = "", assetPrefix = "", requestHref = "solicitar-servicio/", registerHref = "como-registrarte/", animate = false }: ByteFooterProps) {
   const [footerOpen, setFooterOpen] = useState<"explore" | "solutions" | null>(null);
+  const creditsRef = useRef<HTMLDivElement>(null);
+  const [creditsVisible, setCreditsVisible] = useState(false);
+
+  useEffect(() => {
+    const credits = creditsRef.current;
+    if (!credits) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setCreditsVisible(entry.isIntersecting),
+      { rootMargin: "0px 0px 100px 0px" },
+    );
+    observer.observe(credits);
+    return () => observer.disconnect();
+  }, []);
   const sectionHref = (id: string) => homePrefix + "#" + id;
   const closeFooter = () => setFooterOpen(null);
 
@@ -94,14 +107,14 @@ export default function ByteFooter({ homePrefix = "", assetPrefix = "", requestH
           </div>
         </div>
 
-        <div className="byte-footer__bottom">
+        <div className="byte-footer__bottom" ref={creditsRef}>
           <span>© {new Date().getFullYear()} Byte Conectividad.</span>
 
-          <span className="byte-footer__ideamos">Diseño y desarrollo para ir más lejos — <a href="https://ideamos.com.ar" target="_blank" rel="noreferrer">Estudio Ideamos <b>↗</b></a></span>
+          <span className="byte-footer__ideamos"><span>Diseño y desarrollo para ir más lejos</span><a href="https://ideamos.com.ar" target="_blank" rel="noreferrer" aria-label="Estudio Ideamos, diseño y desarrollo web"><img src={assetPrefix + "assets/ideamos-light.webp"} width="870" height="213" alt="Ideamos" loading="lazy" /><b aria-hidden="true">↗</b></a></span>
         </div>
       </footer>
 
-      <a className="whatsapp" href="https://wa.me/5492355448231?text=Hola%20Byte%2C%20quiero%20consultar%20por%20el%20servicio%20de%20internet." target="_blank" rel="noreferrer" aria-label="Escribir a Byte por WhatsApp"><span>WhatsApp</span><i><img className="whatsapp-mark whatsapp-mark--floating" src={assetPrefix + "assets/whatsapp.svg"} alt="" aria-hidden="true" /></i></a>
+      <a className={"whatsapp" + (creditsVisible ? " whatsapp--hidden" : "")} aria-hidden={creditsVisible || undefined} tabIndex={creditsVisible ? -1 : undefined} href="https://wa.me/5492355448231?text=Hola%20Byte%2C%20quiero%20consultar%20por%20el%20servicio%20de%20internet." target="_blank" rel="noreferrer" aria-label="Escribir a Byte por WhatsApp"><span>WhatsApp</span><i><img className="whatsapp-mark whatsapp-mark--floating" src={assetPrefix + "assets/whatsapp.svg"} alt="" aria-hidden="true" /></i></a>
     </>
   );
 }

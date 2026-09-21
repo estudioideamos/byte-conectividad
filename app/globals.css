@@ -1167,7 +1167,9 @@ body.menu-open{overflow:hidden;touch-action:none}
   letter-spacing:.1em;
   text-transform:uppercase;
 }
-.byte-footer__ideamos{text-align:right}
+.byte-footer__ideamos{display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:12px;text-align:right}
+.byte-footer__ideamos a img{display:block;width:104px;height:auto;opacity:.85;transition:opacity .25s ease}
+.byte-footer__ideamos a:hover img{opacity:1}
 .byte-footer__ideamos a{display:inline-flex;align-items:center;gap:5px;color:#9fa8ba;transition:color .25s ease}
 .byte-footer__ideamos a:hover{color:white}
 .byte-footer__ideamos a b{color:#6d81ff;font-size:10px}
@@ -1313,7 +1315,7 @@ body.menu-open{overflow:hidden;touch-action:none}
   .byte-footer__contact h3{margin-left:auto;margin-right:auto}
   .byte-footer__whatsapp{max-width:440px}
   .byte-footer__bottom{justify-items:center}
-  .byte-footer__ideamos{text-align:center}
+  .byte-footer__ideamos{justify-content:center;text-align:center}
 }
 
 @media (prefers-reduced-motion:reduce){
@@ -2809,4 +2811,10 @@ body.menu-open{overflow:hidden;touch-action:none}
   .register-page .register-note p{font-size:14px}
   .register-page .register-final__button span{font-size:15px}
   .register-page .register-final__button small{font-size:11px;line-height:1.45}
+}
+/* Keep the floating action clear of the footer credits. */
+.whatsapp{transition:opacity .2s ease,visibility .2s ease,transform .2s ease}
+.whatsapp.whatsapp--hidden{opacity:0;visibility:hidden;pointer-events:none;transform:translateY(10px)}
+@media (prefers-reduced-motion:reduce){
+  .whatsapp,.byte-footer__ideamos a img{transition:none}
 }
