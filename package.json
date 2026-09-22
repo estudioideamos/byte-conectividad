@@ -16,16 +16,16 @@
     "check": "npm run lint && npm run typecheck && npm run build:pages && npm test"
   },
   "dependencies": {
-    "lucide-react": "^0.468.0",
-    "react": "19.2.8",
-    "react-dom": "19.2.8"
+    "lucide-react": "^1.47.0",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
   },
   "devDependencies": {
     "@eslint/js": "9.39.4",
     "@next/eslint-plugin-next": "16.3.3",
     "@types/node": "22.19.19",
-    "@types/react": "19.2.18",
-    "@types/react-dom": "19.2.5",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
     "@vitejs/plugin-react": "6.1.0",
     "@vitejs/plugin-rsc": "0.5.34",
     "eslint": "9.39.4",
