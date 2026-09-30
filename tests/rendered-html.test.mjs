@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
@@ -106,7 +107,7 @@ test("conecta ambos formularios con el endpoint propio y sin intermediarios", as
   assert.match(endpoint, /addReplyTo\(\$email,\s*\$name\)/i);
   assert.match(endpoint, /addAddress\(\(string\) \$config\['recipient'\]/i);
   assert.doesNotMatch(endpoint, /\bmail\s*\(/i);
-  assert.doesNotMatch(endpoint, /Rivadavia1286/i);
+  assert.doesNotMatch(endpoint, /\$mail->Password\s*=\s*["']/, "No incrustar credenciales SMTP");
 });
 test("exporta la guía individual para registrarse", async () => {
   const html = await readFile(registerOutput, "utf8");
@@ -130,4 +131,23 @@ test("exporta la guía individual para registrarse", async () => {
   assert.match(await readFile(styles, "utf8"), /html,body\{[^}]*overflow-x:clip/s);
   assert.match(html, /href="\.\.\/solicitar-servicio\/?"/i);
   assert.match(html, /href="\.\.\/#servicios"/i);
+});
+
+test("la política CSP autoriza los scripts exportados sin permitir scripts inline arbitrarios", async () => {
+  const headers = await readFile(htaccessOutput, "utf8");
+  assert.match(headers, /frame-ancestors 'none'/);
+  assert.match(headers, /script-src-attr 'none'/);
+  assert.doesNotMatch(headers, /script-src[^;]*'unsafe-inline'/);
+  for (const file of [output, requestOutput, registerOutput]) {
+    const html = await readFile(file, "utf8");
+    const csp = html.match(/http-equiv="Content-Security-Policy"[^>]*content="([^"]+)"/i)?.[1];
+    assert.ok(csp, "CSP presente en cada página");
+    assert.doesNotMatch(csp, /script-src[^;]*'unsafe-inline'/);
+    for (const match of html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)) {
+      if (/\bsrc\s*=/.test(match[1]) || !match[2].trim()) continue;
+      const hash = "'sha256-" + createHash("sha256").update(match[2]).digest("base64") + "'";
+      assert.ok(headers.includes(hash), "Script autorizado por cabecera");
+      assert.ok(csp.includes(hash), "Script autorizado por meta");
+    }
+  }
 });

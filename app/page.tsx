@@ -121,7 +121,9 @@ export default function Home() {
     let pointerX = 0;
     let pointerY = 0;
     let points: Array<{ x: number; y: number; vx: number; vy: number; size: number }> = [];
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let reducedMotion = motionQuery.matches;
+    let canvasVisible = true;
 
     const resize = () => {
       const bounds = canvas.getBoundingClientRect();
@@ -180,9 +182,21 @@ export default function Home() {
           }
         }
       }
-      if (!reducedMotion) frame = window.requestAnimationFrame(draw);
+      if (!reducedMotion && canvasVisible && !document.hidden) frame = window.requestAnimationFrame(draw);
     };
 
+    const syncCanvas = () => {
+      window.cancelAnimationFrame(frame);
+      reducedMotion = motionQuery.matches;
+      if (canvasVisible && !document.hidden) draw();
+    };
+    const canvasObserver = new IntersectionObserver(([entry]) => {
+      canvasVisible = entry.isIntersecting;
+      syncCanvas();
+    });
+    canvasObserver.observe(canvas);
+    document.addEventListener("visibilitychange", syncCanvas);
+    motionQuery.addEventListener("change", syncCanvas);
     resize();
     window.addEventListener("resize", resize);
     window.addEventListener("pointermove", handlePointer, { passive: true });
@@ -190,6 +204,9 @@ export default function Home() {
 
     return () => {
       window.cancelAnimationFrame(frame);
+      canvasObserver.disconnect();
+      document.removeEventListener("visibilitychange", syncCanvas);
+      motionQuery.removeEventListener("change", syncCanvas);
       window.removeEventListener("resize", resize);
       window.removeEventListener("pointermove", handlePointer);
     };
@@ -228,7 +245,7 @@ export default function Home() {
     };
 
     const syncVideo = (video: HTMLVideoElement) => {
-      if (motionPreference.matches || video.dataset.inView !== "true") {
+      if (motionPreference.matches || document.hidden || video.dataset.inView !== "true" || (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData) {
         video.pause();
         return;
       }
@@ -247,11 +264,13 @@ export default function Home() {
     const syncPlayback = () => videos.forEach(syncVideo);
     videos.forEach((video) => observer.observe(video));
     motionPreference.addEventListener("change", syncPlayback);
+    document.addEventListener("visibilitychange", syncPlayback);
 
     return () => {
       observer.disconnect();
       videos.forEach((video) => video.pause());
       motionPreference.removeEventListener("change", syncPlayback);
+      document.removeEventListener("visibilitychange", syncPlayback);
     };
   }, []);
 

@@ -30,6 +30,10 @@ jobs:
           cache: npm
       - name: Instalar dependencias
         run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Auditar dependencias
+        run: npm run audit:security
+      - name: Probar seguridad de formularios sin enviar correos
+        run: php tests/contact-security.test.php
       - name: Verificar código
         run: npm run lint && npm run typecheck
       - name: Construir versión pública

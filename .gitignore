@@ -39,3 +39,8 @@ yarn-error.log*
 /outputs/
 /work/
 *.tsbuildinfo
+
+# Local attachments, credentials and deployment backups
+/.codex-remote-attachments/
+**/.private/
+/backups/
