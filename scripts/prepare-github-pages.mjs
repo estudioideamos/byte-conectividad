@@ -11,13 +11,14 @@ async function createDirectoryRoute(routeName) {
   await mkdir(routeDirectory, { recursive: true });
   await copyFile(sourceBase + ".html", path.join(routeDirectory, "index.html"));
 
-  try {
-    await copyFile(sourceBase + ".rsc", path.join(routeDirectory, "index.rsc"));
-  } catch (error) {
-    if (error?.code !== "ENOENT") throw error;
+  for (const extension of [".rsc", ".txt"]) {
+    try {
+      await copyFile(sourceBase + extension, path.join(routeDirectory, "index" + extension));
+    } catch (error) {
+      if (error?.code !== "ENOENT") throw error;
+    }
   }
 }
-
 await createDirectoryRoute("solicitar-servicio");
 await createDirectoryRoute("como-registrarte");
 

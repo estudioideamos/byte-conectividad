@@ -20,7 +20,7 @@ Options -Indexes
     Header set Cache-Control "public, max-age=604800"
   </FilesMatch>
 
-  <FilesMatch "\.(?:html|rsc)$">
+  <FilesMatch "\.(?:html|rsc|txt)$">
     Header set Cache-Control "no-cache, must-revalidate"
   </FilesMatch>
 
